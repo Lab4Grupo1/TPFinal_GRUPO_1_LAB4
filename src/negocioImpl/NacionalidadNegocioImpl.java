@@ -1,5 +1,6 @@
 package negocioImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import daoImpl.NacionalidadDaoImpl;
@@ -10,7 +11,7 @@ public class NacionalidadNegocioImpl implements NacionalidadNegocio {
 
 	NacionalidadDaoImpl ndao = new NacionalidadDaoImpl();
 	
-	public List<Nacionalidad> readAll() {
+	public ArrayList<Nacionalidad> readAll() {
 		// TODO Auto-generated method stub
 		return ndao.readAll();
 	}

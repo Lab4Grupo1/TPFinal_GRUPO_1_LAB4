@@ -14,7 +14,7 @@ public class CuentasDaoImpl {
 	static String db = "tpint_grupo1_v2";
 	static String user = "root";
 	static String pass = "root";
-
+	
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
 	public int insert(Cuentas cuenta) {
@@ -22,7 +22,7 @@ public class CuentasDaoImpl {
 		int filas = 0;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class CuentasDaoImpl {
 		int filas = 0;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class CuentasDaoImpl {
 		int filas = 0;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class CuentasDaoImpl {
 	public Cuentas buscarCuenta(int numeroCuenta) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -105,7 +105,7 @@ public class CuentasDaoImpl {
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
 				x.setNumeroCuenta(numeroCuenta);
-				x.setCbu(rs.getDouble("Cbu"));
+				x.setCbu(rs.getString("Cbu"));
 				x.setFechaCreacion(rs.getDate("FechaCreacion"));
 				x.setSaldo(rs.getFloat("Saldo"));
 				x.setEstado(rs.getBoolean("Estado"));
@@ -122,7 +122,7 @@ public class CuentasDaoImpl {
 	public Cuentas buscarDni(int dni) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -141,7 +141,7 @@ public class CuentasDaoImpl {
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
 				x.setNumeroCuenta(rs.getInt("numeroCuenta"));
-				x.setCbu(rs.getDouble("Cbu"));
+				x.setCbu(rs.getString("Cbu"));
 				x.setFechaCreacion(rs.getDate("FechaCreacion"));
 				x.setSaldo(rs.getFloat("Saldo"));
 				x.setEstado(rs.getBoolean("Estado"));

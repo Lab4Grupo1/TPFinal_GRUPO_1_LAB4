@@ -23,7 +23,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 
 	public int insert(Telefonos tel) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 
 	public int update(Telefonos tel) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -70,7 +70,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		ArrayList<Telefonos> Telefonos = new ArrayList<Telefonos>();
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +103,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 	public Telefonos buscarId(int id) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

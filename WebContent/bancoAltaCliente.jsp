@@ -1,5 +1,6 @@
-<%@page import="entidad.Nacionalidad"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="daoImpl.NacionalidadDaoImpl"%>
+<%@page import="entidad.Nacionalidad"%> 
 <%@page import="negocio.NacionalidadNegocio"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -62,14 +63,21 @@
 				    <div class="col-md-3 mb-3">
 				      <label for="Provincia">Provincia</label>
 				      <input type="text" class="form-control" name="Provincia" placeholder="Provincia" required>
-				    </div> 
-				    <div class="col-md-3 mb-3">
-				      <label for="Nacionalidad">Nacionalidad</label>
-				      <select name="Nacionalidad">    				      
-				       
-				      </select>
-				    </div>
-				    
+				    </div>   
+					<div class="col-md-3 mb-3">
+					   <label for="Nacionalidad">Nacionalidad</label> 
+					   <select > 
+						   <%		NacionalidadDaoImpl Naca = new NacionalidadDaoImpl();
+								   ArrayList<Nacionalidad> ListaN =  Naca.readAll();
+										if(Naca != null)
+										{
+											for(Nacionalidad nac : ListaN){
+										       %><option><%=nac.getNacionalidad() %> </option><%
+										       }		
+										}			
+										%> 
+						</select>
+					</div>				    
 				</div>
 				    
 				  <div class="form-row">

@@ -22,7 +22,7 @@ public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
 	public ArrayList<TipoMovimiento> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
 		TipoMovimiento TmovimientoRs = new TipoMovimiento();
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -5,14 +5,14 @@ import java.sql.Date;
 public class Cuentas {
 
 	private int NumeroCuenta;
-	private double Cbu;
+	private String Cbu;
 	private TipoCuentas TipoCuenta;
 	private DatosPersonales DpDNI;
 	private Date FechaCreacion;
 	private float Saldo;
 	private boolean Estado;
 
-	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, Date fechaCreacion,
+	public Cuentas(int numeroCuenta, String cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, Date fechaCreacion,
 			float saldo, boolean estado) {
 		NumeroCuenta = numeroCuenta;
 		Cbu = cbu;
@@ -34,11 +34,11 @@ public class Cuentas {
 		NumeroCuenta = numeroCuenta;
 	}
 
-	public double getCbu() {
+	public String getCbu() {
 		return Cbu;
 	}
 
-	public void setCbu(double cbu) {
+	public void setCbu(String cbu) {
 		Cbu = cbu;
 	}
 

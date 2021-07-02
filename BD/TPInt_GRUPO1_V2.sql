@@ -10,11 +10,6 @@ CREATE TABLE `tipocuenta` (
   `Descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-CREATE TABLE `tipotelefono` (
-  `idTipo` int NOT NULL AUTO_INCREMENT,
-  `Descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idTipo`)
-);
 CREATE TABLE `nacionalidad` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Nacionalidad` varchar(45) DEFAULT NULL,
@@ -29,14 +24,11 @@ CREATE TABLE `rol` (
 CREATE TABLE `telefonos` (
   `idTelefonos` int NOT NULL AUTO_INCREMENT,
   `Numero` varchar(45) DEFAULT NULL,
-  `FK_idTipo` int NOT NULL,
-  PRIMARY KEY (`idTelefonos`),
-  KEY `FK_idTipo_idx` (`FK_idTipo`),
-  CONSTRAINT `FK_idTipo` FOREIGN KEY (`FK_idTipo`) REFERENCES `tipotelefono` (`idTipo`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ;
 CREATE TABLE `datospersonales` (
   `Dni` int NOT NULL,
-  `Cuil` int NOT NULL,
+  `Cuil` double NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `Apellido` varchar(45) DEFAULT NULL,
   `Sexo` varchar(45) DEFAULT NULL,
@@ -55,9 +47,9 @@ CREATE TABLE `datospersonales` (
 );
 CREATE TABLE `cuentas` (
   `NumeroCuenta` int NOT NULL AUTO_INCREMENT,
-  `Cbu` varchar(45) NOT NULL,
+  `Cbu` double NOT NULL,
   `FechaCreacion` date DEFAULT NULL,
-  `Saldo` decimal(10,0) DEFAULT NULL,
+  `Saldo` decimal(5,3) DEFAULT NULL,
   `Estado` boolean not NULL,
   `FK_idTipoCuenta` int NOT NULL,
   `FK_DniCliente` int NOT NULL,
@@ -71,7 +63,7 @@ CREATE TABLE `movimientos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Detalle` varchar(45) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
-  `Importe` decimal(10,0) DEFAULT NULL,
+  `Importe` decimal(5,3) DEFAULT NULL,
   `FK_IdTipoMovimiento` int NOT NULL,
   `FK_IdCuentas` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -84,8 +76,8 @@ CREATE TABLE `prestamos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cuotas pagas` int DEFAULT NULL,
   `cuotas total` int DEFAULT NULL,
-  `importeCuota` decimal(10,0) DEFAULT NULL,
-  `importePedido` decimal(10,0) DEFAULT NULL,
+  `importeCuota` decimal(5,3) DEFAULT NULL,
+  `importePedido` decimal(5,3) DEFAULT NULL,
   `FechaUltimoPago` date DEFAULT NULL,
   `FK_NumeroCuenta` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -95,7 +87,7 @@ CREATE TABLE `prestamos` (
 CREATE TABLE `solicitud` (
   `idSolicitud` int NOT NULL AUTO_INCREMENT,
   `FK_NCuenta` int NOT NULL,
-  `Montosolicitado` decimal(10,0) DEFAULT NULL,
+  `Montosolicitado` decimal(5,3) DEFAULT NULL,
   `CantCuotasSolicitadas` int DEFAULT NULL,
   `EstadoSolicitud` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idSolicitud`),
@@ -105,7 +97,7 @@ CREATE TABLE `solicitud` (
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `NombreUsuario` varchar(45) DEFAULT NULL,
-  `Contrase√±a` varchar(45) DEFAULT NULL,
+  `ContraseÒa` varchar(45) DEFAULT NULL,
   `FK_idRol` int NOT NULL,
   `FK_DniDP` int NOT NULL,
   `Estado` boolean not NULL,
@@ -115,18 +107,20 @@ CREATE TABLE `usuario` (
   CONSTRAINT `FK_DniDP` FOREIGN KEY (`FK_DniDP`) REFERENCES `datospersonales` (`Dni`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_idRol` FOREIGN KEY (`FK_idRol`) REFERENCES `rol` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
-INSERT INTO `nacionalidad`(Nacionalidad) VALUES ('Afganist√°n'),('Albania'),('Alemania'),('Andorra'),('Angola'),('Antigua y Barbuda'),('Arabia Saudita'),
-('Argelia'),('Argentina'),('Armenia'),('Australia'),('Austria'),('Azerbaiy√°n'),('Bahamas'),('Bahr√©in'),('Banglad√©s'),('Barbados'),('Bielorrusia'),
-('B√©lgica'),('Belice'),('Ben√≠n'),('But√°n'),('Bolivia'),('Bosnia-Herzegovina'),('Botsuana'),('Brasil'),('Brun√©i'),('Bulgaria'),('Burkina Faso'),
-('Burundi'),('Burundi'),('Cabo Verde'),('Camboya'),('Camer√∫n'),('Canad√°'),('Chad'),('Rep√∫blica Checa'),('Chequia'),('Chile'),('China'),('Chipre'),
+INSERT INTO `nacionalidad`(Nacionalidad) VALUES ('Afganist·n'),('Albania'),('Alemania'),('Andorra'),('Angola'),('Antigua y Barbuda'),('Arabia Saudita'),
+('Argelia'),('Argentina'),('Armenia'),('Australia'),('Austria'),('Azerbaiy·n'),('Bahamas'),('BahrÈin'),('BangladÈs'),('Barbados'),('Bielorrusia'),
+('BÈlgica'),('Belice'),('BenÌn'),('But·n'),('Bolivia'),('Bosnia-Herzegovina'),('Botsuana'),('Brasil'),('BrunÈi'),('Bulgaria'),('Burkina Faso'),
+('Burundi'),('Burundi'),('Cabo Verde'),('Camboya'),('Camer˙n'),('Canad·'),('Chad'),('Rep˙blica Checa'),('Chequia'),('Chile'),('China'),('Chipre'),
 ('Colombia'),('Comoras'),('Congo'),('Corea del Norte'),('Corea del Sur'),('Costa Rica'),('Costa de Marfil'),('Croacia'),('Cuba'),('Dinamarca'),
-('Dominica'),('Ecuador'),('El Salvador'),('Espa√±a'),('Estados Unidos'),('Guatemala'),('Francia'),('Honduras'),('Israel'),('Italia'),('Jamaica'),
-('M√©xico'),('Nicaragua'),('Noruega'),('Panam√°'),('Paraguay'),('Per√∫'),('Portugal'),('Rep√∫blica Dominicana'),('Rusia'),('Suiza'),('Uruguay'),
+('Dominica'),('Ecuador'),('El Salvador'),('EspaÒa'),('Estados Unidos'),('Guatemala'),('Francia'),('Honduras'),('Israel'),('Italia'),('Jamaica'),
+('MÈxico'),('Nicaragua'),('Noruega'),('Panam·'),('Paraguay'),('Per˙'),('Portugal'),('Rep˙blica Dominicana'),('Rusia'),('Suiza'),('Uruguay'),
 ('Zimbabue');
-insert into `tipomovimiento`(Descripcion) values('Alta de cuenta'),(' Alta de un pr√©stamo'),('Pago de pr√©stamo'),('Transferencia'),('Extraccion'),
+insert into `tipomovimiento`(Descripcion) values('Alta de cuenta'),(' Alta de un prÈstamo'),('Pago de prÈstamo'),('Transferencia'),('Extraccion'),
 ('Deposito');
 insert into `tipocuenta`(Descripcion) values ('Caja de ahorro'),('Cuenta corriente');
-insert into`tipotelefono`(Descripcion) values('Celular'),('Hogar'),('Empresa'),('Fax');
 insert into`rol` (`Descripcion`,`Estado`)values ('Adminitrativo',true),('Cliente',true),('Gerente',false);
 
- select * from tipotelefono
+insert into `telefonos`(Numero) values(19377894);
+insert into `datospersonales`(Dni, Cuil, FK_Nacionalidad, FK_idTelefono) values('1',1,12,1);
+insert into `cuentas`(CBU, Estado, FK_idTipoCuenta, FK_DniCliente) values('222',true,2,1);
+insert into `movimientos`(Detalle, Fecha, Importe, FK_IdTipoMovimiento, FK_IdCuentas) values('Acreditacion Prestamo','2021/7/8',25.26,2,1),('Uso Prestamo','2021/7/5',-55,3,1)

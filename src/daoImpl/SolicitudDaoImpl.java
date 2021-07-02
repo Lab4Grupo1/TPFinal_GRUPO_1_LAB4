@@ -22,7 +22,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 	public List<Solicitud> readAll(){
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
@@ -61,7 +61,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 	
 	public boolean updateSolicitud(Solicitud solicitud) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}

@@ -23,7 +23,7 @@ public class TipoCuentasDaoImpl implements TiposCuentaDao {
 	public ArrayList<TipoCuentas> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class TipoCuentasDaoImpl implements TiposCuentaDao {
 	public TipoCuentas buscarId(int id) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
