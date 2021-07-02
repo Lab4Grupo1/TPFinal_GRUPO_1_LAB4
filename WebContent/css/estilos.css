@@ -1,0 +1,94 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border box;
+	img{max-width:100%;};
+	font-family: 'Nunito', sans-serif;
+}
+
+body {
+	background: #dcdcde; 
+}
+
+hr{
+	background-color: white;
+}
+
+.titulo{
+	color: #0057c6
+;
+}
+
+.row-principal{
+	height: 97vh;  
+	width: auto;
+}
+
+.col-menu{ 
+	margin-left: 15px;
+	padding: 0px;
+	background-color: #49525D;   
+}
+
+/* Opciones*/
+.logo{
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 170px;
+	height: 170px;
+}
+
+.UserName{  
+	position:relative;
+	left: 40px;
+	color: white;
+}
+
+
+.row-opciones{
+	padding: auto;
+	margin: auto; 
+}
+
+.row-sesion{
+	padding: auto;
+	margin: auto; 
+	position: absolute;
+	top:550px;
+	left: 50px;
+}
+ 
+
+.btn-dark{
+	border: none;
+ 	background-color: #49525D;
+	margin-top: 2px;
+	padding-left: auto;
+	padding-right: auto;
+	color: #ECECEC; 
+	width: 100%;
+}
+
+.btn-group-vertical{
+	width: auto;
+} 
+ 
+ 
+.formBusqueda{
+	  display:flex; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
