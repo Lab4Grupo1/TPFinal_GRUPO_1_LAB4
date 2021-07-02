@@ -5,50 +5,53 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList; 
 
 import dao.NacionalidadDao;
-import entidad.Nacionalidad;
+import entidad.Nacionalidad; 
 
 public class NacionalidadDaoImpl implements NacionalidadDao {
 
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
+ 
+ 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
-	public List<Nacionalidad> readAll() {
+	public ArrayList<Nacionalidad> readAll() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		ArrayList<Nacionalidad> Nacionalidad = new ArrayList<Nacionalidad>();
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(host + dbName, user, pass);
-			Statement st = conn.createStatement();
 
-			ResultSet rs = st.executeQuery(" SELECT id, Nacionalidad FROM Nacionalidad;");
+		ArrayList<Nacionalidad> lcue = new ArrayList<Nacionalidad>();
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+
+			ResultSet rs = st.executeQuery(" SELECT id, Nacionalidad FROM nacionalidad;");
 
 			while (rs.next()) {
+				Nacionalidad TNacionalidadRs = new Nacionalidad();
+				TNacionalidadRs.setId(rs.getInt("id"));
+				TNacionalidadRs.setNacionalidad(rs.getString("Nacionalidad"));
 
-				Nacionalidad NacionalidadRs = new Nacionalidad();
-				NacionalidadRs.setNacionalidad(rs.getString("descripcion"));
-
-				Nacionalidad.add(NacionalidadRs);
-
+				lcue.add(TNacionalidadRs);
 			}
-			conn.close();
+			cn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
 		}
-		return Nacionalidad;
+		return lcue;
 
 	}
 
@@ -63,14 +66,14 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 
 		Nacionalidad NacionalidadRs = new Nacionalidad();
 		try {
-			conn = DriverManager.getConnection(host + dbName, user, pass);
+			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 
 			ResultSet rs = st.executeQuery(" SELECT * FROM Nacionalidad where id=" + id);
 
 			while (rs.next()) {
 				NacionalidadRs.setId(id);
-				NacionalidadRs.setNacionalidad(rs.getString("descripcion"));
+				NacionalidadRs.setNacionalidad(rs.getString("Nacionalidad")); 
 
 			}
 			conn.close();

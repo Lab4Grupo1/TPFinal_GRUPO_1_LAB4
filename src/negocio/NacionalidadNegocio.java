@@ -1,10 +1,11 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entidad.Nacionalidad;
 
 public interface NacionalidadNegocio {
-	public List<Nacionalidad> readAll();
+	public ArrayList<Nacionalidad> readAll();
 
 }
