@@ -4,6 +4,19 @@ import java.sql.Date;
 
 public class DatosPersonales {
 	
+	private int Dni;
+	private int Cuil;
+	private String Nombre;
+	private String Apellido;
+	private String Sexo;
+	private Nacionalidad Nacionalidad;
+	private Date FechaNacimiento;
+	private String Direccion;
+	private String Localidad;
+	private String Provincia;
+	private String Mail;
+	private Telefonos Telefono;	
+	
 	public DatosPersonales(int dni, int cuil, String nombre, String apellido, String sexo, Nacionalidad nacionalidad, String direccion, String localidad, String provincia, String mail,
 			Telefonos telefono) { 
 		Dni = dni;
@@ -20,19 +33,6 @@ public class DatosPersonales {
 	}
 	
 	public DatosPersonales() {};
-	private int Dni;
-	private int Cuil;
-	private String Nombre;
-	private String Apellido;
-	private String Sexo;
-	private Nacionalidad Nacionalidad;
-	private Date FechaNacimiento;
-	private String Direccion;
-	private String Localidad;
-	private String Provincia;
-	private String Mail;
-	private Telefonos Telefono;
-	
 	
 	public int getDni() {
 		return Dni;
@@ -51,9 +51,7 @@ public class DatosPersonales {
 	}
 	public void setNombre(String nombre) {
 		Nombre = nombre;
-	}
-	
-	
+	}	
 	
 	public Nacionalidad getNacionalidad() {
 		return Nacionalidad;

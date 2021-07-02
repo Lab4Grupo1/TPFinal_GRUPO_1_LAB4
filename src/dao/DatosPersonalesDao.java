@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.DatosPersonales; 
 
@@ -9,5 +9,5 @@ public interface DatosPersonalesDao {
 	public int update(DatosPersonales persona); 
 	public DatosPersonales obtenerUnUsuario(int id);
 
-	public List<DatosPersonales> readAll();
+	public ArrayList<DatosPersonales> readAll();
 }

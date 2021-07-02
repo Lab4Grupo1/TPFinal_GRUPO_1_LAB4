@@ -10,7 +10,6 @@ public class RolNegocioImpl implements RolNegocio {
 
 	RolDaoImpl rdao = new RolDaoImpl();
 	
-	@Override
 	public List<Rol> readAll() {
 		// TODO Auto-generated method stub
 		return rdao.readAll();

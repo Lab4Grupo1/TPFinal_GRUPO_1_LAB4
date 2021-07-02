@@ -26,16 +26,12 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="User">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+    <form action="post" method="/servletLogin.java">
+      <input type="text" name="login" class="fadeIn second" name="login" placeholder="User">
+      <input type="password" name="password" class="fadeIn third" name="login" placeholder="Password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div>
 
   </div>
 </div>

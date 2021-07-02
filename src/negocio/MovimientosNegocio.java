@@ -1,10 +1,10 @@
 package negocio;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.Movimientos;
 
 public interface MovimientosNegocio {
-	public List<Movimientos> readAll();
+	public ArrayList<Movimientos> readAll();
 
 }

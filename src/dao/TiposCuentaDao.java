@@ -1,12 +1,11 @@
 package dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import entidad.TipoCuentas; 
+import entidad.TipoCuentas;
 
 public interface TiposCuentaDao {
-	
 
-	public List<TipoCuentas> readAll();
+	public ArrayList<TipoCuentas> readAll();
 
 }

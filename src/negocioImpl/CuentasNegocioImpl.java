@@ -8,19 +8,17 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 
 	CuentasDaoImpl cdao = new CuentasDaoImpl();
 	
-	@Override
 	public int insert(Cuentas cuenta) {
 		// TODO Auto-generated method stub
 		return cdao.insert(cuenta);
 	}
 
-	@Override
 	public int update(Cuentas cuenta) {
 		// TODO Auto-generated method stub
 		return cdao.update(cuenta);
 	}
 
-	@Override
+	
 	public int delete(Cuentas cuenta) {
 		// TODO Auto-generated method stub
 		return cdao.delete(cuenta);

@@ -1,8 +1,8 @@
 package dao;
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.Movimientos;
 
 public interface MovimientosDao {
-	public List<Movimientos> readAll();
+	public ArrayList<Movimientos> readAll();
 }

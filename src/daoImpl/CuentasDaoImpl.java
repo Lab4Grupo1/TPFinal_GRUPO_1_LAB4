@@ -2,28 +2,33 @@ package daoImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import entidad.Cuentas;
 
 public class CuentasDaoImpl {
 
-	private String host = "jdbc:mysql://localhost:3306/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
+
+	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
 	public int insert(Cuentas cuenta) {
+
+		int filas = 0;
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filas = 0;
 		Connection cn = null;
 		try {
-			cn = DriverManager.getConnection(host + dbName, user, pass);
+			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Insert into cuentas(nrocuenta,cbu,fechacracion,saldo,estado,tipocuenta) values ('"
 					+ cuenta.getNumeroCuenta() + "','" + cuenta.getCbu() + "','" + cuenta.getFechaCreacion() + "','"
@@ -36,16 +41,17 @@ public class CuentasDaoImpl {
 	}
 
 	public int update(Cuentas cuenta) {
+
+		int filas = 0;
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filas = 0;
 		Connection cn = null;
 		try {
-			cn = DriverManager.getConnection(host + dbName, user, pass);
+			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Update cuentas saldo= ('" + cuenta.getSaldo() + "'), tipocuenta=('" + cuenta.getTipoCuenta()
 					+ "') where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
@@ -57,16 +63,17 @@ public class CuentasDaoImpl {
 	}
 
 	public int delete(Cuentas cuenta) {
+
+		int filas = 0;
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int filas = 0;
 		Connection cn = null;
 		try {
-			cn = DriverManager.getConnection(host + dbName, user, pass);
+			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Update cuentas estado= false where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
 			filas = st.executeUpdate(query);
@@ -76,4 +83,75 @@ public class CuentasDaoImpl {
 		return filas;
 	}
 
+	public Cuentas buscarCuenta(int numeroCuenta) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		TipoCuentasDaoImpl TipoImp = new TipoCuentasDaoImpl();
+		DatosPersonalesDaoImpl DniImp = new DatosPersonalesDaoImpl();
+
+		Connection cn = null;
+		Cuentas x = new Cuentas();
+
+		try {
+
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT * FROM cuentas where numeroCuenta=" + numeroCuenta;
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				x.setNumeroCuenta(numeroCuenta);
+				x.setCbu(rs.getDouble("Cbu"));
+				x.setFechaCreacion(rs.getDate("FechaCreacion"));
+				x.setSaldo(rs.getFloat("Saldo"));
+				x.setEstado(rs.getBoolean("Estado"));
+				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
+				x.setDniCliente(DniImp.buscarDNI(rs.getInt("FK_DniCliente")));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return x;
+	}
+
+	public Cuentas buscarDni(int dni) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		TipoCuentasDaoImpl TipoImp = new TipoCuentasDaoImpl();
+		DatosPersonalesDaoImpl DniImp = new DatosPersonalesDaoImpl();
+
+		Connection cn = null;
+		Cuentas x = new Cuentas();
+
+		try {
+
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT * FROM cuentas where numeroCuenta=" + dni;
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				x.setNumeroCuenta(rs.getInt("numeroCuenta"));
+				x.setCbu(rs.getDouble("Cbu"));
+				x.setFechaCreacion(rs.getDate("FechaCreacion"));
+				x.setSaldo(rs.getFloat("Saldo"));
+				x.setEstado(rs.getBoolean("Estado"));
+				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
+				x.setDniCliente(DniImp.buscarDNI(dni));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return x;
+	}
 }

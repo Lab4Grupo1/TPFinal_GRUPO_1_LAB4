@@ -6,52 +6,84 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
-import dao.TiposMovimientoDao; 
+import dao.TiposMovimientoDao;
 import entidad.TipoMovimiento;
 
 public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
 
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
-	
-	public List<TipoMovimiento> readAll(){
-		
+	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
+
+	public ArrayList<TipoMovimiento> readAll() {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		ArrayList<TipoMovimiento> Tmovimiento = new ArrayList<TipoMovimiento>();
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
-			Statement st =   conn.createStatement();
-			
+			cn = DriverManager.getConnection(url, user, pass);
+
+			Statement st = cn.createStatement();
+
 			ResultSet rs = st.executeQuery(" SELECT id, descripcion FROM tipomovimiento;");
-			
-			while(rs.next()){
-				
+
+			while (rs.next()) {
+
 				TipoMovimiento TmovimientoRs = new TipoMovimiento();
 				TmovimientoRs.setDescripcion(rs.getString("descripcion"));
-				
+
 				Tmovimiento.add(TmovimientoRs);
-				
-				
+
 			}
-			conn.close();
-			
-		}catch(SQLException e) {
+			cn.close();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			
+		} finally {
+
 		}
 		return Tmovimiento;
-		
+
 	}
-	
-	
+
+	public TipoMovimiento buscarID(int id) {
+
+		TipoMovimiento TmovimientoRs = new TipoMovimiento();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+
+			Statement st = cn.createStatement();
+
+			ResultSet rs = st.executeQuery("SELECT * FROM tipoMovimiento where id =" + id);
+
+			while (rs.next()) {
+				TmovimientoRs.setId(id);
+				TmovimientoRs.setDescripcion(rs.getString("descripcion"));
+			}
+			cn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return TmovimientoRs;
+
+	}
 }

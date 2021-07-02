@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.NacionalidadDao;
-import entidad.Nacionalidad; 
+import entidad.Nacionalidad;
 
 public class NacionalidadDaoImpl implements NacionalidadDao {
 
@@ -17,39 +17,70 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 	private String user = "root";
 	private String pass = "root";
 	private String dbName = "TPInt_GRUPO1_V2";
-	
-	public List<Nacionalidad> readAll(){
-		
+
+	public List<Nacionalidad> readAll() {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		ArrayList<Nacionalidad> Nacionalidad = new ArrayList<Nacionalidad>();
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
-			Statement st =   conn.createStatement();
-			
+			conn = DriverManager.getConnection(host + dbName, user, pass);
+			Statement st = conn.createStatement();
+
 			ResultSet rs = st.executeQuery(" SELECT id, Nacionalidad FROM Nacionalidad;");
-			
-			while(rs.next()){
-				
-				Nacionalidad NacionalidadRs = new Nacionalidad(); 
+
+			while (rs.next()) {
+
+				Nacionalidad NacionalidadRs = new Nacionalidad();
 				NacionalidadRs.setNacionalidad(rs.getString("descripcion"));
-				
+
 				Nacionalidad.add(NacionalidadRs);
-				
-				
+
 			}
 			conn.close();
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			
+		} finally {
+
 		}
 		return Nacionalidad;
-		
+
+	}
+
+	public Nacionalidad buscarId(int id) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection conn = null;
+
+		Nacionalidad NacionalidadRs = new Nacionalidad();
+		try {
+			conn = DriverManager.getConnection(host + dbName, user, pass);
+			Statement st = conn.createStatement();
+
+			ResultSet rs = st.executeQuery(" SELECT * FROM Nacionalidad where id=" + id);
+
+			while (rs.next()) {
+				NacionalidadRs.setId(id);
+				NacionalidadRs.setNacionalidad(rs.getString("descripcion"));
+
+			}
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return NacionalidadRs;
+
 	}
 }

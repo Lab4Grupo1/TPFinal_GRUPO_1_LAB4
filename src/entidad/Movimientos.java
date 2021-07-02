@@ -9,18 +9,20 @@ public class Movimientos {
 	private Date Fecha;
 	private float Importe;
 	private TipoMovimiento TipoMovimiento;
-	private int NumeroCuenta;
+	private Cuentas Cuenta;
 
-	public Movimientos(int id, String detalle, Date fecha, float importe, TipoMovimiento tipoMovimiento, int numeroCuenta) {
+	public Movimientos() {
+	}
+
+	public Movimientos(int id, String detalle, Date fecha, float importe, TipoMovimiento tipoMovimiento,
+			Cuentas cuenta) {
 		Id = id;
 		Detalle = detalle;
 		Fecha = fecha;
 		Importe = importe;
 		TipoMovimiento = tipoMovimiento;
-		NumeroCuenta = numeroCuenta;
+		Cuenta = cuenta;
 	}
-	
-	public Movimientos(){}
 
 	public int getId() {
 		return Id;
@@ -62,14 +64,12 @@ public class Movimientos {
 		TipoMovimiento = tipoMovimiento;
 	}
 
-	public int getNumeroCuenta() {
-		return NumeroCuenta;
+	public Cuentas getCuenta() {
+		return Cuenta;
 	}
 
-	public void setNumeroCuenta(int numeroCuenta) {
-		NumeroCuenta = numeroCuenta;
+	public void setCuenta(Cuentas cuenta) {
+		Cuenta = cuenta;
 	}
-	
+
 }
-	
-	

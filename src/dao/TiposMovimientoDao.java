@@ -1,9 +1,9 @@
 package dao;
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.TipoMovimiento;
 
 public interface TiposMovimientoDao {
 	
-	public List<TipoMovimiento> readAll();
+	public ArrayList<TipoMovimiento> readAll();
 }

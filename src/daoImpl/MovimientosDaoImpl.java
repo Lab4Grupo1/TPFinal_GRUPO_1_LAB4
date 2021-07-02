@@ -3,59 +3,91 @@ package daoImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import dao.MovimientosDao;
 import entidad.Movimientos;
 
 public class MovimientosDaoImpl implements MovimientosDao {
 
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
-	
-	public List<Movimientos> readAll(){
-		
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
+
+	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
+
+	TipoMovimientoDaoImpl TipoMovImp = new TipoMovimientoDaoImpl();
+	CuentasDaoImpl CueImp = new CuentasDaoImpl();
+
+	public ArrayList<Movimientos> readAll() {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		ArrayList<Movimientos> Movimiento = new ArrayList<Movimientos>();
-		Connection conn = null;
-		
+
+		ArrayList<Movimientos> lmov = new ArrayList<Movimientos>();
+
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
-			Statement st =   conn.createStatement();
-			
-			ResultSet rs = st.executeQuery("SELECT id, Detalle, Fecha, Importe, FK_IdTipoMovimiento FROM movimientos;");
-			
-			while(rs.next()){
-				
-				Movimientos MovimientoRs = new Movimientos();
-				MovimientoRs.setId(rs.getInt("id"));
-				MovimientoRs.setDetalle(rs.getString("Detalle"));
-				MovimientoRs.setFecha(rs.getDate("Fecha"));
-				MovimientoRs.setImporte(rs.getFloat("Importe"));
-				//MovimientoRs.setTipoMovimiento(rs.getInt("FK_IdTipoMovimiento"));
-				
-				Movimiento.add(MovimientoRs);
-				
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT * FROM movimientos";
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				Movimientos x = new Movimientos();
+				x.setId(rs.getInt("id"));
+				x.setDetalle(rs.getString("Detalle"));
+				x.setFecha(rs.getDate("Fecha"));
+				x.setImporte(rs.getFloat("Importe"));
+				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
+				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
+				lmov.add(x);
 			}
-			conn.close();
-			
-		}catch(SQLException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
 		}
-		return Movimiento;
-		
+		return lmov;
 	}
-	
-	
+
+	public ArrayList<Movimientos> buscarDNI(int dni, int tipoCuenta) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Movimientos> lmov = new ArrayList<Movimientos>();
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT * FROM movimientos";
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				Movimientos x = new Movimientos();
+				x.setId(rs.getInt("id"));
+				x.setDetalle(rs.getString("Detalle"));
+				x.setFecha(rs.getDate("Fecha"));
+				x.setImporte(rs.getFloat("Importe"));
+				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
+				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
+				if (x.getCuenta().getTipoCuenta().getId() == tipoCuenta
+						&& x.getCuenta().getDniCliente().getDni() == dni) {
+					lmov.add(x);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lmov;
+	}
 }

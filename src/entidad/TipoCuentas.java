@@ -1,23 +1,33 @@
 package entidad;
 
 public class TipoCuentas {
-	public TipoCuentas(String descripcion) { 
-		Descripcion = descripcion;
-	}
-	public TipoCuentas( ) {}
-
 	private int Id;
 	private String Descripcion;
 	
+	public TipoCuentas(int id, String descripcion) {
+		super();
+		Id = id;
+		Descripcion = descripcion;
+	}
+
+	public TipoCuentas() {
+		super();
+	}
+
 	public int getId() {
 		return Id;
 	}
-	
-	public void setDescripcion(String desc) {
-		Descripcion = desc;
+
+	public void setId(int id) {
+		Id = id;
 	}
-	
+
 	public String getDescripcion() {
 		return Descripcion;
 	}
+
+	public void setDescripcion(String descripcion) {
+		Descripcion = descripcion;
+	}
+	
 }

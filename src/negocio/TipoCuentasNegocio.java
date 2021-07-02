@@ -1,10 +1,10 @@
 package negocio;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import entidad.TipoCuentas;
 
 public interface TipoCuentasNegocio {
-	public List<TipoCuentas> readAll();
+	public ArrayList<TipoCuentas> readAll();
 
 }

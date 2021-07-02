@@ -1,17 +1,16 @@
 package negocioImpl;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import daoImpl.MovimientosDaoImpl;
 import entidad.Movimientos;
 import negocio.MovimientosNegocio;
 
-public class MovimientosNegocioImpl implements MovimientosNegocio{
+public class MovimientosNegocioImpl implements MovimientosNegocio {
 
 	MovimientosDaoImpl mdao = new MovimientosDaoImpl();
-	
-	@Override
-	public List<Movimientos> readAll() {
+
+	public ArrayList<Movimientos> readAll() {
 		// TODO Auto-generated method stub
 		return mdao.readAll();
 	}
