@@ -1,10 +1,11 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entidad.Rol;
 
 public interface RolDao {
 
-	public List<Rol> readAll();
+	public ArrayList<Rol> readAll();
 }

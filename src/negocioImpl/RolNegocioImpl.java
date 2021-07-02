@@ -1,6 +1,6 @@
 package negocioImpl;
 
-import java.util.List;
+import java.util.ArrayList; 
 
 import daoImpl.RolDaoImpl;
 import entidad.Rol;
@@ -10,7 +10,7 @@ public class RolNegocioImpl implements RolNegocio {
 
 	RolDaoImpl rdao = new RolDaoImpl();
 	
-	public List<Rol> readAll() {
+	public ArrayList<Rol> readAll() {
 		// TODO Auto-generated method stub
 		return rdao.readAll();
 	}

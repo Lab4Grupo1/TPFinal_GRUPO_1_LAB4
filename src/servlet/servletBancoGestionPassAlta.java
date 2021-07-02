@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import daoImpl.NacionalidadDaoImpl;
+import daoImpl.RolDaoImpl;
+import daoImpl.TelefonosDaoImpl;
+import daoImpl.UsuarioDaoImpl;
+import entidad.DatosPersonales;
+import entidad.Nacionalidad;
 import entidad.Telefonos;
 import entidad.Usuario;
  
@@ -26,30 +32,70 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 		
 		if(request.getParameter("btnAceptar")!=null)
 		{			
-			HttpSession sesionAltaCliente = request.getSession(); 
 			
-			Object Nombre = (String) sesionAltaCliente.getAttribute("Nombre");
-			Object Apellido = (String) sesionAltaCliente.getAttribute("Apellido");
-			Object FechaNacimiento = (Date) sesionAltaCliente.getAttribute("FechaNacimiento");
-			Object DNI = (String) sesionAltaCliente.getAttribute("DNI");
-			Object CUIL = (String) sesionAltaCliente.getAttribute("CUIL");
-			Object Direccion = (String) sesionAltaCliente.getAttribute("Direccion");
-			Object Localidad = (String) sesionAltaCliente.getAttribute("Localidad");
-			Object Provincia = (String) sesionAltaCliente.getAttribute("Provincia");
-			Object Nacionalidad = (String) sesionAltaCliente.getAttribute("Nacionalidad");
-			Object Telefono = (Number) sesionAltaCliente.getAttribute("Telefono");
-			Object Email = (String) sesionAltaCliente.getAttribute("Email");
-			Object Tipo = (String) sesionAltaCliente.getAttribute("Tipo");
-			Object Sexo = (String) sesionAltaCliente.getAttribute("Sexo"); 
+			/*Traigo valores de la sesion Alta Usuario*/
+			HttpSession sesionAltaCliente = request.getSession();			
+			String Nombre = (String) sesionAltaCliente.getAttribute("Nombre");
+			String Apellido = (String) sesionAltaCliente.getAttribute("Apellido");
+			//Date FechaNacimiento = (Date) sesionAltaCliente.getAttribute("FechaNacimiento");
+			int DNI = (int) sesionAltaCliente.getAttribute("DNI");
+			int CUIL = (int) sesionAltaCliente.getAttribute("CUIL");
+			String Direccion = (String) sesionAltaCliente.getAttribute("Direccion");
+			String Localidad = (String) sesionAltaCliente.getAttribute("Localidad");
+			String Provincia = (String) sesionAltaCliente.getAttribute("Provincia");
+			int Nacionalidad = (int) sesionAltaCliente.getAttribute("Nacionalidad");
+			String Telefono = (String) sesionAltaCliente.getAttribute("Telefono");
+			String Email = (String) sesionAltaCliente.getAttribute("Email");
+			int Rol = (int) sesionAltaCliente.getAttribute("Rol");
+			String Sexo = (String) sesionAltaCliente.getAttribute("Sexo"); 
+			
+			request.setAttribute("Nombre", Nombre);			
 
+			/*Inserto en Telefono*/
+			Telefonos num = new Telefonos();
+			TelefonosDaoImpl tel = new TelefonosDaoImpl();			
+			num.setNumero(Telefono);
+			int idTel = tel.insert(num);
+			num.setId(idTel);			
+
+			/*Inserto en Datos Personales*/
+			NacionalidadDaoImpl nac = new NacionalidadDaoImpl();			
+			DatosPersonales dp = new DatosPersonales();
+			dp.setDni(DNI);
+			dp.setCuil(CUIL);
+			dp.setNombre(Nombre);
+			dp.setApellido(Apellido);
+			dp.setSexo(Sexo);
+		//	dp.setFechaNacimiento(FechaNacimiento);
+			dp.setDireccion(Direccion);
+			dp.setLocalidad(Localidad);
+			dp.setProvincia(Provincia);
+			dp.setMail(Email);
+			dp.setNacionalidad(nac.buscarId(Nacionalidad));
+			dp.setTelefono(num);
+			 
+
+			/*Creo el usuario con Nombre Apellido DNI*/
+            String DNIUs = Integer.toString(DNI).substring(0, 3);
+            String nombreUs = Nombre.substring(0, 3);
+            String apellidoUs = Apellido.substring(0, 3);
+            String Usuario = DNIUs + apellidoUs + nombreUs; 
 			
 
-		 
-			Usuario u  =  new Usuario(null, null, null, null, false); 
+			/*Inserto en usuario*/
+			UsuarioDaoImpl usuario = new UsuarioDaoImpl();
+			Usuario u = new Usuario();
 			
-			Telefonos t = new Telefonos(null, null);
-  
+			RolDaoImpl rol1 = new RolDaoImpl();
 			
+			u.setNombreUsuario(Usuario);
+			u.setContraseña(request.getParameter("NuevaPassRepetir"));
+			u.setRol(rol1.buscarId(Rol));
+			u.setDatosPersonales(dp);
+			u.setEstado(true); 
+			
+			usuario.insert(u);
+			 
 			
 			//REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("bancoClienteAlta.jsp");

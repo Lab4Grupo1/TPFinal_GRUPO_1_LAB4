@@ -28,19 +28,27 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			e.printStackTrace();
 		}
 
-		int filas = 0;
+		int cantidad = 0;
 
 		Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into telefono(numero)  values ( " + tel.getNumero() + ")";
-
-			filas = st.executeUpdate(query);
+			String query = "Insert into telefono(numero)  values ( " + tel.getNumero() + ")"; 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return filas;
+		
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+			String query = "SELECT max(id) FROM tpint_grupo1_v2.telefonos;";
+
+			cantidad = st.executeUpdate(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cantidad;
 	}
 
 	public int update(Telefonos tel) {

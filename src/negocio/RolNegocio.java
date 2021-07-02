@@ -1,10 +1,9 @@
 package negocio;
 
-import java.util.List;
-
+import java.util.ArrayList; 
 import entidad.Rol;
 
 public interface RolNegocio {
-	public List<Rol> readAll();
+	public ArrayList<Rol> readAll();
 
 }

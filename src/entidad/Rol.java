@@ -2,12 +2,9 @@ package entidad;
 
 public class Rol {
 	
-	public Rol() {
-		
-	}
+	public Rol() {}
 	
-	public Rol(String descripcion, boolean estado) {
-		super();
+	public Rol(String descripcion, boolean estado) { 
 		Descripcion = descripcion;
 		Estado = estado;
 	}

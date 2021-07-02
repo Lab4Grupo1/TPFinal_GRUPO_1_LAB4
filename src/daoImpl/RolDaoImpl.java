@@ -9,49 +9,86 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.RolDao;
+import entidad.Nacionalidad;
 import entidad.Rol;
 
-public class RolDaoImpl implements RolDao{
+public class RolDaoImpl implements RolDao{ 
 	
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
-	
-	public List<Rol> readAll(){
-		
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
+ 
+ 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
+
+	public ArrayList<Rol> readAll() {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}catch(ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		ArrayList<Rol> rol = new ArrayList<Rol>();
-		Connection conn = null;
-		
+
+		ArrayList<Rol> Rol = new ArrayList<Rol>();
+
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
-			Statement st =   conn.createStatement();
-			
-			ResultSet rs = st.executeQuery("SELECT id, Descripcion, Estado FROM rol");
-			
-			while(rs.next()){
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+ 
+			ResultSet rs = st.executeQuery("SELECT id, Descripcion, Estado FROM rol"); 
+
+				while(rs.next()){
 				
 				Rol rolRs = new Rol();
 				rolRs.setId(rs.getInt("id"));
 				rolRs.setDescripcion(rs.getString("Descripcion"));
 				rolRs.setEstado(rs.getBoolean("Estado"));
 				
-				rol.add(rolRs);
+				Rol.add(rolRs);
 				
 			}
-			conn.close();
-			
-		}catch(SQLException e) {
+			cn.close();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			
+		} finally {
+
 		}
-		return rol;
-		
+		return Rol;
+
+	}
+	
+	public Rol buscarId(int id) {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection conn = null;
+
+		Rol RolRs = new Rol();
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			Statement st = conn.createStatement();
+
+			ResultSet rs = st.executeQuery(" SELECT * FROM Rol where id=" + id);
+
+			while (rs.next()) {
+				RolRs.setId(id);
+				RolRs.setDescripcion(rs.getString("Descripcion"));
+
+			}
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return RolRs;
+
 	}
 }

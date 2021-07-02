@@ -1,7 +1,6 @@
 package negocioImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList; 
 
 import daoImpl.NacionalidadDaoImpl;
 import entidad.Nacionalidad;

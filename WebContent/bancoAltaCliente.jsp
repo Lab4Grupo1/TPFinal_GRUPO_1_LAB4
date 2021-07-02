@@ -1,3 +1,5 @@
+<%@page import="entidad.Rol"%>
+<%@page import="daoImpl.RolDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="daoImpl.NacionalidadDaoImpl"%>
 <%@page import="entidad.Nacionalidad"%> 
@@ -38,7 +40,7 @@
 				  <div class="form-row">
 				     <div class="col-md-3 mb-3">
 				      <label for="FechaNacimiento">Fecha Nacimiento</label>
-				      <input type="text" class="form-control" name="FechaNacimiento" placeholder="FechaNacimiento" required>
+				      <input type="text" class="form-control" name="FechaNacimiento" placeholder="DD/MM/YYYY" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Apellido">DNI</label>
@@ -66,16 +68,16 @@
 				    </div>   
 					<div class="col-md-3 mb-3">
 					   <label for="Nacionalidad">Nacionalidad</label> 
-					   <select > 
-						   <%		NacionalidadDaoImpl Naca = new NacionalidadDaoImpl();
-								   ArrayList<Nacionalidad> ListaN =  Naca.readAll();
-										if(Naca != null)
-										{
-											for(Nacionalidad nac : ListaN){
-										       %><option><%=nac.getNacionalidad() %> </option><%
-										       }		
-										}			
-										%> 
+					   <select name="Nacionalidad"> 
+						   <%	NacionalidadDaoImpl Naca = new NacionalidadDaoImpl();
+					 			ArrayList<Nacionalidad> ListaN =  Naca.readAll();
+								if(Naca != null)
+								{
+									for(Nacionalidad nac : ListaN){
+								       %><option value="<%=nac.getId() %>"><%=nac.getNacionalidad() %> </option><%
+								       }		
+								}			
+							%> 
 						</select>
 					</div>				    
 				</div>
@@ -89,11 +91,22 @@
 				      <label for="Email">Email</label>
 				      <input type="email" class="form-control" name="Email" placeholder="Email" required>
 				    </div>
-				    <div class="col-md-3 mb-3">
-				      <label for="Rol">Rol</label>
-				      <input type="text" class="form-control" name="Rol" placeholder="Rol" required>
-				    </div>
-				  </div>   
+					<div class="col-md-3 mb-3">
+					   <label for="Rol">Rol</label> 
+					   <br>
+					   <select name="Rol" > 
+						   <%	RolDaoImpl Rol = new RolDaoImpl();
+					 			ArrayList<Rol> ListaRol =  Rol.readAll();
+								if(ListaRol != null)
+								{
+									for(Rol List : ListaRol){
+								       %><option value="<%=List.getId() %>"><%=List.getDescripcion() %> </option><%
+								       }		
+								}			
+							%> 
+						</select>
+					</div>		
+					</div>		
 				  
 				  <div class="form-group">
 				    <div class="form-check">
