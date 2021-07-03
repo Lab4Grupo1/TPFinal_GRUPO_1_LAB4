@@ -25,7 +25,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	public ArrayList<Movimientos> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	public ArrayList<Movimientos> buscarDNI(int dni, int tipoCuenta) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

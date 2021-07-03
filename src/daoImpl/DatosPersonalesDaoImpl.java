@@ -24,7 +24,7 @@ public class DatosPersonalesDaoImpl {
 	public int insert(DatosPersonales persona) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class DatosPersonalesDaoImpl {
 	public int update(DatosPersonales persona) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -91,7 +91,7 @@ public class DatosPersonalesDaoImpl {
 	public ArrayList<DatosPersonales> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -120,6 +120,7 @@ public class DatosPersonalesDaoImpl {
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
+				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
 				DatosPersonalesRs.setNacionalidad(NacionalidadRs); 
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
@@ -144,7 +145,7 @@ public class DatosPersonalesDaoImpl {
 	public DatosPersonales buscarDNI(int dni) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -160,8 +161,7 @@ public class DatosPersonalesDaoImpl {
 			Statement st = cn.createStatement();
 
 			ResultSet rs = st
-					.executeQuery(" SELECT DNI, Cuil, Nombre, Apellido, sexo, FK_Nacionalidad, FechaNacimiento,"
-							+ " Direccion, Localidad, Provincia, Mail, FK_IdTelefono FROM datospersonales where dni ="
+					.executeQuery(" SELECT * FROM datospersonales where dni ="
 							+ dni);
 
 			while (rs.next()) {

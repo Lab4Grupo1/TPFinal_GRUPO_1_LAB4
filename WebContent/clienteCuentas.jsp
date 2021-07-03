@@ -35,7 +35,7 @@
 						numCuenta = request.getAttribute("numCuenta").toString();
 					}
 					%>
-					<div class="dropdown">
+					<div  class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" type="button"
 							id="dropdownMenuButton" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">Elegir cuenta </a>

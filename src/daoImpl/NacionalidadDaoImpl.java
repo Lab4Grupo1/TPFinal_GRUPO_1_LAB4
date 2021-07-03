@@ -23,7 +23,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 	public ArrayList<Nacionalidad> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 	public Nacionalidad buscarId(int id) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

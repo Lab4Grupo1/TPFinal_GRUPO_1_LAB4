@@ -25,7 +25,7 @@ public class RolDaoImpl implements RolDao{
 	public ArrayList<Rol> readAll() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +63,7 @@ public class RolDaoImpl implements RolDao{
 	public Rol buscarId(int id) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
