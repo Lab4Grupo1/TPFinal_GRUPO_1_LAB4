@@ -51,6 +51,7 @@ public class servletBancoAltaCliente extends HttpServlet {
 			sesionAltaCliente.setAttribute("Rol", request.getParameter("Rol"));  
 			sesionAltaCliente.setAttribute("Sexo", request.getParameter("Sexo"));    
 			
+			System.out.println(request.getParameter("Sexo"));
 			//REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 			rd.forward(request, response);

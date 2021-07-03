@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.Query;
+
 import dao.TelefonosDao;
 import entidad.Telefonos;
 
@@ -29,15 +31,20 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		}
 
 		int cantidad = 0;
+		int res = 0;
 
 		Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Insert into telefono(numero)  values ( " + tel.getNumero() + ")"; 
+
+			res = st.executeUpdate(query);
+			System.out.println(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 		try {
 			cn = DriverManager.getConnection(url, user, pass);

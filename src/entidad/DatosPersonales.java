@@ -1,23 +1,24 @@
 package entidad;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class DatosPersonales {
 	
 	private int Dni;
-	private int Cuil;
+	private String Cuil;
 	private String Nombre;
 	private String Apellido;
 	private String Sexo;
 	private Nacionalidad Nacionalidad;
-	private Date FechaNacimiento;
+	private LocalDate FechaNacimiento;
 	private String Direccion;
 	private String Localidad;
 	private String Provincia;
 	private String Mail;
 	private Telefonos Telefono;	
 	
-	public DatosPersonales(int dni, int cuil, String nombre, String apellido, String sexo, Nacionalidad nacionalidad, String direccion, String localidad, String provincia, String mail,
+	public DatosPersonales(int dni, String cuil, String nombre, String apellido, String sexo, Nacionalidad nacionalidad, String direccion, String localidad, String provincia, String mail,
 			Telefonos telefono) { 
 		Dni = dni;
 		Cuil = cuil;
@@ -40,10 +41,10 @@ public class DatosPersonales {
 	public void setDni(int dni) {
 		Dni = dni;
 	}
-	public int getCuil() {
+	public String getCuil() {
 		return Cuil;
 	}
-	public void setCuil(int cuil) {
+	public void setCuil(String cuil) {
 		Cuil = cuil;
 	}
 	public String getNombre() {
@@ -93,12 +94,12 @@ public class DatosPersonales {
 	public String getMail() {
 		return Mail;
 	}
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return FechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		FechaNacimiento = fechaNacimiento;
+	public void setFechaNacimiento(LocalDate dataFormateada) {
+		FechaNacimiento =  dataFormateada;
 	}
 
 	public void setMail(String mail) {

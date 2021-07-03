@@ -34,11 +34,14 @@ public class UsuarioDaoImpl {
 		{
 			cn = DriverManager.getConnection(host+dbName, user,pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into usuario (NombreUsuario, Contraseña, FK_IdRol, FK_DniDp, Estado)  values"
-			+ "	('"+usuario.getNombreUsuario()+"','"+usuario.getContraseña()+"," 
-			+ "	('"+usuario.getRol().getId()+"','"+usuario.getdp_DNI()+"," +usuario.isEstado();
+			String query = "Insert into usuario (NombreUsuario, Contraseña, FK_IdRol, FK_DniDp, Estado) values ("
+			+ "'"+usuario.getNombreUsuario()+	"',"
+			+ "'"+usuario.getContraseña()+		"'," 
+			+ "'"+usuario.getRol().getId()+		"',"
+			+ "'"+usuario.getdp_DNI()+			"',"
+				 +usuario.isEstado()+			")";
 
-		
+			System.out.println(query);
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)
