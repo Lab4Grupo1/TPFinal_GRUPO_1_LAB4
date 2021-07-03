@@ -14,9 +14,10 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 
 	static String host = "localhost";
 	static int port = 3306;
-	static String db = "tpint_grupo1_v2";
+	static String db = "TPInt_GRUPO1_V6";
 	static String user = "root";
 	static String pass = "root";
+
  
  	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
