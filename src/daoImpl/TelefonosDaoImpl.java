@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.Query;
+
 import dao.TelefonosDao;
 import entidad.Telefonos;
 
@@ -28,26 +30,36 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			e.printStackTrace();
 		}
 
-		int cantidad = 0;
+		int cantidad = 0; 
+		int insert = 0; 
 
 		Connection cn = null;
-		try {
+		try 
+		{
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into telefono(numero)  values ( " + tel.getNumero() + ")"; 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			cn = DriverManager.getConnection(url, user, pass);
-			Statement st = cn.createStatement();
-			String query = "SELECT max(id) FROM tpint_grupo1_v2.telefonos;";
+			
 
-			cantidad = st.executeUpdate(query);
+			String query = "Insert into tpint_grupo1_v2.telefonos(numero) values('" + tel.getNumero() + "');"; 
+ 
+			insert = st.executeUpdate(query); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		 
+		try 
+		{
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement(); 
+			ResultSet rs = st.executeQuery("SELECT max(id) as id FROM tpint_grupo1_v2.telefonos;");
+			while (rs.next()) { 
+				cantidad = rs.getInt("id");
+			}
+			cn.close();
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return cantidad;
 	}
 
@@ -123,10 +135,10 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery(" SELECT * FROM Telefonos where id=" + id);
+			ResultSet rs = st.executeQuery(" SELECT id, numero FROM Telefonos where id=" + id);
 
 			while (rs.next()) {
-				TelefonosRs.setId(id);
+				TelefonosRs.setId(rs.getInt("id"));
 				TelefonosRs.setNumero(rs.getString("numero"));
 
 			}

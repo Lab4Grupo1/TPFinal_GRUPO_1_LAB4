@@ -13,12 +13,13 @@ import entidad.Usuario;
 
 public class UsuarioDaoImpl {
 
-	private String host = "jdbc:mysql://localhost:3306/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "bdregistro";
+	static String host = "localhost";
+	static int port = 3306;
+	static String db = "tpint_grupo1_v2";
+	static String user = "root";
+	static String pass = "root";
 
-	/*Crearupdate*/ 
+	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 	
 	public int insert(Usuario usuario)
 	{		
@@ -32,13 +33,14 @@ public class UsuarioDaoImpl {
 		Connection cn = null;
 		try
 		{
-			cn = DriverManager.getConnection(host+dbName, user,pass);
+			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into usuario (NombreUsuario, Contraseña, FK_IdRol, FK_DniDp, Estado)  values"
-			+ "	('"+usuario.getNombreUsuario()+"','"+usuario.getContraseña()+"," 
-			+ "	('"+usuario.getRol().getId()+"','"+usuario.getdp_DNI()+"," +usuario.isEstado();
-
-		
+			String query = "Insert into tpint_grupo1_v2.usuario (NombreUsuario, ContraseÃ±a, FK_IdRol, FK_DniDp, Estado) values ("
+			+ "'"+usuario.getNombreUsuario()+	"',"
+			+ "'"+usuario.getContraseña()+		"'," 
+			+ "'"+usuario.getRol().getId()+		"',"
+			+ "'"+usuario.getdp_DNI().getDni()+			"',"  +usuario.isEstado()+ ")";
+ 
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)
@@ -60,9 +62,9 @@ public class UsuarioDaoImpl {
 		Connection cn = null;
 		try
 		{
-			cn = DriverManager.getConnection(host+dbName, user,pass);
+			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
-			String query = "update usuario set NombreUsuario = '"+ usuario.getNombreUsuario() +"',  Contraseña = '"+usuario.getContraseña()+"', FK_IdRol = '"+usuario.getRol()+"', FK_DniDp ='"+usuario.getdp_DNI()+"'  where  NombreUsuario =  '"+ usuario.getNombreUsuario()+"'"; 
+			String query = "update usuario set NombreUsuario = '"+ usuario.getNombreUsuario() +"',  ContraseÃ±a = '"+usuario.getContraseña()+"', FK_IdRol = '"+usuario.getRol()+"', FK_DniDp ='"+usuario.getdp_DNI()+"'  where  NombreUsuario =  '"+ usuario.getNombreUsuario()+"'"; 
 
 		
 			filas=st.executeUpdate(query);
@@ -88,7 +90,7 @@ public class UsuarioDaoImpl {
 		Connection cn = null;
 		try
 		{
-			cn = DriverManager.getConnection(host+dbName, user,pass);
+			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
 			String query = "update usuario set estado = false where id="+id;
 			filas=st.executeUpdate(query);
@@ -115,8 +117,8 @@ public class UsuarioDaoImpl {
 		
 		Connection con = null;
 		try{
-			con = DriverManager.getConnection(host + dbName, user, pass);
-			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.Contraseña, "
+			con = DriverManager.getConnection(url, user, pass);
+			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.ContraseÃ±a, "
 					+ "u.FK_idRol, r.Descripcion, u.FK_DniDP, u.Estado "
 					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.Id = ?;");
 			miSentencia.setInt(1, id); //Cargo el ID recibido
@@ -157,7 +159,7 @@ public class UsuarioDaoImpl {
 			
 		   Connection conn = null;
 	       try {
-	    	    conn = DriverManager.getConnection(host + dbName, user, pass);
+	    	    conn = DriverManager.getConnection(url, user, pass);
 	            CallableStatement proc = conn.prepareCall(" CALL crearUsuario(?,?) ");
 	            proc.setString("NombreUsuario", usuario.getNombreUsuario());//Tipo String 
 	            proc.execute();            

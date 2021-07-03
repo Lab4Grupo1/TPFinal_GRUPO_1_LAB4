@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 import entidad.DatosPersonales;
 import entidad.Nacionalidad;
@@ -34,16 +34,25 @@ public class DatosPersonalesDaoImpl {
 		Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
-			Statement st = cn.createStatement();
-			String query = "Insert into usuario (DNI, Cuil, Nombre, Apellido, sexo, FK_Nacionalidad, FechaNacimiento,"
-					+ " Direccion, Localidad, Provincia, Mail, FK_IdTelefono)  values" + "	('" + persona.getDni()
-					+ "','" + persona.getCuil() + "," + "	('" + persona.getNombre() + "','" + persona.getApellido()
-					+ "," + persona.getSexo() + "," + "	('" + persona.getNacionalidad() + "','"
-					+ persona.getFechaNacimiento() + "," + persona.getDireccion() + "," + "	('" + persona.getLocalidad()
-					+ "','" + persona.getProvincia() + "," + persona.getMail() + "," + "	('" + persona.getTelefono()
-					+ "'";
-
-			filas = st.executeUpdate(query);
+			Statement st = cn.createStatement();  
+			
+			String query = "Insert into datospersonales(DNI, Cuil, Nombre, Apellido, sexo, FechaNacimiento,"
+					+ " Direccion, Localidad, Provincia, Mail, FK_Nacionalidad, FK_IdTelefono)  values (" +  
+					+ 		  persona.getDni() + 			","
+					+ "'" + persona.getCuil() + 			"'," 
+					+ "'" + persona.getNombre() + 			"'," 
+					+ "'" + persona.getApellido() + 		"',"
+					+ "'" + persona.getSexo() + 			"'," 					
+					+ "('" + persona.getFechaNacimiento() +  "'),"					
+					+ "'" + persona.getDireccion() + 		"'," 
+					+ "'" + persona.getLocalidad() +		"',"
+					+ "'" + persona.getProvincia() + 		"'," 
+					+ "'" + persona.getMail() + 			"',"
+					+ 		persona.getNacionalidad().getId() + 	","							
+					+ 		persona.getTelefono().getId()	+ 		")"; 
+		 
+			filas = st.executeUpdate(query); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,8 +105,7 @@ public class DatosPersonalesDaoImpl {
 			Statement st = cn.createStatement();
 
 			ResultSet rs = st
-					.executeQuery(" SELECT DNI, Cuil, Nombre, Apellido, sexo, FK_Nacionalidad, FechaNacimiento,"
-							+ " Direccion, Localidad, Provincia, Mail, FK_IdTelefono FROM datospersonales ;");
+					.executeQuery(" SELECT * FROM datospersonales ;");
 
 			while (rs.next()) {
 				DatosPersonales DatosPersonalesRs = new DatosPersonales();
@@ -106,14 +114,13 @@ public class DatosPersonalesDaoImpl {
 
 				NacionalidadRs.setNacionalidad(rs.getString("FK_Nacionalidad"));
 				TelefonoRs.setNumero(rs.getString("FK_IdTelefono"));
-
+				 
 				DatosPersonalesRs.setDni(rs.getInt("DNI"));
-				DatosPersonalesRs.setCuil(rs.getInt("Cuil"));
+				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
-				DatosPersonalesRs.setNacionalidad(NacionalidadRs);
-				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento"));
+				DatosPersonalesRs.setNacionalidad(NacionalidadRs); 
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
 				DatosPersonalesRs.setProvincia(rs.getString("Provincia"));
@@ -160,12 +167,12 @@ public class DatosPersonalesDaoImpl {
 			while (rs.next()) {
 
 				DatosPersonalesRs.setDni(dni);
-				DatosPersonalesRs.setCuil(rs.getInt("Cuil"));
+				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
-				DatosPersonalesRs.setNacionalidad(NacioImp.buscarId(rs.getInt("FK_Nacionalidad")));
-				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento"));
+				DatosPersonalesRs.setNacionalidad(NacioImp.buscarId(rs.getInt("FK_Nacionalidad"))); 
+				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
 				DatosPersonalesRs.setProvincia(rs.getString("Provincia"));
@@ -183,4 +190,6 @@ public class DatosPersonalesDaoImpl {
 		return DatosPersonalesRs;
 
 	}
+	
+	
 }

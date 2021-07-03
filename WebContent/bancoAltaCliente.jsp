@@ -21,10 +21,10 @@
 			<jsp:include page="masterBanco.jsp"></jsp:include>	
 		</div>		
 		<div class="col">			  
-						<h4>Alta Usuario</h4>	
-				<div class=".container-sm" style="width: 90%">
-				 
-				<form action="servletBancoAltaCliente" method="get">
+		<h4>Alta Usuario</h4>	
+			<div class=".container-sm" style="width: 90%">
+			 
+				<form action="servletBancoAltaCliente" method="post">
 				
 				  <div class="form-row">
 				    <div class="col-md mb">
@@ -40,7 +40,7 @@
 				  <div class="form-row">
 				     <div class="col-md-3 mb-3">
 				      <label for="FechaNacimiento">Fecha Nacimiento</label>
-				      <input type="text" class="form-control" name="FechaNacimiento" placeholder="DD/MM/YYYY" required>
+				      <input type="text"  class="form-control" name="FechaNacimiento" placeholder="YYYY/MM/DD" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Apellido">DNI</label>
@@ -110,18 +110,18 @@
 				  
 				  <div class="form-group">
 				    <div class="form-check">
-				      <input class="form-check-input" type="radio" name="sexo" id="Masculino" required>
+				      <input class="form-check-input" type="radio" name="Sexo" id="Masculino" value="Masculino" required>
 				      <label class="form-check-label" for="Masculino">Masculino</label> 
 				      <br> 
-				      <input class="form-check-input" type="radio" name="sexo" id="Femenino" required>
+				      <input class="form-check-input" type="radio" name="Sexo" id="Femenino" value="Femenino" required>
 				      <label class="form-check-label" for="Femenino">Femenino</label> 
 				    </div>
-				  </div>
+				  </div> 
+				  
 					<input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar">
 					<input class="btn btn-primary col-md-1" type="submit" value="Cancelar" name="btnCancelar">
 				</form>
-				</div> 
-		
+			</div>  
 		</div>		
 	</div>	
 </div>

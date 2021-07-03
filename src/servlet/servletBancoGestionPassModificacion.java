@@ -26,10 +26,10 @@ import entidad.Telefonos;
 import entidad.Usuario;
  
 @WebServlet("/servletBancoGestionPassAlta")
-public class servletBancoGestionPassAlta extends HttpServlet {
+public class servletBancoGestionPassModificacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         
-    public servletBancoGestionPassAlta() {
+    public servletBancoGestionPassModificacion() {
         super(); 
     }
  

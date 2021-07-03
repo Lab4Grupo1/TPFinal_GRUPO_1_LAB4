@@ -69,10 +69,10 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 
-			ResultSet rs = st.executeQuery(" SELECT * FROM Nacionalidad where id=" + id);
+			ResultSet rs = st.executeQuery(" SELECT id, Nacionalidad  FROM Nacionalidad where id=" + id);
 
 			while (rs.next()) {
-				NacionalidadRs.setId(id);
+				NacionalidadRs.setId(rs.getInt("id"));
 				NacionalidadRs.setNacionalidad(rs.getString("Nacionalidad")); 
 
 			}
