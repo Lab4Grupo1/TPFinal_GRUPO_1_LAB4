@@ -1,10 +1,10 @@
 package servlet;
 
+
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,15 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession; 
 
 @WebServlet("/servletBancoAltaCliente")
-public class servletBancoAltaCliente extends HttpServlet {
+public class servletBancoModificarCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
-    public servletBancoAltaCliente() {}
+    public servletBancoModificarCliente() {}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getParameter("btnAceptar")!=null)
-		{	   
+		{	  
+	        
 			HttpSession sesionAltaCliente = request.getSession();		
 			
 			sesionAltaCliente.setAttribute("Nombre", request.getParameter("Nombre")); 
@@ -37,11 +38,10 @@ public class servletBancoAltaCliente extends HttpServlet {
 			sesionAltaCliente.setAttribute("Nacionalidad", request.getParameter("Nacionalidad")); 
 			sesionAltaCliente.setAttribute("Telefono", request.getParameter("Telefono")); 
 			sesionAltaCliente.setAttribute("Email", request.getParameter("Email")); 
-			sesionAltaCliente.setAttribute("Rol", request.getParameter("Rol"));  
-			sesionAltaCliente.setAttribute("Sexo", request.getParameter("Sexo"));     
+			sesionAltaCliente.setAttribute("Rol", request.getParameter("Rol"));        
 			
 			//REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassModificacion.jsp");
 			rd.forward(request, response);
 		}
 		 

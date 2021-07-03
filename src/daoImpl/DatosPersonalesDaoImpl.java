@@ -105,8 +105,7 @@ public class DatosPersonalesDaoImpl {
 			Statement st = cn.createStatement();
 
 			ResultSet rs = st
-					.executeQuery(" SELECT DNI, Cuil, Nombre, Apellido, sexo, FK_Nacionalidad, FechaNacimiento,"
-							+ " Direccion, Localidad, Provincia, Mail, FK_IdTelefono FROM datospersonales ;");
+					.executeQuery(" SELECT * FROM datospersonales ;");
 
 			while (rs.next()) {
 				DatosPersonales DatosPersonalesRs = new DatosPersonales();
@@ -173,6 +172,7 @@ public class DatosPersonalesDaoImpl {
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
 				DatosPersonalesRs.setNacionalidad(NacioImp.buscarId(rs.getInt("FK_Nacionalidad"))); 
+				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
 				DatosPersonalesRs.setProvincia(rs.getString("Provincia"));
@@ -190,4 +190,6 @@ public class DatosPersonalesDaoImpl {
 		return DatosPersonalesRs;
 
 	}
+	
+	
 }

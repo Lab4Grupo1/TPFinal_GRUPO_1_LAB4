@@ -135,10 +135,10 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery(" SELECT * FROM Telefonos where id=" + id);
+			ResultSet rs = st.executeQuery(" SELECT id, numero FROM Telefonos where id=" + id);
 
 			while (rs.next()) {
-				TelefonosRs.setId(id);
+				TelefonosRs.setId(rs.getInt("id"));
 				TelefonosRs.setNumero(rs.getString("numero"));
 
 			}
