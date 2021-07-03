@@ -30,9 +30,13 @@ public class CuentasDaoImpl {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into cuentas(nrocuenta,cbu,fechacracion,saldo,estado,tipocuenta) values ('"
-					+ cuenta.getNumeroCuenta() + "','" + cuenta.getCbu() + "','" + cuenta.getFechaCreacion() + "','"
-					+ cuenta.getSaldo() + "','" + cuenta.isEstado() + "','" + cuenta.getTipoCuenta() + "')";
+			String query = "Insert into cuentas(nrocuenta,cbu,fechacracion,saldo,estado,tipocuenta) values ('" 
+					+ cuenta.getCbu() + "','" 
+					+ cuenta.getFechaCreacion() + "','"
+					+ cuenta.getSaldo() + "','" 
+					+ cuenta.isEstado() + "','" 
+					+ cuenta.getTipoCuenta() + "')";
+			
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();

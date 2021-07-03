@@ -22,18 +22,7 @@ public class servletBancoAltaCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getParameter("btnAceptar")!=null)
-		{	 
-			 
-			
-			 //Formato de fecha (día/mes/año)
-	        SimpleDateFormat formatoFecha = new SimpleDateFormat("DD/MM/YYYY");
-	        formatoFecha.setLenient(false);
-	        //Comprobación de la fecha
-	        try {
-				formatoFecha.parse(request.getParameter("FechaNacimiento"));
-			} catch (ParseException e) { 
-				e.printStackTrace();
-			} 
+		{	  
 	        
 			HttpSession sesionAltaCliente = request.getSession();		
 			
@@ -49,9 +38,8 @@ public class servletBancoAltaCliente extends HttpServlet {
 			sesionAltaCliente.setAttribute("Telefono", request.getParameter("Telefono")); 
 			sesionAltaCliente.setAttribute("Email", request.getParameter("Email")); 
 			sesionAltaCliente.setAttribute("Rol", request.getParameter("Rol"));  
-			sesionAltaCliente.setAttribute("Sexo", request.getParameter("Sexo"));    
+			sesionAltaCliente.setAttribute("Sexo", request.getParameter("Sexo"));     
 			
-			System.out.println(request.getParameter("Sexo"));
 			//REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 			rd.forward(request, response);

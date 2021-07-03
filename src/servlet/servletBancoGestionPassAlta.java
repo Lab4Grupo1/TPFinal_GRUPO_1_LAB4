@@ -48,8 +48,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 		    String mmm = FechaNacimiento.substring(5, 7);
 		    String dd = FechaNacimiento.substring(8, 10); 
 		
-			LocalDate FechaNac = LocalDate.of(Integer.parseInt(yyyyy),Integer.parseInt(mmm),Integer.parseInt(dd));			
-			System.out.println(FechaNac);
+			LocalDate FechaNac = LocalDate.of(Integer.parseInt(yyyyy),Integer.parseInt(mmm),Integer.parseInt(dd));		 
 	       
 	        String DNI = (String) sesionAltaCliente.getAttribute("DNI"); 
 			int DNIentero = Integer.parseInt(DNI);
@@ -63,9 +62,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			String Email = (String) sesionAltaCliente.getAttribute("Email");
 			String Rol = (String) sesionAltaCliente.getAttribute("Rol");
 			int Rolentero = Integer.parseInt(Rol);
-			String Sexo = (String) sesionAltaCliente.getAttribute("Sexo");  
-			 
-			System.out.println("Sexo: " + Sexo);
+			String Sexo = (String) sesionAltaCliente.getAttribute("Sexo");   
 			
 			/*Inserto en Telefono*/
 			Telefonos num = new Telefonos();
@@ -73,7 +70,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			num.setNumero(Telefono);
 			int idTel = tel.insert(num);
 			num.setId(idTel); 
-			
+		 
 			/*Inserto en Datos Personales*/
 			NacionalidadDaoImpl nac = new NacionalidadDaoImpl();
 			DatosPersonalesDaoImpl dpDao = new DatosPersonalesDaoImpl();
@@ -91,8 +88,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			dp.setNacionalidad(nac.buscarId(Nacionalidadentero));
 			dp.setTelefono(num);
 			
-			int FilaDP= dpDao.insert(dp);
-			 
+			int FilaDP= dpDao.insert(dp); 
 
 			/*Creo el usuario con Nombre Apellido DNI*/
             String DNIUs = Integer.toString(DNIentero).substring(0, 3);

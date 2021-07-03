@@ -49,9 +49,10 @@ public class DatosPersonalesDaoImpl {
 					+ "'" + persona.getProvincia() + 		"'," 
 					+ "'" + persona.getMail() + 			"',"
 					+ 		persona.getNacionalidad().getId() + 	","							
-					+ 		persona.getTelefono().getId()	+ 		")";
- 
-			filas = st.executeUpdate(query);
+					+ 		persona.getTelefono().getId()	+ 		")"; 
+		 
+			filas = st.executeUpdate(query); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
