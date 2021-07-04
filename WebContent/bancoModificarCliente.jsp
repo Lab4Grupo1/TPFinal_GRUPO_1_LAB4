@@ -39,9 +39,7 @@
 				    </div>
                 </form>
 			 
-				<form action="servletBancoModificacionCliente" method="post" class="mb-3"> 
-				
-				
+				<form action="servletBancoModificacionCliente" method="post" class="mb-3">  
 				<%
 					DatosPersonales dpMod = new DatosPersonales();
 					Usuario uMod = new Usuario();
@@ -57,7 +55,7 @@
 					
 					if (request.getAttribute("Telefono") != null) {
 						tMod = (Telefonos) request.getAttribute("Telefono");
-					}
+					} 
 				%>
 				
 				  <div class="form-row">

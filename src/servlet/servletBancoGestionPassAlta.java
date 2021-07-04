@@ -47,7 +47,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 		    String yyyyy = FechaNacimiento.substring(0, 4);
 		    String mmm = FechaNacimiento.substring(5, 7);
 		    String dd = FechaNacimiento.substring(8, 10); 
-		
+		    		    
 			LocalDate FechaNac = LocalDate.of(Integer.parseInt(yyyyy),Integer.parseInt(mmm),Integer.parseInt(dd));		 
 	       
 	        String DNI = (String) sesionAltaCliente.getAttribute("DNI"); 
