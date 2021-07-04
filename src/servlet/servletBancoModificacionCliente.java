@@ -74,7 +74,8 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			
 			/*Update en Telefono*/
 			Telefonos num = new Telefonos();
-			TelefonosDaoImpl tel = new TelefonosDaoImpl();			
+			TelefonosDaoImpl tel = new TelefonosDaoImpl();				
+			num.setId(Integer.parseInt(request.getParameter("idtel")));
 			num.setNumero(request.getParameter("Telefono"));
 			int idTel = tel.update(num);
 		 
@@ -95,11 +96,8 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			int FilaDP= dpDao.update(dp);  
 			
 			/*Inserto en usuario*/
-			UsuarioDaoImpl usuario = new UsuarioDaoImpl();
-			Usuario u = new Usuario(); 
-			u.setDatosPersonales(dp); 
-			int FilaU = usuario.update(u);
-			
+			UsuarioDaoImpl usuario = new UsuarioDaoImpl(); 
+			int FilaU = usuario.updateDNI(dp);			
 
 			System.out.println(idTel +"-"+ FilaDP +"-"+ FilaU);
 			

@@ -15,10 +15,14 @@
 		<div class="col">			
 		  
 		<h4>Gestion de contraseñas</h4>
+		
+		<%  HttpSession sesionPass = request.getSession();
+	    String PassUrl = (String) sesionPass.getAttribute("pass");
+	    String UsuarioUrl = (String) sesionPass.getAttribute("passUsuairo"); %>
 		 					
-		<div class=".container-sm" style="width: 90%">
+		<div class=".container-sm" style="width: 90%"> 
 		 
-			<form action="servletBancoGestionPassAlta" method="get">	 
+			<form action="servletBancoGestionPassModificacion" method="get">	 
 				<div class="form-row">
 				    <div class="col-md-5 mb-3">
 				      <label for="ViejaPass">Vieja Contraseña</label>
@@ -36,8 +40,10 @@
 				      <label for="NuevaPassRepetir">Repetir Nueva Contraseña</label>
 				      <input type="password" class="form-control" name="NuevaPassRepetir" placeholder="Repetir Nueva Contraseña" required>
 				   </div>     
-				</div>    
-			  
+				</div>     
+				
+				<input type="hidden" class="form-control" name=PassUrlVieja value="<%=PassUrl %>">
+				<input type="hidden" class="form-control" name=UsuarioUrl value="<%=UsuarioUrl %>">
 			   <br>
 			<input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar">
 			<input class="btn btn-primary col-md-1" type="submit" value="Cancelar" name="btnCancelar">

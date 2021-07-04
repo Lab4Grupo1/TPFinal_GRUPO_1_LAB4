@@ -73,13 +73,17 @@ public class DatosPersonalesDaoImpl {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "update usuario set" + "DNI = '" + persona.getDni() + "'," + "Cuil =	'" + persona.getCuil()
-					+ "'," + "Nombre =	'" + persona.getNombre() + "'," + "Apellido =	'" + persona.getApellido()
-					+ "'," + "Sexo =	'" + persona.getSexo() + "'," + "Nacionalidad =	'" + persona.getNacionalidad()
-					+ "'," + "FechaNacimiento =	'" + persona.getFechaNacimiento() + "'," + "Direccion =	'"
-					+ persona.getDireccion() + "'," + "Localidad =	'" + persona.getLocalidad() + "',"
-					+ "Provincia =	'" + persona.getProvincia() + "'," + "Mail =	'" + persona.getMail() + "',"
-					+ "Telefono =	'" + persona.getTelefono() + "'";
+			String query = "update tpint_grupo1_v2.datospersonales set " 
+						   + "DNI='" + persona.getDni() 
+					+ "'," + "Cuil='" + persona.getCuil()
+					+ "'," + "Nombre='" + persona.getNombre() 
+					+ "'," + "Apellido='" + persona.getApellido() 
+					+ "'," + "FechaNacimiento=('" + persona.getFechaNacimiento() 
+					+ "')," + "Direccion='" + persona.getDireccion() 
+					+ "'," + "Localidad='" + persona.getLocalidad() 
+					+ "'," + "Provincia='" + persona.getProvincia() 
+					+ "'," + "Mail='" + persona.getMail() 
+					+ "'," + "FK_idTelefono='" + persona.getTelefono().getId() + "' where DNI=" + persona.getDni() ; 
 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {

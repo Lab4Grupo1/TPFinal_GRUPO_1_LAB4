@@ -104,6 +104,8 @@
 				  <div class="form-row">
 				    <div class="col-md-4 mb">
 				      <label for="Telefono">Telefono</label>
+				      
+					 <input type="hidden" class="form-control" name="idtel" value="<%=tMod.getId() %>">
 				      <input type="text" class="form-control" name="Telefono" placeholder="Telefono" value="<%=tMod.getNumero() %>" required>
 				    </div>
 				    <div class="col-md-4 mb-3">
@@ -111,13 +113,18 @@
 				      <input type="email" class="form-control" name="Email" placeholder="Email" value="<%=dpMod.getMail() %>" required>
 				    </div> 
 				</div>		 
-				
-					 <input type="hidden" class="form-control" name="pass" value="<%=uMod.getContraseña() %>">
-					 				  
+					
+					<% HttpSession sesionPass = request.getSession();
+			    	   sesionPass.setAttribute("pass", uMod.getContraseña());
+			    	   sesionPass.setAttribute("passUsuairo", uMod.getNombreUsuario());
+					%>
+										 				  
 					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
 					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
-					<input class="btn btn-outline-primary" type="submit" value="Constraseña" name="btnPass">
+				
+					<a class="btn btn-outline-primary" href="bancoGestionPassModificacion.jsp" role="button">Constraseña</a> 
 				</form>
+				 
 			</div>  
 		</div>		
 	</div>	

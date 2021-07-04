@@ -50,7 +50,7 @@ public class UsuarioDaoImpl {
 		return filas;
 	}
 	
-	public int update(Usuario usuario)
+	public int updateDNI(DatosPersonales DatosPersonales)
 	{		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -64,9 +64,33 @@ public class UsuarioDaoImpl {
 		{
 			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
-			String query = "update usuario set NombreUsuario = '"+ usuario.getNombreUsuario() +"',  Contraseña = '"+usuario.getContrase�a()+"', FK_IdRol = '"+usuario.getRol()+"', FK_DniDp ='"+usuario.getdp_DNI()+"'  where  NombreUsuario =  '"+ usuario.getNombreUsuario()+"'"; 
-
-		
+ 			String query = "update usuario set FK_DniDp = '"+ DatosPersonales.getDni()+"' where  FK_DniDp = '"+ DatosPersonales.getDni()+"'";
+	 
+			filas=st.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return filas;
+	}
+	
+	public int updatePass(String passNueva, String usuario)
+	{		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		int filas=0;
+		Connection cn = null;
+		try
+		{
+			cn = DriverManager.getConnection(url, user,pass);
+			Statement st = cn.createStatement();
+			String query = "update tpint_grupo1_v2.usuario set Contraseña='"+ passNueva + "'  where NombreUsuario='"+ usuario +"'";
+				
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)

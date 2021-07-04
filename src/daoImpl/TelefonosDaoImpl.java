@@ -76,7 +76,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "update Telefonos set numero = '" + tel.getNumero() + "'";
+			String query = "update Telefonos set numero = '" + tel.getNumero() + "' where id = " + tel.getId() ;
 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
