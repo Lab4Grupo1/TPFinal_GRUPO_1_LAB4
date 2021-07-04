@@ -102,7 +102,7 @@ public class UsuarioDaoImpl {
 		return filas;
 	}
  
-	public Usuario obtenerUnUsuario(int id)
+	public Usuario obtenerUnUsuario(int id, String NombreUsuario)
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -120,8 +120,9 @@ public class UsuarioDaoImpl {
 			con = DriverManager.getConnection(url, user, pass);
 			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.Contraseña, "
 					+ "u.FK_idRol, r.Descripcion, u.FK_DniDP, u.Estado "
-					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.Id = ?;");
+					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.FK_DniDP = ? or u.NombreUsuario = ?;");
 			miSentencia.setInt(1, id); //Cargo el ID recibido
+			miSentencia.setString(2, NombreUsuario); //Cargo el usuario recibido
 			ResultSet resultado = miSentencia.executeQuery();
 			resultado.next();
 			

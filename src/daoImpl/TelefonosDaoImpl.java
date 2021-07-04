@@ -134,13 +134,12 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-
-			ResultSet rs = st.executeQuery(" SELECT id, numero FROM Telefonos where id=" + id);
+			String query = "SELECT id, numero FROM tpint_grupo1_v2.Telefonos where id= " + id; 
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next()) {
 				TelefonosRs.setId(rs.getInt("id"));
-				TelefonosRs.setNumero(rs.getString("numero"));
-
+				TelefonosRs.setNumero(rs.getString("numero")); 
 			}
 			cn.close();
 
@@ -149,7 +148,6 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		} finally {
 
 		}
-		return TelefonosRs;
-
+		return TelefonosRs; 
 	}
 }

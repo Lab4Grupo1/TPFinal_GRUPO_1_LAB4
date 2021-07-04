@@ -118,8 +118,8 @@
 				    </div>
 				  </div> 
 				  
-					<input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-primary col-md-1" type="submit" value="Cancelar" name="btnCancelar">
+					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
+					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
 				</form>
 			</div>  
 		</div>		

@@ -1,3 +1,7 @@
+<%@page import="entidad.Telefonos"%>
+<%@page import="entidad.Usuario"%>
+<%@page import="entidad.DatosPersonales"%>
+<%@page import="daoImpl.DatosPersonalesDaoImpl"%>
 <%@page import="entidad.Rol"%>
 <%@page import="daoImpl.RolDaoImpl"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,11 +14,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modificar Usuario Usuario</title>
+<title>Modificar Usuario</title>
 </head>
 <body>
-
-
+ 
 <div class=".container">
 	<div class="row row-principal">
 		<div class="col-2 col-menu">	
@@ -23,35 +26,62 @@
 		<div class="col">			  
 		<h4>Modificar Usuario</h4>	
 			<div class=".container-sm" style="width: 90%">
+			
+				<form action="servletBancoModificacionCliente" method= "get" class="formBusqueda" style="display:flex;" > 
+	                 <div class="col-md-3 mb-3"> 
+	               		<input type="text" class="form-control" placeholder="DNI"  name= "DNICliente" required>
+				     </div>
+				     <div class="col-md-3 mb-3"> 
+	               		<input type="text" class="form-control" placeholder="Nombre Cliente"  name= "NombreCliente" required>
+				    </div>
+				     <div class="col-md-3 mb-3"> 
+	               	<input type="submit" class="btn btn-outline-primary" value="Buscar" name="btnBuscar" style="margin-left: 10px;">
+				    </div>
+                </form>
 			 
-				<form action="servletBancoAltaCliente" method="post">
+				<form action="servletBancoModificacionCliente" method="post" class="mb-3"> 
 				
-				<% 
 				
+				<%
+					DatosPersonales dpMod = new DatosPersonales();
+					Usuario uMod = new Usuario();
+					Telefonos tMod = new Telefonos();
+
+					if (request.getAttribute("DatosPersonales") != null) {
+						dpMod = (DatosPersonales) request.getAttribute("DatosPersonales");
+					}
+
+					if (request.getAttribute("Usuario") != null) {
+						uMod = (Usuario) request.getAttribute("Usuario");
+					}
+					
+					if (request.getAttribute("Telefono") != null) {
+						tMod = (Telefonos) request.getAttribute("Telefono");
+					}
 				%>
 				
 				  <div class="form-row">
-				    <div class="col-md mb">
+				    <div class="col-md mb-3">
 				      <label for="Nombre">Nombre</label>
-				      <input type="text" class="form-control" name="Nombre" placeholder="Nombre" value="" required>
+				      <input type="text" class="form-control" name="Nombre" placeholder="Nombre" value="<%=dpMod.getNombre() %>" required>
 				    </div>
 				    <div class="col-md mb-3">
 				      <label for="Apellido">Apellido</label>
-				      <input type="text" class="form-control" name="Apellido" placeholder="Apellido" required>
+				      <input type="text" class="form-control" name="Apellido" placeholder="Apellido" value="<%=dpMod.getApellido() %>" required>
 				    </div>
 				  </div>
 				  <div class="form-row">
 				     <div class="col-md-3 mb-3">
 				      <label for="FechaNacimiento">Fecha Nacimiento</label>
-				      <input type="text"  class="form-control" name="FechaNacimiento" placeholder="YYYY/MM/DD" required>
+				      <input type="text"  class="form-control" name="FechaNacimiento" placeholder="YYYY/MM/DD" value="<%=dpMod.getFechaNacimiento() %>" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Apellido">DNI</label>
-				      <input type="text" class="form-control" name="DNI" placeholder="DNI" required>
+				      <input type="text" class="form-control" name="DNI" placeholder="DNI" value="<%=dpMod.getDni() %>" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Apellido">CUIL</label>
-				      <input type="text" class="form-control" name="CUIL" placeholder="CUIL" required>
+				      <input type="text" class="form-control" name="CUIL" placeholder="CUIL" value="<%=dpMod.getCuil() %>" required>
 				    </div>
 				  </div>
 				  
@@ -59,60 +89,34 @@
 				  <div class="form-row">
 				    <div class="col-md-5mb">
 				      <label for="Direccion">Direccion</label>
-				      <input type="text" class="form-control" name="Direccion" placeholder="Direccion" required>
+				      <input type="text" class="form-control" name="Direccion" placeholder="Direccion" value="<%=dpMod.getDireccion() %>" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Localidad">Localidad</label>
-				      <input type="text" class="form-control" name="Localidad" placeholder="Localidad" required>
+				      <input type="text" class="form-control" name="Localidad" placeholder="Localidad" value="<%=dpMod.getLocalidad() %>" required>
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Provincia">Provincia</label>
-				      <input type="text" class="form-control" name="Provincia" placeholder="Provincia" required>
+				      <input type="text" class="form-control" name="Provincia" placeholder="Provincia" value="<%=dpMod.getProvincia() %>" required>
 				    </div>   
-					<div class="col-md-3 mb-3">
-					   <label for="Nacionalidad">Nacionalidad</label> 
-					   <select name="Nacionalidad"> 
-						   <%	NacionalidadDaoImpl Naca = new NacionalidadDaoImpl();
-					 			ArrayList<Nacionalidad> ListaN =  Naca.readAll();
-								if(Naca != null)
-								{
-									for(Nacionalidad nac : ListaN){
-								       %><option value="<%=nac.getId() %>"><%=nac.getNacionalidad() %> </option><%
-								       }		
-								}			
-							%> 
-						</select>
-					</div>				    
 				</div>
 				    
 				  <div class="form-row">
 				    <div class="col-md-4 mb">
 				      <label for="Telefono">Telefono</label>
-				      <input type="text" class="form-control" name="Telefono" placeholder="Telefono" required>
+				      <input type="text" class="form-control" name="Telefono" placeholder="Telefono" value="<%=tMod.getNumero() %>" required>
 				    </div>
 				    <div class="col-md-4 mb-3">
 				      <label for="Email">Email</label>
-				      <input type="email" class="form-control" name="Email" placeholder="Email" required>
-				    </div>
-					<div class="col-md-3 mb-3">
-					   <label for="Rol">Rol</label> 
-					   <br>
-					   <select name="Rol" > 
-						   <%	RolDaoImpl Rol = new RolDaoImpl();
-					 			ArrayList<Rol> ListaRol =  Rol.readAll();
-								if(ListaRol != null)
-								{
-									for(Rol List : ListaRol){
-								       %><option value="<%=List.getId() %>"><%=List.getDescripcion() %> </option><%
-								       }		
-								}			
-							%> 
-						</select>
-					</div>		
-					</div>		 
-				  
-					<input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-primary col-md-1" type="submit" value="Cancelar" name="btnCancelar">
+				      <input type="email" class="form-control" name="Email" placeholder="Email" value="<%=dpMod.getMail() %>" required>
+				    </div> 
+				</div>		 
+				
+					 <input type="hidden" class="form-control" name="pass" value="<%=uMod.getContraseña() %>">
+					 				  
+					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
+					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
+					<input class="btn btn-outline-primary" type="submit" value="Constraseña" name="btnPass">
 				</form>
 			</div>  
 		</div>		

@@ -160,12 +160,8 @@ public class DatosPersonalesDaoImpl {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st
-					.executeQuery(" SELECT * FROM datospersonales where dni ="
-							+ dni);
-
-			while (rs.next()) {
-
+			ResultSet rs = st.executeQuery("SELECT * FROM tpint_grupo1_v2.datospersonales where dni =" + dni); 
+			while (rs.next()) { 
 				DatosPersonalesRs.setDni(dni);
 				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
