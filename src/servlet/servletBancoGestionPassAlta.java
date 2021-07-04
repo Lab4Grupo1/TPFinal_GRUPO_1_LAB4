@@ -36,10 +36,10 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("btnAceptar")!=null)
-		{			 
+		{	 
 			/*Traigo valores de la sesion Alta Usuario*/
 			HttpSession sesionAltaCliente = request.getSession();			
-			String Nombre = (String) sesionAltaCliente.getAttribute("Nombre");
+			String Nombre = (String) sesionAltaCliente.getAttribute("Nombre"); 
 			String Apellido = (String) sesionAltaCliente.getAttribute("Apellido");  
 			
 			String FechaNacimiento = (String) sesionAltaCliente.getAttribute("FechaNacimiento");  

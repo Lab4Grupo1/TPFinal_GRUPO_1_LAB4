@@ -22,7 +22,7 @@
 			<label for="cliente">Busqueda cliente</label> 
 			<div class="busquedaForm">	
 				<form class="formBusqueda"  style="display:flex;" action="">
-				     <input type="text" class="form-control col-md-3" placeholder="cliente">	     
+				     <input type="text" class="form-control col-md-3" placeholder="cliente" requeried>	     
 					 <input type="submit" class="btn btn-primary" value="Buscar"  style="margin-left: 10px;">
 				</form>
 			</div> 

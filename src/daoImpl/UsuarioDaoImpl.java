@@ -90,7 +90,7 @@ public class UsuarioDaoImpl {
 			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
 			String query = "update tpint_grupo1_v2.usuario set Contraseña='"+ passNueva + "'  where NombreUsuario='"+ usuario +"'";
-				
+				 
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)
@@ -100,7 +100,7 @@ public class UsuarioDaoImpl {
 		return filas;
 	}
 	
-	public int delete(int id)
+	public int delete(String id, String usuario)
 	{
 		
 		try {
@@ -116,7 +116,7 @@ public class UsuarioDaoImpl {
 		{
 			cn = DriverManager.getConnection(url, user,pass);
 			Statement st = cn.createStatement();
-			String query = "update usuario set estado = false where id="+id;
+			String query = "update usuario set estado = 0 where FK_DniDP='"+id +"' and NombreUsuario='" + usuario +"'";
 			filas=st.executeUpdate(query);
 		}
 		catch(Exception e)

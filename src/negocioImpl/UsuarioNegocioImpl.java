@@ -25,9 +25,9 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 		return udao.updatePass(pass, usuario);
 	} 
 
-	public int delete(int id) {
+	public int delete(String id, String usuario) {
 		// TODO Auto-generated method stub
-		return udao.delete(id);
+		return udao.delete(id,usuario);
 	}
 
 	public Usuario obtenerUnUsuario(int id, String nombreUsuario) {

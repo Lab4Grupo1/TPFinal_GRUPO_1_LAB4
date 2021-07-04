@@ -7,6 +7,6 @@ public interface UsuarioNegocio {
 	public int insert(Usuario usuario);
 	public int updateDNI(DatosPersonales DatosPersonales);
 	public int updatePass(String pass, String usuario);
-	public int delete(int id); 
+	public int delete(String id, String usuario); 
 	public Usuario obtenerUnUsuario(int id, String nombreUsuario);
 }
