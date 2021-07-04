@@ -21,7 +21,7 @@
 			<ul class="list-group">
 			  <li class="list-group-item col-md-4">
 			    Numero solicitud 
-			    <span class="badge">14</span>
+			    <span class="badge"><%=request.getParameter("Nsoli").toString()%></span>
 			  </li>
 			</ul>
 			<br> 

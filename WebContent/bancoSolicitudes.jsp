@@ -25,26 +25,16 @@ pageEncoding="ISO-8859-1"%>
 		 <div class="col">
 			 <label for="cliente">Busqueda cliente</label> 
 				<div class="busquedaForm">	
-					<form class="formBusqueda"  style="display:flex;" action="servletBancoSolicitud" method= "post">
-					     <input type="text" class="form-control col-md-5"   name= "txtCliente">	     
+					<form class="formBusqueda"  style="display:flex;" action="servletBancoSolicitud" method= "get">
+					     <input type="number" class="form-control col-md-3" name="txtCliente" required>	     
 						 <input type="submit" class="btn btn-outline-primary" value="Buscar" name= "btnBuscar" style="margin-left: 10px;">
-						 
 					</form>
 				</div>
 		</div> 
+		
 		<div class="col">
-			 <label for="cliente">Fecha desde-hasta</label> 
-				<div class="busquedaForm"  >	
-					<form class="formBusqueda"  style="display:flex;" action="">
-					     <input type="text" class="form-control col-md-4" placeholder="desde">
-					     <input type="text" class="form-control col-md-4" placeholder="hasta">	     
-						 <input type="submit" class="btn btn-outline-primary" value="Buscar"  style="margin-left: 10px;">
-					</form>
-				</div>
-		</div>
-		 <div class="col">
 			<div class="dropdown">
-			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			    Filtro solicitudes
 			  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -53,7 +43,7 @@ pageEncoding="ISO-8859-1"%>
 			    <a class="dropdown-item" href="?cc">Rechazadas</a>  
 			  </div> 
 			</div> 
-		</div>
+		</div> 
 	</div>
 	
 	<br> 
@@ -68,6 +58,7 @@ pageEncoding="ISO-8859-1"%>
 	      <th scope="col">Estado Solicitud</th>
 	    </tr>
 	  </thead>
+	  
 	  <% ArrayList<Solicitud>listaSolicitud = null;
 	     if(request.getAttribute("lista")!=null){
 		 listaSolicitud = (ArrayList<Solicitud>)request.getAttribute("lista");
@@ -81,10 +72,14 @@ pageEncoding="ISO-8859-1"%>
 	      <td><%= soli.getCantCuotasSolicitado() %></td>
 	      <td><%= soli.getMontoSolicitado() %></td>
 	      <td><%= soli.getEstadoSolicitud() %></td>
-	       <td><a href="bancoGestionSolicitudes.jsp" class="btn btn-outline-primary"  role="button" aria-disabled="true">Gestionar</a></td>	   		
-	   
+	      <td>
+	      <button type="button" class="btn btn-outline-primary" onclick="location.href='bancoGestionSolicitudes.jsp?Nsoli=<%=soli.getNumeroSolicitud()%>'" name="btnGestionar" style="margin-left: 10px;"Visible = false></button>
+	      </td>
 	   </tr>
 	    <%}%>
+	    <td>
+	    <a href='bancoSolicitudes.jsp'class="btn btn-outline-primary" style="margin-right:10px">Limpiar Busqueda</a>
+	    </td>
 	   <%}catch(Exception e){
 		   e.printStackTrace();
 	   }finally{
@@ -102,7 +97,7 @@ pageEncoding="ISO-8859-1"%>
 	      <td><%= soli.getCantCuotasSolicitado() %></td>
 	      <td><%= soli.getMontoSolicitado() %></td>
 	      <td><%= soli.getEstadoSolicitud() %></td>
-	       <td><a href="bancoGestionSolicitudes.jsp" class="btn btn-outline-primary"  role="button" aria-disabled="true">Gestionar</a></td>	   		
+	   			
 	   </tr>
 		<%}%>
 	   <%}%>

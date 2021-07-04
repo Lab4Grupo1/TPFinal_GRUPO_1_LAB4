@@ -38,8 +38,6 @@ public class servletBancoSolicitud extends HttpServlet {
 		if(request.getParameter("btnBuscar")!=null) {
 			String cuenta =request.getParameter("txtCliente").toString();
 			
-			;
-			
 			SolicitudDaoImpl soli = new SolicitudDaoImpl();
 			lista =(ArrayList<Solicitud>)soli.buscar(cuenta);
 			
@@ -48,7 +46,12 @@ public class servletBancoSolicitud extends HttpServlet {
 			
 			RequestDispatcher rd= request.getRequestDispatcher("/bancoSolicitudes.jsp");
 			rd.forward(request, response);
-	}	
+		}
+		if(request.getParameter("btnGestionar")!=null) {
+			RequestDispatcher rd;
+			rd= request.getRequestDispatcher("/bancoGesionSolicitudes.jsp");
+			rd.forward(request,response);
+		}
 }
 	
 
@@ -57,6 +60,6 @@ public class servletBancoSolicitud extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 		}		
 }
