@@ -13,13 +13,16 @@ import entidad.Solicitud;
 
 public class SolicitudDaoImpl  implements SolicitudDao{
 
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
+	static String host = "localhost";
+    static int port = 3306;
+    static String db = "TPInt_GRUPO1_V6";
+    static String user = "root";
+    static String pass = "root";
+    
+
+    static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 	
-	
-	public List<Solicitud> readAll(){
+	public ArrayList<Solicitud> readAll(){
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -30,21 +33,21 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		ArrayList<Solicitud> solicitud = new ArrayList<Solicitud>();
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
+			conn =  DriverManager.getConnection(url, user, pass);
 			Statement st =   conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, MontoSolicitado, CantCuotasSolicitadas,"
-					+ " FechaEmitida, CuentaDepositar FROM solicitud where EstadoSolicitud like '%pendiente%'");
+			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
+					+ " FROM solicitud limit 0,5");
 			
 			while(rs.next()){
 				
 				Solicitud solicitudRs = new Solicitud();
 				solicitudRs.setNumeroSolicitud(rs.getInt("idSolicitud"));
 				solicitudRs.setNumeroCuenta(rs.getInt("FK_NCuenta"));
-				solicitudRs.setMontoSolicitado(rs.getFloat("MontoSolicitado"));
+				solicitudRs.setMontoSolicitado(rs.getFloat("Montosolicitado"));
 				solicitudRs.setCantCuotasSolicitado(rs.getInt("CantCuotasSolicitadas"));
-				solicitudRs.setFechaEmitida(rs.getDate("FechaEmitida"));
-				solicitudRs.setCuentaDepositar(rs.getInt("CuentaDepositar"));
+				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
+				
 				
 				solicitud.add(solicitudRs);
 				
@@ -69,7 +72,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		int filas=0;
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection( host+dbName, user , pass);
+			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 			
 			String query = ("update solicitud set EstadoSolicitud =('"+solicitud.getEstadoSolicitud()+"')"
@@ -90,5 +93,76 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return false;
 	
 	}
+	
+	public ArrayList<Solicitud> buscar(String cliente){
+		int cliente2 = Integer.parseInt(cliente);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		ArrayList<Solicitud> solicitud = new ArrayList<Solicitud>();
+		Connection conn = null;
+		try {
+			conn =  DriverManager.getConnection(url, user, pass);
+			Statement st =   conn.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT * FROM solicitud where FK_NCuenta =" + cliente2 );
+			
+			while(rs.next()){
+				Solicitud solicitudRs = new Solicitud();
+				solicitudRs.setNumeroSolicitud(rs.getInt("idSolicitud"));
+				solicitudRs.setNumeroCuenta(rs.getInt("FK_NCuenta"));
+				solicitudRs.setMontoSolicitado(rs.getFloat("Montosolicitado"));
+				solicitudRs.setCantCuotasSolicitado(rs.getInt("CantCuotasSolicitadas"));
+				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
+				solicitud.add(solicitudRs);
+			}
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		return solicitud;
+		
+	}
+	
+	public Solicitud buscarSolicitud(int Nsolicitud) {
+		Solicitud solicitudRs = new Solicitud();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		Connection conn = null;
+		try {
+			conn =  DriverManager.getConnection(url, user, pass);
+			Statement st =   conn.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
+					+ " FROM solicitud where idSolicitud =" + Nsolicitud);
+			
+			while(rs.next()){
+				solicitudRs.setNumeroSolicitud(rs.getInt("idSolicitud"));
+				solicitudRs.setNumeroCuenta(rs.getInt("FK_NCuenta"));
+				solicitudRs.setMontoSolicitado(rs.getFloat("Montosolicitado"));
+				solicitudRs.setCantCuotasSolicitado(rs.getInt("CantCuotasSolicitadas"));
+				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
+				
+			}
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		return solicitudRs;
+	}
+	
 	
 }
