@@ -1,6 +1,7 @@
 package entidad;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 public class Cuentas {
 
@@ -8,12 +9,11 @@ public class Cuentas {
 	private double Cbu;
 	private TipoCuentas TipoCuenta;
 	private DatosPersonales DpDNI;
-	private Date FechaCreacion;
-	private float Saldo;
+	private LocalDate FechaCreacion;
+	private DecimalFormat Saldo;
 	private boolean Estado;
 
-	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, Date fechaCreacion,
-			float saldo, boolean estado) {
+	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, LocalDate fechaCreacion,DecimalFormat saldo, boolean estado) {
 		NumeroCuenta = numeroCuenta;
 		Cbu = cbu;
 		TipoCuenta = tipoCuenta;
@@ -46,31 +46,31 @@ public class Cuentas {
 		return TipoCuenta;
 	}
 
-	public void setTipoCuenta(TipoCuentas tipoCuenta) {
-		TipoCuenta = tipoCuenta;
+	public void setTipoCuenta(TipoCuentas tP) {
+		TipoCuenta = tP;
 	}
 
 	public DatosPersonales getDniCliente() {
 		return DpDNI;
 	}
 
-	public void setDniCliente(DatosPersonales dpDNI) {
-		DpDNI = dpDNI;
+	public void setDniCliente(DatosPersonales dniInt) {
+		DpDNI = dniInt;
 	}
 
-	public Date getFechaCreacion() {
+	public LocalDate getFechaCreacion() {
 		return FechaCreacion;
 	}
 
-	public void setFechaCreacion(Date fechaCreacion) {
-		FechaCreacion = fechaCreacion;
+	public void setFechaCreacion(LocalDate fechaCre) {
+		FechaCreacion = fechaCre;
 	}
 
-	public float getSaldo() {
+	public DecimalFormat getSaldo() {
 		return Saldo;
 	}
 
-	public void setSaldo(float saldo) {
+	public void setSaldo(DecimalFormat saldo) {
 		Saldo = saldo;
 	}
 

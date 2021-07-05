@@ -115,8 +115,8 @@
 					<% HttpSession sesionPass = request.getSession();
 			    	   sesionPass.setAttribute("pass", uMod.getContraseña());
 			    	   sesionPass.setAttribute("passUsuairo", uMod.getNombreUsuario());
-					%>
-										 				  
+					%> 
+					
 					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
 					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
 				

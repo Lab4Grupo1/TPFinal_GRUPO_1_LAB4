@@ -30,12 +30,15 @@ public class CuentasDaoImpl {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Insert into cuentas(nrocuenta,cbu,fechacracion,saldo,estado,tipocuenta) values ('" 
-					+ cuenta.getCbu() + "','" 
-					+ cuenta.getFechaCreacion() + "','"
-					+ cuenta.getSaldo() + "','" 
-					+ cuenta.isEstado() + "','" 
-					+ cuenta.getTipoCuenta() + "')";
+			String query = "Insert into cuentas(cbu,fechacreacion,saldo,estado,FK_Idtipocuenta,FK_DniCliente) values ("
+                    + "'" + cuenta.getCbu() + "'," 
+                    + "('" + cuenta.getFechaCreacion() + "'),"
+                    + cuenta.getSaldo() + ","
+                    + cuenta.isEstado() + "," 
+                    + cuenta.getTipoCuenta().getId() + ","
+                    + cuenta.getDniCliente().getDni() +")";
+			System.out.println(query);
+
 			
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
@@ -110,8 +113,8 @@ public class CuentasDaoImpl {
 			while (rs.next()) {
 				x.setNumeroCuenta(numeroCuenta);
 				x.setCbu(rs.getDouble("Cbu"));
-				x.setFechaCreacion(rs.getDate("FechaCreacion"));
-				x.setSaldo(rs.getFloat("Saldo"));
+				x.setFechaCreacion(rs.getDate("FechaCreacion").toLocalDate());
+			//	x.setSaldo(rs.getFloat("Saldo"));
 				x.setEstado(rs.getBoolean("Estado"));
 				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
 				x.setDniCliente(DniImp.buscarDNI(rs.getInt("FK_DniCliente")));
@@ -146,8 +149,8 @@ public class CuentasDaoImpl {
 			while (rs.next()) {
 				x.setNumeroCuenta(rs.getInt("numeroCuenta"));
 				x.setCbu(rs.getDouble("Cbu"));
-				x.setFechaCreacion(rs.getDate("FechaCreacion"));
-				x.setSaldo(rs.getFloat("Saldo"));
+				x.setFechaCreacion(rs.getDate("FechaCreacion").toLocalDate());
+			//	x.setSaldo(rs.getFloat("Saldo"));
 				x.setEstado(rs.getBoolean("Estado"));
 				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
 				x.setDniCliente(DniImp.buscarDNI(dni));
