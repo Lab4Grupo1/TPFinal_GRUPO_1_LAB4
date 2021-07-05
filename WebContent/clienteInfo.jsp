@@ -91,13 +91,13 @@
 						<label class="form-label" style="font-weight: bold">Nacionalidad</label> <input
 							class="form-control" type="text"
 							aria-label="readonly input example" readonly
-							value="<%=datImpl.buscarDNI(dni).getNacionalidad().getNacionalidad()%>">
+							value="<%=datImpl.buscarDNI(dni).getNacionalidad()%>">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label class="form-label" style="font-weight: bold">Telefono</label> <input
 							class="form-control" type="text"
 							aria-label="readonly input example" readonly
-							value="<%=datImpl.buscarDNI(dni).getTelefono().getNumero()%>">
+							value="<%=datImpl.buscarDNI(dni).getTelefono()%>">
 					</div>
 				</form>
 			</div>
