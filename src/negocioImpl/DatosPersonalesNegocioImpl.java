@@ -1,35 +1,36 @@
 package negocioImpl;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import daoImpl.DatosPersonalesDaoImpl;
 import entidad.DatosPersonales;
 import negocio.DatosPersonalesNegocio;
 
-public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
+public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio {
 
-	DatosPersonalesDaoImpl dpdao = new DatosPersonalesDaoImpl();
-	
-	
+	DatosPersonalesDaoImpl Ddao = new DatosPersonalesDaoImpl();
+
+	@Override
 	public int insert(DatosPersonales persona) {
 		// TODO Auto-generated method stub
-		return dpdao.insert(persona);
+		return Ddao.insert(persona);
 	}
 
-	
+	@Override
 	public int update(DatosPersonales persona) {
 		// TODO Auto-generated method stub
-		return dpdao.update(persona);
+		return Ddao.update(persona);
 	}
 
-	public DatosPersonales obtenerUnUsuario(int id) {
+	@Override
+	public ArrayList<DatosPersonales> readAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return Ddao.readAll();
 	}
 
-	public List<DatosPersonales> readAll() {
+	@Override
+	public DatosPersonales buscarDNI(int dni) {
 		// TODO Auto-generated method stub
-		return dpdao.readAll();
+		return Ddao.buscarDNI(dni);
 	}
-
 }

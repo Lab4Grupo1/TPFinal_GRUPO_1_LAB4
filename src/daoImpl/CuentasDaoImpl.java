@@ -5,9 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import dao.CuentasDao;
 import entidad.Cuentas;
 
-public class CuentasDaoImpl {
+public class CuentasDaoImpl implements CuentasDao{
 
 	static String host = "localhost";
 	static int port = 3306;
@@ -17,6 +18,7 @@ public class CuentasDaoImpl {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public int insert(Cuentas cuenta) {
 
 		int filas = 0;
@@ -47,6 +49,7 @@ public class CuentasDaoImpl {
 		return filas;
 	}
 
+	@Override
 	public int update(Cuentas cuenta) {
 
 		int filas = 0;
@@ -69,6 +72,7 @@ public class CuentasDaoImpl {
 		return filas;
 	}
 
+	@Override
 	public int delete(Cuentas cuenta) {
 
 		int filas = 0;
@@ -90,6 +94,7 @@ public class CuentasDaoImpl {
 		return filas;
 	}
 
+	@Override
 	public Cuentas buscarCuenta(int numeroCuenta) {
 
 		try {
@@ -126,6 +131,7 @@ public class CuentasDaoImpl {
 		return x;
 	}
 
+	@Override
 	public Cuentas buscarDni(int dni) {
 
 		try {

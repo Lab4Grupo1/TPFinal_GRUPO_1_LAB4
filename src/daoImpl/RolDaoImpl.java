@@ -13,7 +13,7 @@ import entidad.Nacionalidad;
 import entidad.Rol;
 
 public class RolDaoImpl implements RolDao{ 
-	
+
 	static String host = "localhost";
 	static int port = 3306;
 	static String db = "tpint_grupo1_v2";

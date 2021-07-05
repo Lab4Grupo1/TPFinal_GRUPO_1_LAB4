@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
+import dao.DatosPersonalesDao;
 import entidad.DatosPersonales;
 import entidad.Nacionalidad;
 import entidad.Telefonos;
 
-public class DatosPersonalesDaoImpl {
+public class DatosPersonalesDaoImpl implements DatosPersonalesDao {
 
 	static String host = "localhost";
 	static int port = 3306;
@@ -21,51 +22,19 @@ public class DatosPersonalesDaoImpl {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
-	public int insert(DatosPersonales persona) {
-
+	public void driver() {
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		int filas = 0;
-
-		Connection cn = null;
-		try {
-			cn = DriverManager.getConnection(url, user, pass);
-			Statement st = cn.createStatement();  
-			
-			String query = "Insert into datospersonales(DNI, Cuil, Nombre, Apellido, sexo, FechaNacimiento,"
-					+ " Direccion, Localidad, Provincia, Mail, FK_Nacionalidad, FK_IdTelefono)  values (" +  
-					+ 		  persona.getDni() + 			","
-					+ "'" + persona.getCuil() + 			"'," 
-					+ "'" + persona.getNombre() + 			"'," 
-					+ "'" + persona.getApellido() + 		"',"
-					+ "'" + persona.getSexo() + 			"'," 					
-					+ "('" + persona.getFechaNacimiento() +  "'),"					
-					+ "'" + persona.getDireccion() + 		"'," 
-					+ "'" + persona.getLocalidad() +		"',"
-					+ "'" + persona.getProvincia() + 		"'," 
-					+ "'" + persona.getMail() + 			"',"
-					+ 		persona.getNacionalidad().getId() + 	","							
-					+ 		persona.getTelefono().getId()	+ 		")"; 
-		 
-			filas = st.executeUpdate(query); 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return filas;
 	}
 
-	public int update(DatosPersonales persona) {
+	@Override
+	public int insert(DatosPersonales persona) {
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		driver();
 
 		int filas = 0;
 
@@ -73,17 +42,40 @@ public class DatosPersonalesDaoImpl {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "update tpint_grupo1_v2.datospersonales set " 
-						   + "DNI='" + persona.getDni() 
-					+ "'," + "Cuil='" + persona.getCuil()
-					+ "'," + "Nombre='" + persona.getNombre() 
-					+ "'," + "Apellido='" + persona.getApellido() 
-					+ "'," + "FechaNacimiento=('" + persona.getFechaNacimiento() 
-					+ "')," + "Direccion='" + persona.getDireccion() 
-					+ "'," + "Localidad='" + persona.getLocalidad() 
-					+ "'," + "Provincia='" + persona.getProvincia() 
-					+ "'," + "Mail='" + persona.getMail() 
-					+ "'," + "FK_idTelefono='" + persona.getTelefono().getId() + "' where DNI=" + persona.getDni() ; 
+
+			String query = "Insert into datospersonales(DNI, Cuil, Nombre, Apellido, sexo, FechaNacimiento,"
+					+ " Direccion, Localidad, Provincia, Mail, FK_Nacionalidad, FK_IdTelefono)  values ("
+					+ +persona.getDni() + "," + "'" + persona.getCuil() + "'," + "'" + persona.getNombre() + "'," + "'"
+					+ persona.getApellido() + "'," + "'" + persona.getSexo() + "'," + "('"
+					+ persona.getFechaNacimiento() + "')," + "'" + persona.getDireccion() + "'," + "'"
+					+ persona.getLocalidad() + "'," + "'" + persona.getProvincia() + "'," + "'" + persona.getMail()
+					+ "'," + persona.getNacionalidad().getId() + "," + persona.getTelefono().getId() + ")";
+
+			filas = st.executeUpdate(query);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return filas;
+	}
+
+	@Override
+	public int update(DatosPersonales persona) {
+
+		driver();
+
+		int filas = 0;
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+			String query = "update tpint_grupo1_v2.datospersonales set " + "DNI='" + persona.getDni() + "'," + "Cuil='"
+					+ persona.getCuil() + "'," + "Nombre='" + persona.getNombre() + "'," + "Apellido='"
+					+ persona.getApellido() + "'," + "FechaNacimiento=('" + persona.getFechaNacimiento() + "'),"
+					+ "Direccion='" + persona.getDireccion() + "'," + "Localidad='" + persona.getLocalidad() + "',"
+					+ "Provincia='" + persona.getProvincia() + "'," + "Mail='" + persona.getMail() + "',"
+					+ "FK_idTelefono='" + persona.getTelefono().getId() + "' where DNI=" + persona.getDni();
 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
@@ -92,13 +84,10 @@ public class DatosPersonalesDaoImpl {
 		return filas;
 	}
 
+	@Override
 	public ArrayList<DatosPersonales> readAll() {
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		driver();
 
 		Connection cn = null;
 
@@ -108,8 +97,7 @@ public class DatosPersonalesDaoImpl {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st
-					.executeQuery(" SELECT * FROM datospersonales ;");
+			ResultSet rs = st.executeQuery(" SELECT * FROM datospersonales ;");
 
 			while (rs.next()) {
 				DatosPersonales DatosPersonalesRs = new DatosPersonales();
@@ -118,14 +106,14 @@ public class DatosPersonalesDaoImpl {
 
 				NacionalidadRs.setNacionalidad(rs.getString("FK_Nacionalidad"));
 				TelefonoRs.setNumero(rs.getString("FK_IdTelefono"));
-				 
+
 				DatosPersonalesRs.setDni(rs.getInt("DNI"));
 				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
 				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
-				DatosPersonalesRs.setNacionalidad(NacionalidadRs); 
+				DatosPersonalesRs.setNacionalidad(NacionalidadRs);
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
 				DatosPersonalesRs.setProvincia(rs.getString("Provincia"));
@@ -143,16 +131,12 @@ public class DatosPersonalesDaoImpl {
 
 		}
 		return Ldatos;
-
 	}
 
+	@Override
 	public DatosPersonales buscarDNI(int dni) {
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		driver();
 
 		Connection cn = null;
 
@@ -164,14 +148,14 @@ public class DatosPersonalesDaoImpl {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery("SELECT * FROM tpint_grupo1_v2.datospersonales where dni =" + dni); 
-			while (rs.next()) { 
+			ResultSet rs = st.executeQuery("SELECT * FROM tpint_grupo1_v2.datospersonales where dni =" + dni);
+			while (rs.next()) {
 				DatosPersonalesRs.setDni(dni);
 				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
 				DatosPersonalesRs.setSexo(rs.getString("sexo"));
-				DatosPersonalesRs.setNacionalidad(NacioImp.buscarId(rs.getInt("FK_Nacionalidad"))); 
+				DatosPersonalesRs.setNacionalidad(NacioImp.buscarId(rs.getInt("FK_Nacionalidad")));
 				DatosPersonalesRs.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
 				DatosPersonalesRs.setDireccion(rs.getString("Direccion"));
 				DatosPersonalesRs.setLocalidad(rs.getString("Localidad"));
@@ -190,6 +174,4 @@ public class DatosPersonalesDaoImpl {
 		return DatosPersonalesRs;
 
 	}
-	
-	
 }

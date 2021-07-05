@@ -17,8 +17,6 @@
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
-
 	<div class=".container">
 		<div class="col">
 			<img class="rounded mx-auto d-block logo" src="image/steam2.png">

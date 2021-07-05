@@ -15,6 +15,9 @@ import daoImpl.CuentasDaoImpl;
 import daoImpl.MovimientosDaoImpl;
 import daoImpl.TipoCuentasDaoImpl;
 import entidad.Movimientos;
+import negocio.CuentasNegocio;
+import negocio.MovimientosNegocio;
+import negocio.TipoCuentasNegocio;
 
 @WebServlet("/servletClienteCuentas")
 public class servletClienteCuentas extends HttpServlet {
@@ -29,7 +32,7 @@ public class servletClienteCuentas extends HttpServlet {
 
 		// carga session
 		HttpSession sesion1 = request.getSession();
-		sesion1.setAttribute("dni", "33119411");
+		sesion1.setAttribute("dni", "1");
 
 		// uso session
 		int dni = Integer.parseInt(sesion1.getAttribute("dni").toString());
@@ -38,9 +41,9 @@ public class servletClienteCuentas extends HttpServlet {
 
 			int tip = Integer.parseInt(request.getParameter("idTipoCuenta"));
 
-			MovimientosDaoImpl mov = new MovimientosDaoImpl();
-			TipoCuentasDaoImpl tipImp = new TipoCuentasDaoImpl();
-			CuentasDaoImpl cueImp = new CuentasDaoImpl();
+			MovimientosNegocio mov = null;
+			TipoCuentasNegocio tipImp = null;
+			CuentasNegocio cueImp = null;
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 
 			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());

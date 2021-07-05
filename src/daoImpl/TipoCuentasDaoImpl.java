@@ -20,6 +20,7 @@ public class TipoCuentasDaoImpl implements TiposCuentaDao {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public ArrayList<TipoCuentas> readAll() {
 
 		try {
@@ -55,6 +56,7 @@ public class TipoCuentasDaoImpl implements TiposCuentaDao {
 
 	}
 
+	@Override
 	public TipoCuentas buscarId(int id) {
 
 		try {

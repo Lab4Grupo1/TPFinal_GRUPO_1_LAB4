@@ -11,6 +11,7 @@ import dao.TiposMovimientoDao;
 import entidad.TipoMovimiento;
 
 public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
+
 	static String host = "localhost";
 	static int port = 3306;
 	static String db = "tpint_grupo1_v2";
