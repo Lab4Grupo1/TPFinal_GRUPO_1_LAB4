@@ -37,7 +37,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 			Statement st =   conn.createStatement();
 			
 			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
-					+ " FROM solicitud;");
+					+ " FROM solicitud limit 0,5");
 			
 			while(rs.next()){
 				
@@ -108,7 +108,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 			conn =  DriverManager.getConnection(url, user, pass);
 			Statement st =   conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("SELECT * FROM solicitud where FK_NCuenta =" + cliente2);
+			ResultSet rs = st.executeQuery("SELECT * FROM solicitud where FK_NCuenta =" + cliente2 );
 			
 			while(rs.next()){
 				Solicitud solicitudRs = new Solicitud();
@@ -128,6 +128,40 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		}
 		return solicitud;
 		
+	}
+	
+	public Solicitud buscarSolicitud(int Nsolicitud) {
+		Solicitud solicitudRs = new Solicitud();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		Connection conn = null;
+		try {
+			conn =  DriverManager.getConnection(url, user, pass);
+			Statement st =   conn.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
+					+ " FROM solicitud where idSolicitud =" + Nsolicitud);
+			
+			while(rs.next()){
+				solicitudRs.setNumeroSolicitud(rs.getInt("idSolicitud"));
+				solicitudRs.setNumeroCuenta(rs.getInt("FK_NCuenta"));
+				solicitudRs.setMontoSolicitado(rs.getFloat("Montosolicitado"));
+				solicitudRs.setCantCuotasSolicitado(rs.getInt("CantCuotasSolicitadas"));
+				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
+				
+			}
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		return solicitudRs;
 	}
 	
 	

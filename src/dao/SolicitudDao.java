@@ -9,5 +9,5 @@ public interface SolicitudDao {
 	public ArrayList<Solicitud> readAll();
 	public boolean updateSolicitud(Solicitud solicitud );
 	public ArrayList<Solicitud> buscar(String cliente);
-	
+	public Solicitud buscarSolicitud(int Nsolicitud);
 }
