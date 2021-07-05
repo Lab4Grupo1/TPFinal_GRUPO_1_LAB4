@@ -29,7 +29,7 @@ public class servletClienteCuentas extends HttpServlet {
 
 		// carga session
 		HttpSession sesion1 = request.getSession();
-		sesion1.setAttribute("dni", "33119411");
+		sesion1.setAttribute("dni", "1");
 
 		// uso session
 		int dni = Integer.parseInt(sesion1.getAttribute("dni").toString());
