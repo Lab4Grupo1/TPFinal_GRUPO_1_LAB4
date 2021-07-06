@@ -27,4 +27,10 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		return cdao.delete(cuenta);
 	}
 
+	@Override
+	public Cuentas buscarDni(int dni) {
+		// TODO Auto-generated method stub
+		return cdao.buscarDni(dni);
+	}
+
 }

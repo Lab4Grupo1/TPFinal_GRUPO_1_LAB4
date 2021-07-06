@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import daoImpl.CuentasDaoImpl;
-import daoImpl.MovimientosDaoImpl;
-import daoImpl.TipoCuentasDaoImpl;
+ 
 import entidad.Movimientos;
-import negocioImpl.MovimientosNegocioImpl;
-import negocioImpl.TipoCuentasNegocioImpl;
+import negocio.CuentasNegocio;
+import negocio.MovimientosNegocio;
+import negocio.TipoCuentasNegocio;
 
 @WebServlet("/servletClienteCuentas")
 public class servletClienteCuentas extends HttpServlet {
@@ -40,9 +38,9 @@ public class servletClienteCuentas extends HttpServlet {
 
 			int tip = Integer.parseInt(request.getParameter("idTipoCuenta"));
 
-			MovimientosNegocioImpl mov = new MovimientosNegocioImpl();
-			TipoCuentasNegocioImpl tipImp = new TipoCuentasNegocioImpl();
-			CuentasDaoImpl cueImp = new CuentasDaoImpl();
+			MovimientosNegocio mov = null;
+			TipoCuentasNegocio tipImp = null;
+			CuentasNegocio cueImp = null;
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 
 			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());
