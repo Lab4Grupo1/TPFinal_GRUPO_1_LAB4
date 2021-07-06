@@ -16,4 +16,10 @@ public class MovimientosNegocioImpl implements MovimientosNegocio {
 		return mdao.readAll();
 	}
 
+	@Override
+	public ArrayList<Movimientos> buscarDNI(int dni, int tip) {
+		// TODO Auto-generated method stub
+		return mdao.buscarDNI(dni, tip);
+	}
+
 }

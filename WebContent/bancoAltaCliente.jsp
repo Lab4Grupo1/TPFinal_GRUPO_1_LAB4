@@ -1,9 +1,8 @@
-<%@page import="entidad.Rol"%>
-<%@page import="daoImpl.RolDaoImpl"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="daoImpl.NacionalidadDaoImpl"%>
+<%@page import="negocioImpl.RolNegocioImpl"%>
+<%@page import="negocioImpl.NacionalidadNegocioImpl"%> 
+<%@page import="entidad.Rol"%> 
 <%@page import="entidad.Nacionalidad"%> 
-<%@page import="negocio.NacionalidadNegocio"%>
+<%@page import="java.util.ArrayList"%> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,7 +68,7 @@
 					<div class="col-md-3 mb-3">
 					   <label for="Nacionalidad">Nacionalidad</label> 
 					   <select name="Nacionalidad"> 
-						   <%	NacionalidadDaoImpl Nac = new NacionalidadDaoImpl();
+						   <%	NacionalidadNegocioImpl Nac = new NacionalidadNegocioImpl();
 					 			ArrayList<Nacionalidad> ListaN =  Nac.readAll();
 								if(Nac != null)
 								{
@@ -95,7 +94,7 @@
 					   <label for="Rol">Rol</label> 
 					   <br>
 					   <select name="Rol" > 
-						   <%	RolDaoImpl Rol = new RolDaoImpl();
+						   <%	RolNegocioImpl Rol = new RolNegocioImpl();
 					 			ArrayList<Rol> ListaRol =  Rol.readAll();
 								if(ListaRol != null)
 								{

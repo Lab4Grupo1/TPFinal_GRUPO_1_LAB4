@@ -1,4 +1,5 @@
 
+<%@page import="negocioImpl.DatosPersonalesNegocioImpl"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Formatter"%>
 <%@page import="java.util.ArrayList"%>
@@ -27,7 +28,7 @@
 					HttpSession sesion1 = request.getSession();
 					int dni = 33119411;
 
-					DatosPersonalesDaoImpl datImpl = new DatosPersonalesDaoImpl();
+					DatosPersonalesNegocioImpl datImpl = new DatosPersonalesNegocioImpl();
 				%>
 				<br>
 				<form class="row" >

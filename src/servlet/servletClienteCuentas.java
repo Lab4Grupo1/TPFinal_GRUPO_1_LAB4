@@ -15,6 +15,8 @@ import daoImpl.CuentasDaoImpl;
 import daoImpl.MovimientosDaoImpl;
 import daoImpl.TipoCuentasDaoImpl;
 import entidad.Movimientos;
+import negocioImpl.MovimientosNegocioImpl;
+import negocioImpl.TipoCuentasNegocioImpl;
 
 @WebServlet("/servletClienteCuentas")
 public class servletClienteCuentas extends HttpServlet {
@@ -38,8 +40,8 @@ public class servletClienteCuentas extends HttpServlet {
 
 			int tip = Integer.parseInt(request.getParameter("idTipoCuenta"));
 
-			MovimientosDaoImpl mov = new MovimientosDaoImpl();
-			TipoCuentasDaoImpl tipImp = new TipoCuentasDaoImpl();
+			MovimientosNegocioImpl mov = new MovimientosNegocioImpl();
+			TipoCuentasNegocioImpl tipImp = new TipoCuentasNegocioImpl();
 			CuentasDaoImpl cueImp = new CuentasDaoImpl();
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 

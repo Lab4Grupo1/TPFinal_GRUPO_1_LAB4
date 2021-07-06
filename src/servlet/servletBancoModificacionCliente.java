@@ -20,6 +20,8 @@ import entidad.DatosPersonales;
 import entidad.Telefonos;
 import entidad.Usuario;
 import negocioImpl.DatosPersonalesNegocioImpl;
+import negocioImpl.TelefonosNegocioImpl;
+import negocioImpl.UsuarioNegocioImpl;
  
 @WebServlet("/servletBancoModificacionCliente")
 public class servletBancoModificacionCliente extends HttpServlet {
@@ -36,13 +38,13 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			int dni = Integer.parseInt(request.getParameter("DNICliente"));
 			String NombreCliente = request.getParameter("NombreCliente");
 			
-			DatosPersonalesDaoImpl dpB = new DatosPersonalesDaoImpl();			
+			DatosPersonalesNegocioImpl dpB = new DatosPersonalesNegocioImpl();			
 			DatosPersonales dpBusqueda = dpB.buscarDNI(dni);
 			
-			UsuarioDaoImpl uB = new UsuarioDaoImpl();
+			UsuarioNegocioImpl uB = new UsuarioNegocioImpl();
 			Usuario uBusqueda = uB.obtenerUnUsuario(dni, NombreCliente);
 			
-			TelefonosDaoImpl tB = new TelefonosDaoImpl(); 
+			TelefonosNegocioImpl tB = new TelefonosNegocioImpl(); 
 			Telefonos tBusqueda = tB.buscarId(dpBusqueda.getTelefono().getId());  
 			
 		     
@@ -74,13 +76,13 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			
 			/*Update en Telefono*/
 			Telefonos num = new Telefonos();
-			TelefonosDaoImpl tel = new TelefonosDaoImpl();				
+			TelefonosNegocioImpl tel = new TelefonosNegocioImpl();				
 			num.setId(Integer.parseInt(request.getParameter("idtel")));
 			num.setNumero(request.getParameter("Telefono"));
 			int idTel = tel.update(num);
 		 
 			/*Update en Datos Personales*/ 
-			DatosPersonalesDaoImpl dpDao = new DatosPersonalesDaoImpl();
+			DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
 			DatosPersonales dp = new DatosPersonales();
 			dp.setDni(DNIentero);
 			dp.setCuil(request.getParameter("CUIL")); 
@@ -96,7 +98,7 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			int FilaDP= dpDao.update(dp);  
 			
 			/*Inserto en usuario*/
-			UsuarioDaoImpl usuario = new UsuarioDaoImpl(); 
+			UsuarioNegocioImpl usuario = new UsuarioNegocioImpl(); 
 			int FilaU = usuario.updateDNI(dp);			
 
 			System.out.println(idTel +"-"+ FilaDP +"-"+ FilaU);

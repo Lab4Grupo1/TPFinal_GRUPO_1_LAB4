@@ -9,4 +9,5 @@ public interface TelefonosNegocio {
 	public int update(Telefonos usuario);
 
 	public List<Telefonos> readAll();
+	Telefonos buscarId(int id);
 }

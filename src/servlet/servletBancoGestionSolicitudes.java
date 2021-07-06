@@ -14,6 +14,8 @@ import daoImpl.PrestamosDaoImpl;
 import daoImpl.SolicitudDaoImpl;
 import entidad.Prestamos;
 import entidad.Solicitud;
+import negocioImpl.PrestamosNegocioImpl;
+import negocioImpl.SolicitudNegocioImpl;
 
 /**
  * Servlet implementation class servletBancoGestionSolicitudes
@@ -35,7 +37,7 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		SolicitudDaoImpl dao = new SolicitudDaoImpl();
+		SolicitudNegocioImpl dao = new SolicitudNegocioImpl();
 		Solicitud soli= new Solicitud();
 		HttpSession session = request.getSession();
 		
@@ -54,7 +56,7 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 		{	Solicitud soli2 =(Solicitud)session.getAttribute("Solicitud");
 		
 			Prestamos pres= new Prestamos();
-			PrestamosDaoImpl presImpl= new PrestamosDaoImpl();
+			PrestamosNegocioImpl presImpl= new PrestamosNegocioImpl();
 			
 			pres.setNumeroCuenta(soli2.getNumeroCuenta());
 			pres.setCuotasPagas(0);

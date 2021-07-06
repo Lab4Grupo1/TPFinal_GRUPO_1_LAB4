@@ -1,6 +1,6 @@
+<%@page import="negocioImpl.TipoCuentasNegocioImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidad.TipoCuentas"%>
-<%@page import="daoImpl.TipoCuentasDaoImpl"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -61,7 +61,7 @@
 		                    <label for="TipoCuenta">Tipo Cuenta</label> 
 		                    <br>
 		                    <select name="TipoCuenta"> 
-						    	<%    TipoCuentasDaoImpl tp = new TipoCuentasDaoImpl();
+						    	<%    TipoCuentasNegocioImpl tp = new TipoCuentasNegocioImpl();
 						            ArrayList<TipoCuentas> Listatp =  tp.readAll();
 						           if(tp != null)
 						           {

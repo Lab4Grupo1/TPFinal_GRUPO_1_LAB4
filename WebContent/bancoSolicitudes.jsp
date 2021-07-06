@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@page import= "entidad.Solicitud" %>
-<%@page import="dao.SolicitudDao" %>
-<%@page import= "daoImpl.SolicitudDaoImpl" %>
+<%@page import="negocioImpl.SolicitudNegocioImpl"%> 
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -88,8 +87,8 @@ pageEncoding="ISO-8859-1"%>
 	   %>
 	   
 	   <%}else{%>
-		<%SolicitudDaoImpl soliNeg = new SolicitudDaoImpl();
-		ArrayList<Solicitud> lista =soliNeg.readAll();%>
+		<%SolicitudNegocioImpl soliNeg = new SolicitudNegocioImpl();
+		ArrayList<Solicitud> lista = soliNeg.readAll(); %>
 		<%for(Solicitud soli : lista){%>
 		<tr>
 	      <td><%= soli.getNumeroSolicitud() %></td>

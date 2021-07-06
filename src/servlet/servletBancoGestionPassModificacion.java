@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
+import negocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/servletBancoGestionPassModificacion")
@@ -45,7 +46,7 @@ public class servletBancoGestionPassModificacion extends HttpServlet {
 			
 			if(passVieja == 1 && passNueva == 1) {
 				
-				UsuarioDaoImpl udp = new UsuarioDaoImpl();
+				UsuarioNegocioImpl udp = new UsuarioNegocioImpl();
 				int updatePass = udp.updatePass(request.getParameter("NuevaPass"), request.getParameter("UsuarioUrl"));
 				
 				RequestDispatcher rd = request.getRequestDispatcher("bancoModificarCliente.jsp");

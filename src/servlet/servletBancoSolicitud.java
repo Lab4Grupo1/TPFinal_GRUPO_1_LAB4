@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.SolicitudDao;
 import daoImpl.SolicitudDaoImpl;
 import entidad.Solicitud;
+import negocioImpl.SolicitudNegocioImpl;
 
 /**
  * Servlet implementation class servletBancoSolicitud
@@ -38,7 +39,7 @@ public class servletBancoSolicitud extends HttpServlet {
 		if(request.getParameter("btnBuscar")!=null) {
 			String cuenta =request.getParameter("txtCliente").toString();
 			
-			SolicitudDaoImpl soli = new SolicitudDaoImpl();
+			SolicitudNegocioImpl soli = new SolicitudNegocioImpl();
 			lista =(ArrayList<Solicitud>)soli.buscar(cuenta);
 			
 			request.setAttribute("lista", lista);

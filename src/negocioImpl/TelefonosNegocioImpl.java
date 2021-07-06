@@ -28,4 +28,10 @@ public class TelefonosNegocioImpl implements TelefonosNegocio {
 		return tdao.readAll();
 	}
 
+	@Override
+	public Telefonos buscarId(int id) {
+		// TODO Auto-generated method stub
+		return tdao.buscarId(id);
+	}
+
 }

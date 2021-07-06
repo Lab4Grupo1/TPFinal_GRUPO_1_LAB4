@@ -1,6 +1,6 @@
 package negocioImpl;
 
-import java.util.List;
+import java.util.ArrayList; 
 
 import daoImpl.SolicitudDaoImpl;
 import entidad.Solicitud;
@@ -11,7 +11,7 @@ public class SolicitudNegocioImpl implements SolicitudNegocio {
     SolicitudDaoImpl sdao = new SolicitudDaoImpl();
 
 	@Override
-    public List<Solicitud> readAll() {
+    public ArrayList<Solicitud> readAll() {
         // TODO Auto-generated method stub
         return sdao.readAll();
     }
@@ -22,5 +22,29 @@ public class SolicitudNegocioImpl implements SolicitudNegocio {
         // TODO Auto-generated method stub
         return sdao.updateSolicitud(filas);
     }
+
+	@Override
+	public Solicitud buscarSolicitud(int nsoli) {
+		// TODO Auto-generated method stub
+		return sdao.buscarSolicitud(nsoli);
+	}
+
+	@Override
+	public int UpdateSumarPrestamo(int numeroCuenta, float montoSolicitado) {
+		// TODO Auto-generated method stub
+		return sdao.UpdateSumarPrestamo(numeroCuenta, montoSolicitado);
+	}
+
+	@Override
+	public int UpdateRechazoSolicitud(int numeroSolicitud) {
+		// TODO Auto-generated method stub
+		return sdao.UpdateRechazoSolicitud(numeroSolicitud);
+	}
+
+	@Override
+	public ArrayList<Solicitud> buscar(String cuenta) {
+		// TODO Auto-generated method stub
+		return sdao.buscar(cuenta);
+	}
 
 }

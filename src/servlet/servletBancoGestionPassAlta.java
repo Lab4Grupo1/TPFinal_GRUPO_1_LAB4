@@ -24,6 +24,11 @@ import daoImpl.UsuarioDaoImpl;
 import entidad.DatosPersonales; 
 import entidad.Telefonos;
 import entidad.Usuario;
+import negocioImpl.DatosPersonalesNegocioImpl;
+import negocioImpl.NacionalidadNegocioImpl;
+import negocioImpl.RolNegocioImpl;
+import negocioImpl.TelefonosNegocioImpl;
+import negocioImpl.UsuarioNegocioImpl;
  
 @WebServlet("/servletBancoGestionPassAlta")
 public class servletBancoGestionPassAlta extends HttpServlet {
@@ -66,14 +71,14 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			
 			/*Inserto en Telefono*/
 			Telefonos num = new Telefonos();
-			TelefonosDaoImpl tel = new TelefonosDaoImpl();			
+			TelefonosNegocioImpl tel = new TelefonosNegocioImpl();			
 			num.setNumero(Telefono);
 			int idTel = tel.insert(num);
 			num.setId(idTel); 
 		 
 			/*Inserto en Datos Personales*/
-			NacionalidadDaoImpl nac = new NacionalidadDaoImpl();
-			DatosPersonalesDaoImpl dpDao = new DatosPersonalesDaoImpl();
+			NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();
+			DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
 			DatosPersonales dp = new DatosPersonales();
 			dp.setDni(DNIentero);
 			dp.setCuil(CUIL); 
@@ -98,10 +103,10 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			
 
 			/*Inserto en usuario*/
-			UsuarioDaoImpl usuario = new UsuarioDaoImpl();
+			UsuarioNegocioImpl usuario = new UsuarioNegocioImpl();
 			Usuario u = new Usuario();
 			
-			RolDaoImpl rol1 = new RolDaoImpl();
+			RolNegocioImpl rol1 = new RolNegocioImpl();
 			
 			u.setNombreUsuario(Usuario);
 			u.setContraseña((String)request.getParameter("NuevaPassRepetir"));

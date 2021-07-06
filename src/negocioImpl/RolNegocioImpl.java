@@ -16,4 +16,10 @@ public class RolNegocioImpl implements RolNegocio {
 		return rdao.readAll();
 	}
 
+	@Override
+	public Rol buscarId(int rolentero) {
+		// TODO Auto-generated method stub
+		return rdao.buscarId(rolentero);
+	}
+
 }

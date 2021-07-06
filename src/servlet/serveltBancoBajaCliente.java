@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.UsuarioDaoImpl;
+import negocioImpl.UsuarioNegocioImpl;
 
  
 @WebServlet("/serveltBancoBajaCliente")
@@ -34,7 +35,7 @@ public class serveltBancoBajaCliente extends HttpServlet {
 			String usuario = request.getParameter("Usuariobaja");  
 			String DNI = (String) request.getParameter("DNIbaja");
 			
-			UsuarioDaoImpl uBaja = new UsuarioDaoImpl();
+			UsuarioNegocioImpl uBaja = new UsuarioNegocioImpl();
 			int baja = uBaja.delete(DNI, usuario); 
 
 			//REQUESTDISPATCHER
