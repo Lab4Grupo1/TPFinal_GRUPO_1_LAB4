@@ -32,7 +32,7 @@
 							<a class="btn btn-dark" href="bancoAltaCliente.jsp">Alta</a> 
 							<a class="btn btn-dark" href="bancoModificarCliente.jsp">Modificacion</a>
 							<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> 
-							<a class="btn btn-dark" href="bancoCuentas.jsp">Cuentas</a> 
+							<a class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> 
 							<a class="btn btn-dark" href="bancoInformes.jsp">Informes</a> 
 			</div>
 		</div>

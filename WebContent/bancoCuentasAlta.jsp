@@ -17,86 +17,49 @@
 		<div class="col-2 col-menu">	
 			<jsp:include page="masterBanco.jsp"></jsp:include>	
 		</div>		
-		<div class="col">			
-		
-		<h4>Cuentas</h4>
-
-		<div class=".container-sm" style="width: 90%">   
-		
-			<label for="cliente">Busqueda cliente</label> 
-			<div class="busquedaForm">	
-				<form class="formBusqueda"  style="display:flex;" action="post">
-				     <input type="text" class="form-control col-md-3" placeholder="cliente">	     
-					 <input type="submit" class="btn btn-primary" value="Buscar"  style="margin-left: 10px;">
+		<div class="col">	 
+			<h4>Alta Cuentas</h4> 
+			<div class=".container-sm" style="width: 90%">      
+				<form action="servletBancoCuentas" method="get"> 
+				
+					<div class="form-row"> 
+						<div class="col-md-3 mb-3">
+								<label for="DNICliente">DNI</label>
+								<input type="text" class="form-control" name="DNICliente" placeholder="DNI" required>
+						 </div>  
+						<div class="col-md-3 mb-3">
+								<label for="DNICliente">Usuario</label>
+								<input type="text" class="form-control" name="UsuarioCliente" placeholder="Usuario" required>
+						 </div>  
+					 </div>  
+					 
+					<div class="form-row"> 
+						<div class="col-md-3 mb-3">
+		                    <label for="TipoCuenta">Tipo Cuenta</label> 
+		                    <br>
+		                    <select name="TipoCuenta"> 
+						    	<%    TipoCuentasDaoImpl tp = new TipoCuentasDaoImpl();
+						            ArrayList<TipoCuentas> Listatp =  tp.readAll();
+						           if(tp != null)
+						           {
+						               for(TipoCuentas ltp : Listatp){
+						                  %><option value="<%=ltp.getId() %>"><%=ltp.getDescripcion() %> </option><%
+						               		                                          }
+						           }
+						       %> 
+							</select>
+						</div>
+						<div class="col-md-3 mb-3">
+							<label for="Saldo">Saldo</label>
+							<input type="text" class="form-control" value="10000" name="Saldo" placeholder="Saldo" required>
+						</div>
+					</div>
+					<br>
+					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">  
+					<a class="btn btn-outline-primary" href="bancoCuentaModificacion.jsp" role="button">Modificar</a>  
+					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar"> 
 				</form>
-			</div> 
-			 <br>
-			<form action="servletBancoCuentas" method="get">
-			  
-				<div class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" name="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Elegir cuenta activa
-				  </button>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <a class="dropdown-item" href="?ca">Caja de Ahorro</a>
-				    <a class="dropdown-item" href="?cc">Cuenta Corriente</a>
-				  </div>
-				</div>  
-				<br>
-				 <div class="form-row">
-				   <div class="col-md mb-3">
-				     <label for="UsuarioCliente">Usuario Cliente</label>
-				     <input type="text" class="form-control" name="UsuarioCliente" placeholder="Usuario cliente" required>
-				   </div>
-				   <div class="col-md mb-3">
-				     <label for="DNICliente">DNI Cliente</label>
-				     <input type="text" class="form-control" name="DNICliente" placeholder="DNI Cliente" required>
-				   </div>
-				    
-				 <div class="col-md-3 mb-3">
-                       <label for="TipoCuenta">Tipo Cuenta</label> 
-                       <select name="TipoCuenta"> 
-                           <%    TipoCuentasDaoImpl tp = new TipoCuentasDaoImpl();
-                                 ArrayList<TipoCuentas> Listatp =  tp.readAll();
-                                if(tp != null)
-                                {
-                                    for(TipoCuentas ltp : Listatp){
-                                       %><option value="<%=ltp.getId() %>"><%=ltp.getDescripcion() %> </option><%
-                                    		                                          }
-                                }
-                            %> 
-                        </select>
-                    </div>
-				</div>
-				
-				<div class="form-row">
-				   <div class="col-md-5 mb-3">
-				     <label for="NumeroCuenta">N° Cuenta</label>
-				     <input type="text" class="form-control" name="NumeroCuenta" placeholder="N° Cuenta" required>
-				   </div>
-				</div>
-			     
-				
-				<div class="form-row">
-				   <div class="col-md-3 mb-3">
-				     <label for="Saldo">Saldo</label>
-				     <input type="text" class="form-control" name="Saldo" placeholder="Saldo" required>
-				   </div>
-				   <div class="col-md-3 mb-3">
-				     <label for="Fecha creacion">Fecha Creacion</label>
-				     <input type="text" class="form-control" name="FechaCreacion" placeholder="YYYY/MM/DD" required>
-				   </div>
-				</div>
-			     
-			 <br>
-			 <input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
-                    <input class="btn btn-outline-primary" type="submit" value="Modificar" name="btnModificar">
-                    <input class="btn btn-outline-primary" type="submit" value="Dar de baja" name="tbnDardebaja">
-                    <input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
-			
-			</form>
-		</div> 
- 
+			</div>  
 		</div>		
 	</div>	
 </div>

@@ -149,7 +149,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		Connection con = null;
 		try{
 			con = DriverManager.getConnection(url, user, pass);
-			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.ContraseÃ±a, "
+			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.contraseña, "
 					+ "u.FK_idRol, r.Descripcion, u.FK_DniDP, u.Estado "
 					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.FK_DniDP = ? or u.NombreUsuario = ?;");
 			miSentencia.setInt(1, id); //Cargo el ID recibido
@@ -217,8 +217,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		    con.close();
 		}
 		catch(Exception e)
-		{
-			System.err.println(e);
+		{ 
 			System.out.println("Conexion fallida");
 		}
 		finally

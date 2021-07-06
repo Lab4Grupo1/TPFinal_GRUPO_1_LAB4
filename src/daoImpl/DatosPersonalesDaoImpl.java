@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
+import dao.DatosPersonalesDao;
 import entidad.DatosPersonales;
 import entidad.Nacionalidad;
 import entidad.Telefonos;
 
-public class DatosPersonalesDaoImpl {
+public class DatosPersonalesDaoImpl implements DatosPersonalesDao {
 
 	static String host = "localhost";
 	static int port = 3306;
@@ -21,6 +22,7 @@ public class DatosPersonalesDaoImpl {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public int insert(DatosPersonales persona) {
 
 		try {
@@ -59,6 +61,8 @@ public class DatosPersonalesDaoImpl {
 		return filas;
 	}
 
+
+	@Override
 	public int update(DatosPersonales persona) {
 
 		try {
@@ -92,6 +96,8 @@ public class DatosPersonalesDaoImpl {
 		return filas;
 	}
 
+
+	@Override
 	public ArrayList<DatosPersonales> readAll() {
 
 		try {
@@ -146,27 +152,27 @@ public class DatosPersonalesDaoImpl {
 
 	}
 
+
+	@Override
 	public DatosPersonales buscarDNI(int dni) {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
+		} 
 
 		Connection cn = null;
 
 		DatosPersonales DatosPersonalesRs = new DatosPersonales();
 		NacionalidadDaoImpl NacioImp = new NacionalidadDaoImpl();
-		TelefonosDaoImpl TelImps = new TelefonosDaoImpl();
-
+		TelefonosDaoImpl TelImps = new TelefonosDaoImpl(); 
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
-			Statement st = cn.createStatement();
-
-			ResultSet rs = st.executeQuery("SELECT * FROM tpint_grupo1_v2.datospersonales where dni =" + dni); 
+			Statement st = cn.createStatement(); 
+			ResultSet rs = st.executeQuery("SELECT * FROM datospersonales where dni =" + dni);  
 			while (rs.next()) { 
-				DatosPersonalesRs.setDni(dni);
+				DatosPersonalesRs.setDni(rs.getInt("dni"));
 				DatosPersonalesRs.setCuil(rs.getString("Cuil"));
 				DatosPersonalesRs.setNombre(rs.getString("Nombre"));
 				DatosPersonalesRs.setApellido(rs.getString("Apellido"));
@@ -182,14 +188,13 @@ public class DatosPersonalesDaoImpl {
 			}
 			cn.close();
 
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			e.printStackTrace();
 		} finally {
 
 		}
 		return DatosPersonalesRs;
 
-	}
-	
+	} 
 	
 }

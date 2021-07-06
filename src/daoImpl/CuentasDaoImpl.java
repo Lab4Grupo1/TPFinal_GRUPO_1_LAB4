@@ -32,14 +32,12 @@ public class CuentasDaoImpl {
 			Statement st = cn.createStatement();
 			String query = "Insert into cuentas(cbu,fechacreacion,saldo,estado,FK_Idtipocuenta,FK_DniCliente) values ("
                     + "'" + cuenta.getCbu() + "'," 
-                    + "('" + cuenta.getFechaCreacion() + "'),"
+                    + "('" + cuenta.getFechaCreacion() + "'), "
                     + cuenta.getSaldo() + ","
                     + cuenta.isEstado() + "," 
-                    + cuenta.getTipoCuenta().getId() + ","
-                    + cuenta.getDniCliente().getDni() +")";
+                    + cuenta.getTipoCuenta().getId() + ", "
+                    + cuenta.getDniCliente().getDni() +" )";  
 			System.out.println(query);
-
-			
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();

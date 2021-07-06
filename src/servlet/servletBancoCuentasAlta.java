@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -15,6 +16,12 @@ import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import entidad.Cuentas;
 import entidad.TipoCuentas;
+import entidad.Usuario;
+import negocio.DatosPersonalesNegocio;
+import negocioImpl.CuentasNegocioImpl;
+import negocioImpl.DatosPersonalesNegocioImpl;
+import negocioImpl.TipoCuentasNegocioImpl;
+import negocioImpl.UsuarioNegocioImpl;
 import entidad.DatosPersonales; 
 import daoImpl.TipoCuentasDaoImpl;
 import daoImpl.CuentasDaoImpl;
@@ -22,74 +29,68 @@ import daoImpl.DatosPersonalesDaoImpl;
 
 
 @WebServlet("/servletBancoCuentas")
-public class servletBancoCuentas extends HttpServlet {
+public class servletBancoCuentasAlta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-     public servletBancoCuentas() 
+     public servletBancoCuentasAlta() 
      {
+    	 super();
      }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("btnBuscar")==null)
-		{
-		
-			if(request.getParameter("btnAceptar")!=null)
-			{	   
-				String UsuarioCliente=request.getParameter("UsuarioCliente");	
-				String DNICliente=(String)request.getParameter("DNICliente");
-				DatosPersonales DniInt=getInteger(DNICliente);
-				//String NumeroCuenta=(String)request.getParameter("NumeroCuenta");
-				//int NroCuenta=Integer.parseInt(NumeroCuenta);
-				String Saldo=(String)request.getParameter("Saldo");
-				float S=(float) Double.parseDouble(Saldo);				
-				String TipoCuenta=(String)request.getParameter("TipoCuenta");
-			    //verificar si trae un string o id
-				System.out.println(request.getParameter("TipoCuenta"));
-
-				TipoCuentas TP=parseInt(TipoCuenta);
-				Cuentas cta = new Cuentas();
-				CuentasDaoImpl ctaDI = new CuentasDaoImpl();
+		 
+		if(request.getParameter("btnAceptar")!=null)
+		{	    
+			int dni = Integer.parseInt(request.getParameter("DNICliente"));
+			String usuario = request.getParameter("UsuarioCliente");
+			
+			UsuarioNegocioImpl uni = new UsuarioNegocioImpl();
+			Usuario u = new Usuario();			
+			u = uni.obtenerUnUsuario(dni, usuario);
+			 
+			if(u != null) {
 				
-				String FechaCreacion = (String)request.getParameter("FechaCreacion");  
-				String yyyyy = FechaCreacion.substring(0, 4);
-			    String mmm = FechaCreacion.substring(5, 7);
-			    String dd = FechaCreacion.substring(8, 10); 
-		
-			    LocalDate FechaCre = LocalDate.of(Integer.parseInt(yyyyy),Integer.parseInt(mmm),Integer.parseInt(dd));		 
-	       
-				cta.setFechaCreacion(FechaCre);				
-				//cta.setNumeroCuenta(NroCuenta);
-			//	cta.setSaldo(S);
-				cta.setTipoCuenta(TP);
-				cta.setDniCliente(DniInt);
+				double cbu = dni + 1000000;
+				LocalDate FechaCreacion = LocalDate.now();
+				String Saldo = request.getParameter("Saldo");
+				double SaldoD = Double.parseDouble(Saldo);
+				String TCuenta = request.getParameter("TipoCuenta");
 				
-								
-				int idCta = ctaDI.insert(cta);
-				cta.setCbu(idCta); 
+				TipoCuentasNegocioImpl TPi = new TipoCuentasNegocioImpl();
+				TipoCuentas tP = new TipoCuentas();				
+				tP = TPi.buscarId(Integer.parseInt(TCuenta));
 				
-				System.out.println(idCta +"Insert Cuenta");
-
 				
-		    }
+				DatosPersonalesNegocioImpl  dpNeg = DatosPersonalesNegocioImpl();
+				DatosPersonales dp = new DatosPersonales();  
+				 
+				dp = dpNeg.buscarDNI(dni); 
+				
+				Cuentas  c = new Cuentas();
+				c.setCbu(cbu);
+				c.setFechaCreacion(FechaCreacion);
+				c.setSaldo(SaldoD);
+				c.setEstado(true);
+				c.setTipoCuenta(tP);
+				c.setDniCliente(dp);
+				
+				CuentasNegocioImpl cImp = new CuentasNegocioImpl();
+				int insert = cImp.insert(c);
+				
+				System.out.println("->"+insert);  
+				
+			}
+			else {
+				System.out.println("No existe el cliente");
+			}
+	
 			//REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoCuentas.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("bancoCuentasAlta.jsp");
 			rd.forward(request, response);
-		}
-	}
-
-
-	private DatosPersonales getInteger(String dNICliente) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	private TipoCuentas parseInt(String tipoCuenta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	    } 
+    } 
+	 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 

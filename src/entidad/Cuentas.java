@@ -10,10 +10,10 @@ public class Cuentas {
 	private TipoCuentas TipoCuenta;
 	private DatosPersonales DpDNI;
 	private LocalDate FechaCreacion;
-	private DecimalFormat Saldo;
+	private double Saldo;
 	private boolean Estado;
 
-	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, LocalDate fechaCreacion,DecimalFormat saldo, boolean estado) {
+	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, LocalDate fechaCreacion,double saldo, boolean estado) {
 		NumeroCuenta = numeroCuenta;
 		Cbu = cbu;
 		TipoCuenta = tipoCuenta;
@@ -66,11 +66,11 @@ public class Cuentas {
 		FechaCreacion = fechaCre;
 	}
 
-	public DecimalFormat getSaldo() {
+	public double getSaldo() {
 		return Saldo;
 	}
 
-	public void setSaldo(DecimalFormat saldo) {
+	public void setSaldo(double saldo) {
 		Saldo = saldo;
 	}
 
