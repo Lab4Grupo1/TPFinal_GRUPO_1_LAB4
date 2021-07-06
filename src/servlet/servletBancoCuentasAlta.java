@@ -17,15 +17,12 @@ import javax.servlet.RequestDispatcher;
 import entidad.Cuentas;
 import entidad.TipoCuentas;
 import entidad.Usuario;
+import entidad.DatosPersonales;  
 import negocio.DatosPersonalesNegocio;
 import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.DatosPersonalesNegocioImpl;
 import negocioImpl.TipoCuentasNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
-import entidad.DatosPersonales; 
-import daoImpl.TipoCuentasDaoImpl;
-import daoImpl.CuentasDaoImpl;
-import daoImpl.DatosPersonalesDaoImpl;
 
 
 @WebServlet("/servletBancoCuentas")
@@ -61,8 +58,7 @@ public class servletBancoCuentasAlta extends HttpServlet {
 				TipoCuentas tP = new TipoCuentas();				
 				tP = TPi.buscarId(Integer.parseInt(TCuenta));
 				
-				
-				DatosPersonalesNegocioImpl  dpNeg = DatosPersonalesNegocioImpl();
+				DatosPersonalesNegocioImpl dpNeg = new DatosPersonalesNegocioImpl();
 				DatosPersonales dp = new DatosPersonales();  
 				 
 				dp = dpNeg.buscarDNI(dni); 
