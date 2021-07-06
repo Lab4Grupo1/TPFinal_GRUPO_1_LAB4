@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import daoImpl.PrestamosDaoImpl;
 import daoImpl.SolicitudDaoImpl;
+import entidad.Prestamos;
 import entidad.Solicitud;
 
 /**
@@ -32,16 +35,64 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		SolicitudDaoImpl dao = new SolicitudDaoImpl();
+		Solicitud soli= new Solicitud();
+		HttpSession session = request.getSession();
+		
 		if(request.getParameter("txtUrl")!=null){
-			SolicitudDaoImpl dao = new SolicitudDaoImpl();
-			Solicitud soli= new Solicitud();
-			 int Nsoli=Integer.parseInt(request.getParameter("txtUrl").toString());
+			int Nsoli=Integer.parseInt(request.getParameter("txtUrl").toString());
+			soli=(Solicitud)dao.buscarSolicitud(Nsoli);
 			
-			 soli=(Solicitud)dao.buscarSolicitud(Nsoli);
-			 
-			 request.setAttribute("solic", soli);
+			session.setAttribute("Solicitud", soli);
+			request.setAttribute("solic", soli);
+			
 			 RequestDispatcher rd= request.getRequestDispatcher("/bancoGestionSolicitudes.jsp");
 			 rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnAceptar")!=null)
+		{	Solicitud soli2 =(Solicitud)session.getAttribute("Solicitud");
+		
+			Prestamos pres= new Prestamos();
+			PrestamosDaoImpl presImpl= new PrestamosDaoImpl();
+			
+			pres.setNumeroCuenta(soli2.getNumeroCuenta());
+			pres.setCuotasPagas(0);
+			pres.setCuotasTotal(soli2.getCantCuotasSolicitado());
+			pres.setImportePedido(soli2.getMontoSolicitado());
+			
+			float valor=(int)(soli2.getMontoSolicitado()/soli2.getCantCuotasSolicitado());
+			pres.setImporteTotal(valor);
+			//pres.getFechaUltimoPago("2021/07/05");
+			
+			int listo =dao.updateSolicitud(soli2.getNumeroSolicitud());
+			if(listo>0)
+			{
+				if(presImpl.insertPrestamo(pres) == true) {
+					if(dao.UpdateSumarPrestamo(soli2.getNumeroCuenta(), soli2.getMontoSolicitado())>0){
+						
+						request.setAttribute("listo", listo);
+						RequestDispatcher rd= request.getRequestDispatcher("/bancoSolicitudes.jsp");
+						rd.forward(request, response);
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		if(request.getParameter("btnRechazar")!=null)
+		{
+			Solicitud soli2 =(Solicitud)session.getAttribute("Solicitud");
+			int listo2 =dao.UpdateRechazoSolicitud(soli2.getNumeroSolicitud());
+			if(listo2>0)
+			{	
+				request.setAttribute("listo", listo2);
+				RequestDispatcher rd= request.getRequestDispatcher("/bancoSolicitudes.jsp");
+				rd.forward(request, response);
+			}
 		}
 		
 		

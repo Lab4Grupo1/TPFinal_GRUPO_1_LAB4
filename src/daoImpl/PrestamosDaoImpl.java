@@ -11,11 +11,13 @@ import entidad.Prestamos;
 
 public class PrestamosDaoImpl implements PrestamosDao{
 
-	private String host = "jdbc:mysql://localhost:3006/";
-	private String user = "root";
-	private String pass = "root";
-	private String dbName = "TPInt_GRUPO1_V2";
-	
+	static String host = "localhost";
+    static int port = 3306;
+    static String db = "TPInt_GRUPO1_V6";
+    static String user = "root";
+    static String pass = "root";
+    
+    static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 	
 	public boolean insertPrestamo(Prestamos prestamo) {
 		
@@ -27,12 +29,12 @@ public class PrestamosDaoImpl implements PrestamosDao{
 		 int filas =0;
 		 Connection conn = null;
 		 try {
-			 conn = DriverManager.getConnection( host+dbName, user , pass);
+			 conn = DriverManager.getConnection(url, user, pass);
 			 Statement st =   conn.createStatement();
 			 
-			 String query= "Insert into prestamos(cuotaspagas,cuotastotal, importeCuota, importePedido, FechaUltimoPago, FK_NumeroCuenta) values"
-			 		+ " ('"+prestamo.getCuotasPagas()+"','"+prestamo.getCuotasTotal()+"','"+prestamo.getImporteTotal()+"',"+prestamo.getImportePedido()+"','"+
-					 prestamo.getFechaUltimoPago()+"','"+prestamo.getNumeroCuenta()+"')";
+			 String query= "Insert into prestamos(cuotaspagas,cuotastotal, importeCuota, importePedido, FK_NumeroCuenta) values"
+			 		+ " ('"+prestamo.getCuotasPagas()+"','"+prestamo.getCuotasTotal()+"','"+prestamo.getImporteTotal()+"','"
+					 +prestamo.getImportePedido()+"','"+prestamo.getNumeroCuenta()+"')";
 					 
 			 filas = st.executeUpdate(query);
 			 if(filas > 0) {

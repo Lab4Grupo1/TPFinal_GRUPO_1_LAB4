@@ -14,7 +14,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 
 	static String host = "localhost";
 	static int port = 3306;
-	static String db = "TPInt_GRUPO1_V6";
+	static String db = "TPInt_GRUPO1_V2";
 	static String user = "root";
 	static String pass = "root";
 

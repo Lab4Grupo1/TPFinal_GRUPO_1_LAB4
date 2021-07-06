@@ -69,12 +69,12 @@
 					<div class="col-md-3 mb-3">
 					   <label for="Nacionalidad">Nacionalidad</label> 
 					   <select name="Nacionalidad"> 
-						   <%	NacionalidadDaoImpl Naca = new NacionalidadDaoImpl();
-					 			ArrayList<Nacionalidad> ListaN =  Naca.readAll();
-								if(Naca != null)
+						   <%	NacionalidadDaoImpl Nac = new NacionalidadDaoImpl();
+					 			ArrayList<Nacionalidad> ListaN =  Nac.readAll();
+								if(Nac != null)
 								{
-									for(Nacionalidad nac : ListaN){
-								       %><option value="<%=nac.getId() %>"><%=nac.getNacionalidad() %> </option><%
+									for(Nacionalidad nacLista : ListaN){
+								       %><option value="<%=nacLista.getId() %>"><%=nacLista.getNacionalidad() %> </option><%
 								       }		
 								}			
 							%> 

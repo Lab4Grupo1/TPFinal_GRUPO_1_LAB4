@@ -62,7 +62,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return solicitud;
 	}
 	
-	public boolean updateSolicitud(Solicitud solicitud) {
+	public int updateSolicitud(int numero) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e){
@@ -70,18 +70,19 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		}
 		
 		int filas=0;
+		String estado= "Autorizado";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 			
-			String query = ("update solicitud set EstadoSolicitud =('"+solicitud.getEstadoSolicitud()+"')"
-					+ "where idSolicitud =('"+solicitud.getNumeroSolicitud()+"')");
+			String query = ("update solicitud set EstadoSolicitud =('"+estado+"')"
+					+ "where idSolicitud ="+ numero);
 			
 			filas = st.executeUpdate(query);
 			if(filas > 0) {
 				conn.close();
-				return true;
+				return filas;
 			}
 			
 		
@@ -90,7 +91,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 	}finally {
 		
 	}
-		return false;
+		return filas;
 	
 	}
 	
@@ -164,5 +165,69 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return solicitudRs;
 	}
 	
+	public int UpdateRechazoSolicitud(int numero) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		int filas=0;
+		String estado= "Rechazado";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			Statement st = conn.createStatement();
+			
+			String query = ("update solicitud set EstadoSolicitud =('"+estado+"')"
+					+ "where idSolicitud ="+ numero);
+			
+			filas = st.executeUpdate(query);
+			if(filas > 0) {
+				conn.close();
+				return filas;
+			}
+			
+		
+	}catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		
+	}
+		return filas;
 	
+	}
+	
+	public int UpdateSumarPrestamo(int numeroCuenta, float saldo) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		int filas=0;
+		
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			Statement st = conn.createStatement();
+			
+			String query = ("update cuentas set Saldo =('"+saldo+"'+ Saldo)"
+					+ "where NumeroCuenta ="+ numeroCuenta);
+			
+			filas = st.executeUpdate(query);
+			if(filas > 0) {
+				conn.close();
+				return filas;
+			}
+			
+		
+	}catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		
+	}
+		return filas;
+	}
 }

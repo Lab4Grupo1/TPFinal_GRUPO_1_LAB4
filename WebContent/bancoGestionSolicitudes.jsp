@@ -40,14 +40,14 @@
 		</div>	
 			
 		</div>	
-		<div>
-		 <input class="btn btn-primary col-md-2" type="submit" value="Autorizar" id="Aceptar"> 
-		 <input class="btn btn-primary col-md-2" type="submit" value="Rechazar" id="Cancelar"> 
-	</div>
 		
 	</div>	
 </div>
-
+	 <form  class="formBusqueda" style="display:flex;" action="servletBancoGestionSolicitudes" method= "get">
+	
+	    <input class="btn btn-primary col-md-2" type="submit" value="Autorizar" name="btnAceptar"> 
+	    <input class="btn btn-primary col-md-2" type="submit" value="Rechazar" name="btnRechazar">
+	   </form>
      
 
 </body>

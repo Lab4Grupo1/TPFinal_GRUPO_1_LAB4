@@ -8,33 +8,25 @@
 <link href="css/Login.css" rel="stylesheet" type="text/css" />
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
-<body>
-
-
+<body> 
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
+  <div id="formContent">  
     <!-- Icon -->
     <div class="fadeIn first">
       <img src="https://image.flaticon.com/icons/png/128/848/848006.png" id="icon" alt="User Icon" />
-    </div>
-
+    </div> 
     <!-- Login Form -->
-    <form action="post" method="/servletLogin.java">
-      <input type="text" name="login" class="fadeIn second" name="login" placeholder="User">
-      <input type="password" name="password" class="fadeIn third" name="login" placeholder="Password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
-
-
+    <form action="servletLogin" method="post">
+      <input type="text" name="usuario" class="fadeIn second" placeholder="User" required>
+      <input type="password" name="password" class="fadeIn third" placeholder="Password" required>
+      <input type="submit" class="fadeIn fourth" name="btnLogin" value="Log In">
+    </form> 
   </div>
-</div>
-
+</div> 
 </body>
 </html>
