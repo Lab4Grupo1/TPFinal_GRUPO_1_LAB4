@@ -13,6 +13,7 @@
 <title>Alta Usuario</title>
 </head>
 <body>
+<%@ page errorPage="errorBanco.jsp"%>
 
 
 <div class=".container">

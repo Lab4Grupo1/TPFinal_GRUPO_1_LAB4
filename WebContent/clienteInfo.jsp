@@ -15,6 +15,7 @@
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<%@ page errorPage="errorCliente.jsp"%> 
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">

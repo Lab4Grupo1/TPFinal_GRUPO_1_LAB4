@@ -7,6 +7,7 @@
 <title>Prestamos</title>
 </head>
 <body>
+<%@ page errorPage="errorCliente.jsp"%> 
 
 <div class=".container">
 	<div class="row row-principal">

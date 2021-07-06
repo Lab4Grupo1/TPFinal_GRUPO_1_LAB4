@@ -7,6 +7,7 @@
 <title>Transferencias</title>
 </head>
 <body>
+<%@ page errorPage="errorCliente.jsp"%> 
 			
 
 <div class=".container">
