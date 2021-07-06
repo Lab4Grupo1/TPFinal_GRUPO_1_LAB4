@@ -23,7 +23,7 @@
 			<label for="cliente">Busqueda cliente</label> 
 				<div class="busquedaForm">	
 					<form class="formBusqueda"  style="display:flex;" action="post">
-						<input type="text" class="form-control col-md-3" placeholder="cliente">	     
+						<input type="text" class="form-control col-md-3" placeholder="DNI">	     
 						<input type="submit" class="btn btn-primary" value="Buscar"  style="margin-left: 10px;">
 					</form>
 				</div> 
@@ -41,9 +41,9 @@
 				<br>
 					<div class="form-row"> 
 						<div class="col-md-3 mb-3">
-		                    <label for="TipoCuenta">Numero de cuenta</label> 
+		                    <label for="NroCuenta">Numero de cuenta</label> 
 		                    <br>
-		                    <select name="TipoCuenta"> 
+		                    <select name="NroCuenta"> 
 						    	<%     
 						       %> 
 							</select>

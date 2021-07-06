@@ -80,7 +80,7 @@ public class CuentasDaoImpl {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Update cuentas estado= false where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
+			String query = "Update cuentas set estado= false where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,4 +159,6 @@ public class CuentasDaoImpl {
 		}
 		return x;
 	}
+
+	
 }
