@@ -9,7 +9,8 @@ import negocio.TipoMovimientoNegocio;
 public class TipoMovimientoNegocioImpl implements TipoMovimientoNegocio {
 
 	TipoMovimientoDaoImpl tmdao = new TipoMovimientoDaoImpl();
-	
+
+	@Override
 	public List<TipoMovimiento> readAll() {
 		// TODO Auto-generated method stub
 		return tmdao.readAll();

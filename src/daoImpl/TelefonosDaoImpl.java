@@ -23,6 +23,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public int insert(Telefonos tel) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -63,6 +64,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		return cantidad;
 	}
 
+	@Override
 	public int update(Telefonos tel) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -85,6 +87,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		return filas;
 	}
 
+	@Override
 	public List<Telefonos> readAll() {
 
 		ArrayList<Telefonos> Telefonos = new ArrayList<Telefonos>();
@@ -119,7 +122,8 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		return Telefonos;
 
 	}
-
+	
+	@Override
 	public Telefonos buscarId(int id) {
 
 		try {

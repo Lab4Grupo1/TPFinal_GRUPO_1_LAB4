@@ -22,6 +22,7 @@ public class RolDaoImpl implements RolDao{
  
  	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public ArrayList<Rol> readAll() {
 
 		try {
@@ -59,7 +60,8 @@ public class RolDaoImpl implements RolDao{
 		return Rol;
 
 	}
-	
+
+	@Override
 	public Rol buscarId(int id) {
 
 		try {

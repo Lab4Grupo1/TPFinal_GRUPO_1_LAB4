@@ -21,7 +21,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
     
 
     static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
-	
+
+	@Override
 	public ArrayList<Solicitud> readAll(){
 		
 		try {
@@ -61,7 +62,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		}
 		return solicitud;
 	}
-	
+
+	@Override
 	public int updateSolicitud(int numero) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -94,7 +96,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return filas;
 	
 	}
-	
+
+	@Override
 	public ArrayList<Solicitud> buscar(String cliente){
 		int cliente2 = Integer.parseInt(cliente);
 		try {
@@ -130,7 +133,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return solicitud;
 		
 	}
-	
+
+	@Override
 	public Solicitud buscarSolicitud(int Nsolicitud) {
 		Solicitud solicitudRs = new Solicitud();
 		try {
@@ -164,7 +168,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		}
 		return solicitudRs;
 	}
-	
+
+	@Override
 	public int UpdateRechazoSolicitud(int numero) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -197,7 +202,8 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 		return filas;
 	
 	}
-	
+
+	@Override
 	public int UpdateSumarPrestamo(int numeroCuenta, float saldo) {
 		
 		try {

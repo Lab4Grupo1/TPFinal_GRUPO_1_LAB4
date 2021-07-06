@@ -18,7 +18,8 @@ public class PrestamosDaoImpl implements PrestamosDao{
     static String pass = "root";
     
     static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
-	
+
+	@Override
 	public boolean insertPrestamo(Prestamos prestamo) {
 		
 		try {

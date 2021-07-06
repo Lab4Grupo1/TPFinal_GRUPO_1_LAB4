@@ -22,6 +22,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	TipoMovimientoDaoImpl TipoMovImp = new TipoMovimientoDaoImpl();
 	CuentasDaoImpl CueImp = new CuentasDaoImpl();
 
+	@Override
 	public ArrayList<Movimientos> readAll() {
 
 		try {
@@ -55,6 +56,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		return lmov;
 	}
 
+	@Override
 	public ArrayList<Movimientos> buscarDNI(int dni, int tipoCuenta) {
 
 		try {

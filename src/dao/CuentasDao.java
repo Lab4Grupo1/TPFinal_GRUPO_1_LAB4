@@ -9,4 +9,8 @@ public interface CuentasDao {
 
 	public int delete(Cuentas cuenta);
 
+	public Cuentas buscarCuenta(int numeroCuenta);
+
+	public Cuentas buscarDni(int dni);
+
 }

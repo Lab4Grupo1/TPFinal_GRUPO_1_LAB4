@@ -19,6 +19,7 @@ public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public ArrayList<TipoMovimiento> readAll() {
 
 		try {
@@ -54,6 +55,7 @@ public class TipoMovimientoDaoImpl implements TiposMovimientoDao {
 
 	}
 
+	@Override
 	public TipoMovimiento buscarID(int id) {
 
 		TipoMovimiento TmovimientoRs = new TipoMovimiento();

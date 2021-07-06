@@ -21,6 +21,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
  
  	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
+	@Override
 	public ArrayList<Nacionalidad> readAll() {
 
 		try {
@@ -56,6 +57,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao {
 
 	}
 
+	@Override
 	public Nacionalidad buscarId(int id) {
 
 		try {
