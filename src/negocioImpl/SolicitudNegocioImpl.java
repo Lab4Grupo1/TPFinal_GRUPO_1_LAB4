@@ -9,7 +9,13 @@ import negocio.SolicitudNegocio;
 public class SolicitudNegocioImpl implements SolicitudNegocio {
 
     SolicitudDaoImpl sdao = new SolicitudDaoImpl();
-
+    
+    @Override
+    public int insert(Solicitud soli) {
+        // TODO Auto-generated method stub
+        return sdao.insert(soli);
+    }
+    
 	@Override
     public ArrayList<Solicitud> readAll() {
         // TODO Auto-generated method stub
@@ -30,9 +36,9 @@ public class SolicitudNegocioImpl implements SolicitudNegocio {
 	}
 
 	@Override
-	public int UpdateSumarPrestamo(int numeroCuenta, float montoSolicitado) {
+	public int UpdateSumarPrestamo(int numeroCuenta, double d) {
 		// TODO Auto-generated method stub
-		return sdao.UpdateSumarPrestamo(numeroCuenta, montoSolicitado);
+		return sdao.UpdateSumarPrestamo(numeroCuenta, d);
 	}
 
 	@Override

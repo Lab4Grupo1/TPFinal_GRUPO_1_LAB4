@@ -2,6 +2,7 @@ package daoImpl;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,15 +28,18 @@ public class PrestamosDaoImpl implements PrestamosDao{
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
-		 int filas =0;
+		 int filas =0; 
 		 Connection conn = null;
 		 try {
 			 conn = DriverManager.getConnection(url, user, pass);
 			 Statement st =   conn.createStatement();
 			 
-			 String query= "Insert into prestamos(cuotaspagas,cuotastotal, importeCuota, importePedido, FK_NumeroCuenta) values"
-			 		+ " ('"+prestamo.getCuotasPagas()+"','"+prestamo.getCuotasTotal()+"','"+prestamo.getImporteTotal()+"','"
-					 +prestamo.getImportePedido()+"','"+prestamo.getNumeroCuenta()+"')";
+			 String query= "Insert into prestamos(cuotaspagas,cuotastotal, importeCuota, importePedido, FK_NumeroCuenta) values ("
+			 		 + prestamo.getCuotasPagas()+","
+					 + prestamo.getCuotasTotal()+","
+					 + prestamo.getImporteCuota()+"," 
+					 + prestamo.getImportePedidoTotal()+","
+					 + prestamo.getNumeroCuenta()+")";
 					 
 			 filas = st.executeUpdate(query);
 			 if(filas > 0) {

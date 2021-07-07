@@ -1,5 +1,7 @@
 package negocioImpl;
 
+import java.util.ArrayList;
+
 import daoImpl.CuentasDaoImpl;
 import entidad.Cuentas;
 import negocio.CuentasNegocio;
@@ -32,5 +34,12 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		// TODO Auto-generated method stub
 		return cdao.buscarDni(dni);
 	}
+	
+	@Override
+	public ArrayList<Cuentas> ListarCuentas(int DNI){
+		// TODO Auto-generated method stub
+		return cdao.ListarCuentas(DNI);
+	}
+
 
 }

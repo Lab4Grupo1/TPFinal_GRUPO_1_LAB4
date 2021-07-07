@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import dao.CuentasDao;
 import entidad.Cuentas;
+import entidad.DatosPersonales;
+import entidad.Movimientos;
+import entidad.TipoCuentas;
 
 public class CuentasDaoImpl implements CuentasDao{
 
@@ -164,5 +168,49 @@ public class CuentasDaoImpl implements CuentasDao{
 			e.printStackTrace();
 		}
 		return x;
+	}
+	
+	@Override
+	public ArrayList<Cuentas> ListarCuentas(int DNI) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Cuentas> lc = new ArrayList<Cuentas>();
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT NumeroCuenta, Cbu, FechaCreacion, Saldo, Estado, FK_idTipoCuenta, tc.Descripcion as DescTP, FK_DniCliente FROM cuentas c inner join tipocuenta tc on c.FK_idTipoCuenta = tc.id where FK_DniCliente = " + DNI;
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				Cuentas x = new Cuentas();				
+				
+				TipoCuentas tp = new TipoCuentas();				
+				tp.setId(rs.getInt("FK_idTipoCuenta"));
+				tp.setDescripcion(rs.getString("DescTP"));
+				
+				DatosPersonales dp = new DatosPersonales();
+				dp.setDni(rs.getInt("FK_DniCliente"));
+				
+				x.setNumeroCuenta(rs.getInt("NumeroCuenta"));
+				x.setCbu(rs.getDouble("CBU"));
+				x.setFechaCreacion(rs.getDate("FechaCreacion").toLocalDate());
+				x.setSaldo(rs.getDouble("Saldo"));
+				x.setEstado(rs.getBoolean("Estado"));
+				x.setTipoCuenta(tp);
+				x.setDniCliente(dp);
+				
+				lc.add(x);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lc;
 	}
 }

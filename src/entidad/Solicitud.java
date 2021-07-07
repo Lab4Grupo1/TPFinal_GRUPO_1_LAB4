@@ -4,7 +4,7 @@ public class Solicitud {
 
 	private int NumeroSolicitud;
 	private int NumeroCuenta;
-	private float MontoSolicitado;
+	private double MontoSolicitado;
 	private int CantCuotasSolicitado;
 	private String EstadoSolicitud;
 	private Date FechaEmitida;
@@ -15,7 +15,7 @@ public class Solicitud {
 		
 	}
 	
-	public Solicitud(int numeroSolicitud,int numeroCuenta,float montoSolicitado, int cantCuotasSolicitado,
+	public Solicitud(int numeroSolicitud,int numeroCuenta,double montoSolicitado, int cantCuotasSolicitado,
 			         String estadoSolicitud, Date fechaEmitida, int cuentaDepositar)
 	{ 
 		
@@ -44,11 +44,11 @@ public class Solicitud {
 		NumeroCuenta = numeroCuenta;
 	}
 
-	public float getMontoSolicitado() {
+	public double getMontoSolicitado() {
 		return MontoSolicitado;
 	}
 
-	public void setMontoSolicitado(float montoSolicitado) {
+	public void setMontoSolicitado(double montoSolicitado) {
 		MontoSolicitado = montoSolicitado;
 	}
 

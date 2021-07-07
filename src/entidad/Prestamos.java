@@ -7,8 +7,8 @@ public class Prestamos {
 	private int Id;
 	private int CuotasPagas;
 	private int CuotasTotal;
-	private float ImporteTotal;
-	private float ImportePedido;
+	private double ImporteCuota;
+	private double ImportePedidoTotal;
 	private Date FechaUltimoPago;
 	private int NumeroCuenta;
 	
@@ -16,12 +16,12 @@ public class Prestamos {
 		
 	}
 	
-	public Prestamos(int id, int cuotasPagas, int cuotasTotal, float importeTotal, float importePedido, Date fechaUltimoPago, int numeroCuenta) {
+	public Prestamos(int id, int cuotasPagas, int cuotasTotal, double importeCuota, double importePedidoTotal, Date fechaUltimoPago, int numeroCuenta) {
 		Id =id;
 		CuotasPagas = cuotasPagas;
 		CuotasTotal = cuotasTotal;
-		ImporteTotal = importeTotal;
-		ImportePedido = importePedido;
+		ImporteCuota = importeCuota;
+		ImportePedidoTotal = importePedidoTotal;
 		FechaUltimoPago = fechaUltimoPago;
 		NumeroCuenta = numeroCuenta;
 	}
@@ -51,20 +51,20 @@ public class Prestamos {
 		CuotasTotal =  cuotasTotal;
 	}
 
-	public float getImporteTotal() {
-		return ImporteTotal;
+	public double getImporteCuota() {
+		return ImporteCuota;
 	}
 
-	public void setImporteTotal(float importeTotal) {
-		ImporteTotal = importeTotal;
+	public void setImporteCuota(float importeCuota) {
+		ImporteCuota = importeCuota;
 	}
 
-	public float getImportePedido() {
-		return ImportePedido;
+	public double getImportePedidoTotal() {
+		return ImportePedidoTotal;
 	}
 
-	public void setImportePedido(float importePedido) {
-		ImportePedido = importePedido;
+	public void setImportePedidoTotal(double d) {
+		ImportePedidoTotal = d;
 	}
 
 	public Date getFechaUltimoPago() {

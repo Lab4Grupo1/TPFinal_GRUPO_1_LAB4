@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.ArrayList;
+
 import entidad.Cuentas;
 
 public interface CuentasDao {
@@ -12,5 +14,7 @@ public interface CuentasDao {
 	public Cuentas buscarCuenta(int numeroCuenta);
 
 	public Cuentas buscarDni(int dni);
+
+	ArrayList<Cuentas> ListarCuentas(int DNI);
 
 }

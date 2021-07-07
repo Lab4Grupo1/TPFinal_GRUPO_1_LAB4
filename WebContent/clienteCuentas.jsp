@@ -1,20 +1,17 @@
-<%@page import="negocio.TipoCuentasNegocio"%>
+<%@page import="entidad.Movimientos"%>
+<%@page import="entidad.TipoCuentas"%>
+<%@page import="negocioImpl.TipoCuentasNegocioImpl"%>
+<%@page import="java.util.ArrayList"%> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="java.util.ArrayList"%>
-<%@page import="entidad.TipoCuentas"%>
-<%@page import="daoImpl.TipoCuentasDaoImpl"%>
-<%@page import="entidad.Movimientos"%>
-<%@page import="daoImpl.MovimientosDaoImpl"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cuentas</title>
 </head>
 <body>
-
-	<%@ page errorPage="errorCliente.jsp"%>
+ 
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">
@@ -34,30 +31,20 @@
 							numCuenta = request.getAttribute("numCuenta").toString();
 						}
 					%>
-					<div class="dropdown">
-						<a class="btn btn-secondary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Elegir cuenta </a>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-							<%
-								TipoCuentasNegocio tip = null;
-								ArrayList<TipoCuentas> Ltip = tip.readAll();
-								try {
-									if (Ltip != null) {
-										for (TipoCuentas list : Ltip) {
-							%>
-							<a class="dropdown-item"
-								href="servletClienteCuentas?idTipoCuenta=<%=list.getId()%>"><%=list.getDescripcion()%></a>
-							<%
-								}
-									}
-								} catch (Exception e) {
-								}
-							%>
-
-						</div>
-					</div>
+					<div class="col-md-3 mb-3">
+					   <label for="Nacionalidad">Tipo de cuenta</label> 
+					   <select name="Nacionalidad"> 
+						   <%	TipoCuentasNegocioImpl tpc = new TipoCuentasNegocioImpl();
+					 			ArrayList<TipoCuentas> ListaN =  tpc.readAll();
+								if(tpc != null)
+								{
+									for(TipoCuentas tpcLista : ListaN){
+								       %><option value="<%=tpcLista.getId() %>"><%=tpcLista.getDescripcion() %> </option><%
+								       }		
+								}			
+							%> 
+						</select>
+					</div>	    
 					<br>
 					<%
 						ArrayList<Movimientos> Lmov = null;

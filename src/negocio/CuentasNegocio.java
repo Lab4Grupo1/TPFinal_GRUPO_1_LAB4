@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+
 import entidad.Cuentas;
 
 public interface CuentasNegocio {
@@ -10,4 +12,6 @@ public interface CuentasNegocio {
 	public int delete(Cuentas cuenta);
 
 	public Cuentas buscarDni(int dni);
+
+	ArrayList<Cuentas> ListarCuentas(int DNI);
 }

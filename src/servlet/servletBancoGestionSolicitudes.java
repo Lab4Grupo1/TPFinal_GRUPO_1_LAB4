@@ -61,10 +61,10 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 			pres.setNumeroCuenta(soli2.getNumeroCuenta());
 			pres.setCuotasPagas(0);
 			pres.setCuotasTotal(soli2.getCantCuotasSolicitado());
-			pres.setImportePedido(soli2.getMontoSolicitado());
+			pres.setImportePedidoTotal(soli2.getMontoSolicitado());
 			
 			float valor=(int)(soli2.getMontoSolicitado()/soli2.getCantCuotasSolicitado());
-			pres.setImporteTotal(valor);
+			pres.setImporteCuota(valor);
 			//pres.getFechaUltimoPago("2021/07/05");
 			
 			int listo =dao.updateSolicitud(soli2.getNumeroSolicitud());

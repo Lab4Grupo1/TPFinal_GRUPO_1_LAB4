@@ -49,7 +49,7 @@ CREATE TABLE `cuentas` (
   `NumeroCuenta` int NOT NULL AUTO_INCREMENT,
   `Cbu` double NOT NULL,
   `FechaCreacion` date DEFAULT NULL,
-  `Saldo` decimal(5,3) DEFAULT NULL,
+  `Saldo` decimal(10,3) DEFAULT NULL,
   `Estado` boolean not NULL,
   `FK_idTipoCuenta` int NOT NULL,
   `FK_DniCliente` int NOT NULL,

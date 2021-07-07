@@ -38,17 +38,23 @@ public class servletLogin extends HttpServlet {
 				HttpSession sessionUsuario = request.getSession();
 				sessionUsuario.setAttribute("SesionUsuario", u.getNombreUsuario());
 				sessionUsuario.setAttribute("SesionDNI", u.getdp_DNI().getDni());
+				sessionUsuario.setAttribute("SesionRol", u.getRol());
 				
-				if (u.getRol().getDescripcion() == "Cliente" ) {
+				if(u.isEstado()) {
+					if (u.getRol().getDescripcion() == "Cliente" ) {
 					//REQUESTDISPATCHER
 					RequestDispatcher rd = request.getRequestDispatcher("clienteCuentas.jsp");
 					rd.forward(request, response);
+					}
+					else {
+						//REQUESTDISPATCHER
+						RequestDispatcher rd = request.getRequestDispatcher("bancoSolicitudes.jsp");
+						rd.forward(request, response);
+					}						
 				}
 				else {
-					//REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("bancoSolicitudes.jsp");
-					rd.forward(request, response);
-				}								
+					sessionUsuario.invalidate();
+				}					
 			}
 		}
 	}

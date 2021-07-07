@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.SolicitudDao;
+import entidad.DatosPersonales;
 import entidad.Solicitud;
 
 public class SolicitudDaoImpl  implements SolicitudDao{
@@ -21,6 +22,37 @@ public class SolicitudDaoImpl  implements SolicitudDao{
     
 
     static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
+    
+    @Override
+	public int insert(Solicitud soli) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		int filas = 0;
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();  
+			
+			String query = "insert into solicitud(idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud)   values (" +  
+						  +	soli.getCuentaDepositar() + 	","
+						  + soli.getMontoSolicitado() + 	"," 
+						  + soli.getCantCuotasSolicitado()+ "," 
+					+ "'" + soli.getEstadoSolicitud() +	"')"; 
+		 
+			filas = st.executeUpdate(query); 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return filas;
+	}
+
 
 	@Override
 	public ArrayList<Solicitud> readAll(){
@@ -204,7 +236,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 	}
 
 	@Override
-	public int UpdateSumarPrestamo(int numeroCuenta, float saldo) {
+	public int UpdateSumarPrestamo(int numeroCuenta, double d) {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -219,7 +251,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 			
-			String query = ("update cuentas set Saldo =('"+saldo+"'+ Saldo)"
+			String query = ("update cuentas set Saldo =('"+d+"'+ Saldo)"
 					+ "where NumeroCuenta ="+ numeroCuenta);
 			
 			filas = st.executeUpdate(query);
@@ -236,4 +268,5 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 	}
 		return filas;
 	}
+ 
 }
