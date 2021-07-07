@@ -42,7 +42,7 @@ public class servletBancoSolicitud extends HttpServlet {
 			SolicitudNegocioImpl soli = new SolicitudNegocioImpl();
 			lista =(ArrayList<Solicitud>)soli.buscar(cuenta);
 			
-			request.setAttribute("lista", lista);
+			request.setAttribute("lista", (ArrayList<Solicitud>) lista);
 			
 			
 			RequestDispatcher rd= request.getRequestDispatcher("/bancoSolicitudes.jsp");

@@ -42,8 +42,7 @@ public class CuentasDaoImpl implements CuentasDao{
                     + cuenta.getSaldo() + ","
                     + cuenta.isEstado() + "," 
                     + cuenta.getTipoCuenta().getId() + ", "
-                    + cuenta.getDniCliente().getDni() +" )";  
-			System.out.println(query);
+                    + cuenta.getDniCliente().getDni() +" )";   
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();

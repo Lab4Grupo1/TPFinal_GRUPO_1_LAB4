@@ -39,7 +39,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();  
 			
-			String query = "insert into solicitud(idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud)   values (" +  
+			String query = "insert into solicitud(FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud)   values (" +  
 						  +	soli.getCuentaDepositar() + 	","
 						  + soli.getMontoSolicitado() + 	"," 
 						  + soli.getCantCuotasSolicitado()+ "," 
@@ -70,7 +70,7 @@ public class SolicitudDaoImpl  implements SolicitudDao{
 			Statement st =   conn.createStatement();
 			
 			ResultSet rs = st.executeQuery("SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
-					+ " FROM solicitud limit 0,5");
+					+ " FROM solicitud");
 			
 			while(rs.next()){
 				

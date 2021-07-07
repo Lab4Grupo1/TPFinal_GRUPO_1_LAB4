@@ -65,8 +65,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				int Rolentero = Integer.parseInt(Rol);
 				String Sexo = (String) sesionAltaCliente.getAttribute("Sexo"); 
 				
-				String FechaNacimiento = (String) sesionAltaCliente.getAttribute("FechaNacimiento");
-				System.out.println(FechaNacimiento.length());
+				String FechaNacimiento = (String) sesionAltaCliente.getAttribute("FechaNacimiento"); 
 				
 				if (FechaNacimiento.length() ==  10) {
 					for (int i = 0; i<FechaNacimiento.length(); i++)				{ 
@@ -87,22 +86,13 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				}else {
 					System.out.println("Formato de fecha incorrecto");
 				}
-				
-				
-
+				 
 				Telefonos num = new Telefonos();
-				TelefonosNegocioImpl tel = new TelefonosNegocioImpl();
-				if (Telefono.matches("[+-]?\\d*(\\.\\d+)?")) {
+				TelefonosNegocioImpl tel = new TelefonosNegocioImpl(); 
 					/*Inserto en Telefono*/			
-					num.setNumero(Telefono);
-					int idTel = tel.insert(num);
-					if(idTel != 1) {
-						System.out.println("No se inserto en Telefonos");
-					}
-					num.setId(idTel);
-				}else {
-					System.out.println("Formato de numero incorrecto");
-				}
+				num.setNumero(Telefono);
+				int idTel = tel.insert(num); 
+				num.setId(idTel); 
 				  
 				/*Inserto en Datos Personales*/
 				NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();

@@ -7,10 +7,31 @@ pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Solicitudes</title>
+<title>Solicitudes</title>  
+ 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js" ></script> 
+<script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" defer ></script>
+<script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" defer ></script>
+ 
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" defer ></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" defer  ></script>
+<script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js" defer    ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" defer ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js" defer ></script> 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"></link>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table1').DataTable();
+	});
+</script>
+
 </head>
 <body>
-<div class=".container">
+<div class=".container"> 
+    
 	<div class="row row-principal">
 		<div class="col-2 col-menu">	
 			<jsp:include page="masterBanco.jsp"></jsp:include>	
@@ -45,9 +66,9 @@ pageEncoding="ISO-8859-1"%>
 		</div> 
 	</div>
 	
-	<br> 
+	<br>  
 	
-	<table class="table table-sm table-hover table-bordered " >
+	<table id="table1" class="display table table-sm table-hover table-bordered" >
 	  <thead class="thead-dark">
 	    <tr>
 	      <th scope="col">N° Solicitud</th>
@@ -57,14 +78,15 @@ pageEncoding="ISO-8859-1"%>
 	      <th scope="col">Estado Solicitud</th>
 	    </tr>
 	  </thead>
+	  <tbody>
 	  
-	  <% ArrayList<Solicitud>listaSolicitud = null;
+	   <% 
+		 ArrayList<Solicitud>listaSolicitud = null;
 	     if(request.getAttribute("lista")!=null){
 		 listaSolicitud = (ArrayList<Solicitud>)request.getAttribute("lista");
 	   %>
-	  <tbody>
-	  <tr>
 	    <%try{ %>
+	  <tr>
 	    	<%for(Solicitud soli : listaSolicitud){%>
 	      <td><%= soli.getNumeroSolicitud() %></td>
 	      <td><%= soli.getNumeroCuenta() %></td>
@@ -101,14 +123,7 @@ pageEncoding="ISO-8859-1"%>
 		<%}%>
 	   <%}%>
 	  </tbody>
-	</table>
-	<nav aria-label="Page navigation example">
-	  <ul class="pagination"> 
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li> 
-	  </ul>
-	</nav>
+	</table> 
 </div>  
 		
 		

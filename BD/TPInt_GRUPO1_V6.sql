@@ -74,8 +74,8 @@ CREATE TABLE `movimientos` (
 ) ;
 CREATE TABLE `prestamos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `cuotas pagas` int DEFAULT NULL,
-  `cuotas total` int DEFAULT NULL,
+  `cuotasPagas` int DEFAULT NULL,
+  `cuotasTotal` int DEFAULT NULL,
   `importeCuota` decimal(10,3) DEFAULT NULL,
   `importePedido` decimal(10,3) DEFAULT NULL,
   `FechaUltimoPago` date DEFAULT NULL,

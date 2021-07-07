@@ -20,13 +20,10 @@
 			<jsp:include page="masterCliente.jsp"></jsp:include>	
 		</div>		
 		<div class="col">		 
-		<h4>Prestamos</h4>
-		
-			
-		
+		<h4>Prestamos</h4> 
 			
 			<div class=".container-sm" style="width: 90%"> 
-				<form> 
+				<form action="servletClientePrestamos" method="get"> 
 				  <div class="form-row">
 				     <div class="col-md-3 mb-3">
 				      <label for="Importe">Importe</label>
@@ -41,11 +38,12 @@
 					    <div class="col-md-3 mb-3">   
 					      						
 					     <button onclick="<%
-					    					 int total = 0;
+					    					 int total = 0;	
+				    		  				 String Cantidad = "";
 					     					if(request.getParameter("Importe") != null && request.getParameter("CantidadCuotas") != null ){
 					     						String importe =request.getParameter("Importe");
-					     						String Cantidad =request.getParameter("CantidadCuotas");
-					     						total= Integer.parseInt(importe) * Integer.parseInt(Cantidad);
+					     						Cantidad =request.getParameter("CantidadCuotas");
+					     						total= Integer.parseInt(importe) / Integer.parseInt(Cantidad);
 					     					}	
    											%>" class="btn btn-outline-primary"> Validar</button>
 					    </div> 
@@ -53,14 +51,14 @@
 					    <div class="col-md-3 mb-3">  
 					      <label for="CantidadCuotas">Vista previa</label>  
 					      <br> 
-					      <label for="CantidadCuotas"><%=total %></label>
+					      <label>$</label> <label for="CantidadCuotas"><%=total %></label> <label> X<%=Cantidad %></label>
 					    </div> 
 				  </div>
 				 	<div class="col-md-3 mb-3">
 					   <label for="TipoCuenta">Cuenta a depositar</label> 
 					   <select name="TipoCuenta"> 
 						   <%	 
-						   			HttpSession sessionUsuario = request.getSession();
+						   		 HttpSession sessionUsuario = request.getSession();
 
 							    CuentasNegocioImpl cNimp = new CuentasNegocioImpl();
 							   	String dni = sessionUsuario.getAttribute("SesionDNI").toString();

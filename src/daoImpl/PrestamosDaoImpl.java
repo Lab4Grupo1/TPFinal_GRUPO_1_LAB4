@@ -36,7 +36,7 @@ public class PrestamosDaoImpl implements PrestamosDao{
 			 conn = DriverManager.getConnection(url, user, pass);
 			 Statement st =   conn.createStatement();
 			 
-			 String query= "Insert into prestamos(cuotaspagas,cuotastotal, importeCuota, importePedido, FK_NumeroCuenta) values"
+			 String query= "Insert into prestamos(cuotasPagas,cuotasTotal, importeCuota, importePedido, FK_NumeroCuenta) values"
 			 		+ " ('"+prestamo.getCuotasPagas()+"','"+prestamo.getCuotasTotal()+"','"+prestamo.getImporteCuota()+"','"
 					 +prestamo.getImportePedidoTotal()+"','"+prestamo.getNumeroCuenta()+"')";
 					 

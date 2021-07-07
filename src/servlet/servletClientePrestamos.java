@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +25,8 @@ public class servletClientePrestamos extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if (request.getParameter("btnAceptar") != null) {
  
 			String imp = request.getParameter("Importe");
@@ -45,9 +46,12 @@ public class servletClientePrestamos extends HttpServlet {
 				s.setCantCuotasSolicitado(cuotas);
 				s.setEstadoSolicitud("Pendiente");
 				
-				SNimp.insert(s);
-			}
-		}
+				int  res = SNimp.insert(s); 
+			} 
+		} 		
+		//REQUESTDISPATCHER
+		RequestDispatcher rd = request.getRequestDispatcher("clientePrestamos.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

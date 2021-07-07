@@ -10,6 +10,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pagos</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js" ></script> 
+<script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" defer ></script>
+<script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" defer ></script>
+ 
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" defer ></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" defer  ></script>
+<script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js" defer    ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" defer ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js" defer ></script> 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"></link>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table1').DataTable();
+	});
+</script>
 </head>
 <body>
 
@@ -31,7 +49,7 @@
 	</form>
 	<br>  
 	<%ArrayList<Prestamos> ListarPrestamos = new ArrayList<Prestamos>();%>
-	<table class="table table-sm table-hover table-bordered">
+	<table id="table1" class="table table-sm table-hover table-bordered">
 	  <thead>
 	    <tr>
 	      <th scope="col">N° Solicitud</th>
