@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@page import= "entidad.Prestamos" %>
+<%@page import="dao.PrestamosDao" %>
+<%@page import= "negocioImpl.PrestamosNegocioImpl" %>
+<%@page import="java.util.ArrayList"%>   
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,47 +25,56 @@
      
 
 <div class=".container table-responsive-md">  
-	 
+	<form class="formBusqueda"  style="display:flex;" action="servletclientesPagos" method= "get">
+		<input type="number" class="form-control col-md-3" name="txtNprestamo" required>	     
+		<input type="submit" class="btn btn-outline-primary" value="Buscar" name= "btnBuscarPrest" style="margin-left: 10px;">
+	</form>
 	<br>  
+	<%ArrayList<Prestamos> ListarPrestamos = new ArrayList<Prestamos>();%>
 	<table class="table table-sm table-hover table-bordered">
 	  <thead>
 	    <tr>
 	      <th scope="col">N° Solicitud</th>
-	      <th scope="col">Motivo</th>
-	      <th scope="col">Estado</th>
-	      <th scope="col">Fecha Emitida</th>
-	      <th scope="col">Fecha Emitida</th>
+	      <th scope="col">cuotas Pagas</th>
+	      <th scope="col">Cuotas Total</th>
+	      <th scope="col">Importe Cuota</th>
+	     
 	    </tr>
 	  </thead>
+	  	<%ArrayList<Prestamos> listaFiltrada= null;
+	  	if(request.getAttribute("listafiltrada")!=null){
+	  		listaFiltrada =(ArrayList<Prestamos>)request.getAttribute("listafiltrada");%>
 	  <tbody>
+	  	<tr>
+	  	<%try{
+	  		 for(Prestamos pre : listaFiltrada){%>
+	  		<td><%=pre.getId() %></td>
+	  		<td><%=pre.getCuotasPagas() %></td>
+	  		<td><%=pre.getCuotasPagas() %></td>
+	  		<td><%=pre.getCuotasTotal() %></td>	 
+	  		<td><%=pre.getImportePedidoTotal() %></td>
+	  		<td><a href="clientePagos.jsp" class="btn btn-primary"  role="button" aria-disabled="true">Pagar</a></td>
+	  		
+	  	<%}%>
+	  	<%}catch(Exception e ){%>
+	  	<% %>
+	  	<%}finally{}%>
+	  	
+	  	
+	  	<%}else{%>
+	  	<%PrestamosNegocioImpl dao = new PrestamosNegocioImpl();
+	  	 ListarPrestamos = dao.readAll(); %>
 	    <tr>
-	      <th scope="row">1</th>
-	      <td>Prestamo</td>
-	      <td>Pendiente</td> 
-	      <td>09/12/2018</td>
-	      <td><a href="clientePagos.jsp" class="btn btn-primary"  role="button" aria-disabled="true">Pagar</a></td>
+	    <%for(Prestamos pres : ListarPrestamos){ %>
+	      <td><%=pres.getId() %></td>
+	      <td><%=pres.getCuotasPagas() %></td> 
+	      <td><%=pres.getCuotasTotal() %></td>
+	      <td><%=pres.getImportePedidoTotal() %></td>
+	      
 	    </tr>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Prestamo</td>
-	      <td>Pendiente</td> 
-	      <td>09/12/2018</td>
-	      <td><a href="clientePagos.jsp" class="btn btn-primary"  role="button" aria-disabled="true">Pagar</a></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Prestamo</td>
-	      <td>Pendiente</td> 
-	      <td>09/12/2018</td>
-	      <td><a href="clientePagos.jsp" class="btn btn-primary"  role="button" aria-disabled="true">Pagar</a></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Prestamo</td>
-	      <td>Pendiente</td> 
-	      <td>09/12/2018</td>
-	      <td><a href="clientePagos.jsp" class="btn btn-primary"  role="button" aria-disabled="true">Pagar</a></td>
-	    </tr>
+	      <%}%>
+	    <%}%>
+	     
 	  </tbody>
 	</table>
 </div> 
