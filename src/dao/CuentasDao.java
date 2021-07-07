@@ -17,4 +17,6 @@ public interface CuentasDao {
 
 	ArrayList<Cuentas> ListarCuentas(int DNI);
 
+	public int updateMonto(Double Monto, int dni, int Ncuenta);
+
 }

@@ -14,4 +14,6 @@ public interface CuentasNegocio {
 	public Cuentas buscarDni(int dni);
 
 	ArrayList<Cuentas> ListarCuentas(int DNI);
+	
+	public int updateMonto(Double Monto, int dni, int Ncuenta);
 }

@@ -41,5 +41,11 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		return cdao.ListarCuentas(DNI);
 	}
 
+	@Override
+	public int updateMonto(Double Monto, int dni, int Ncuenta) {
+		// TODO Auto-generated method stub
+		return cdao.updateMonto(Monto, dni,Ncuenta);
+	}
+
 
 }

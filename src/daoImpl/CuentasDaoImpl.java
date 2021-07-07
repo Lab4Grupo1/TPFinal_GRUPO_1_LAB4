@@ -64,7 +64,7 @@ public class CuentasDaoImpl implements CuentasDao{
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Update cuentas saldo= ('" + cuenta.getSaldo() + "'), tipocuenta=('" + cuenta.getTipoCuenta()
+			String query = "Update cuentas set saldo= ('" + cuenta.getSaldo() + "'), tipocuenta=('" + cuenta.getTipoCuenta()
 					+ "') where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
@@ -72,6 +72,30 @@ public class CuentasDaoImpl implements CuentasDao{
 		}
 		return filas;
 	}
+
+
+		@Override
+		public int updateMonto(Double Monto, int dni , int Ncuenta) {
+
+			int filas = 0;
+
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			Connection cn = null;
+			try {
+				cn = DriverManager.getConnection(url, user, pass);
+				Statement st = cn.createStatement();
+				String query = "Update cuentas set saldo= "+ Monto +" where FK_DniCliente = " + dni + " and  NumeroCuenta= " + Ncuenta + ";";
+				System.out.println(query);
+				filas = st.executeUpdate(query);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return filas;
+		}
 
 	@Override
 	public int delete(Cuentas cuenta) {
@@ -150,7 +174,7 @@ public class CuentasDaoImpl implements CuentasDao{
 		try {
 
 			cn = DriverManager.getConnection(url, user, pass);
-			String query = "SELECT * FROM cuentas where numeroCuenta=" + dni;
+			String query = "SELECT * FROM cuentas where FK_DniCliente=" + dni;
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
