@@ -15,8 +15,10 @@ public interface CuentasDao {
 
 	public Cuentas buscarDni(int dni);
 
-	ArrayList<Cuentas> ListarCuentas(int DNI);
+	public ArrayList<Cuentas> ListarCuentas(int DNI); 
 
 	public int updateMonto(Double Monto, int dni, int Ncuenta);
+
+	public ArrayList<Cuentas> ListarCuentasCBU(double cbu);
 
 }

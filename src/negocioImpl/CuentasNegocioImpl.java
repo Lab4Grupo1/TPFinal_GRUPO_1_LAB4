@@ -47,5 +47,11 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		return cdao.updateMonto(Monto, dni,Ncuenta);
 	}
 
+	@Override
+	public ArrayList<Cuentas> ListarCuentasCBU(double cbu) {
+		// TODO Auto-generated method stub
+		return cdao.ListarCuentasCBU(cbu);
+	}
+
 
 }

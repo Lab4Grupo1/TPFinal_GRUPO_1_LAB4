@@ -2,13 +2,14 @@ package negocioImpl;
 
 import java.util.List;
 
+import dao.DatosPersonalesDao;
 import daoImpl.DatosPersonalesDaoImpl;
 import entidad.DatosPersonales;
 import negocio.DatosPersonalesNegocio;
 
 public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
 
-	DatosPersonalesDaoImpl dpdao = new DatosPersonalesDaoImpl();
+	DatosPersonalesDao dpdao = new DatosPersonalesDaoImpl();
 	
 
 	@Override

@@ -1,3 +1,5 @@
+<%@page import="negocioImpl.DatosPersonalesNegocioImpl"%>
+<%@page import="negocio.DatosPersonalesNegocio"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,12 +19,21 @@
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<%
+		HttpSession sessionUsuario = request.getSession();
+		String Usuario = null;
 
+		if (sessionUsuario.getAttribute("SesionUsuario") != null) {
+			Usuario = sessionUsuario.getAttribute("SesionUsuario").toString();
 
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
+	%>	
 	<div class=".container">
 		<div class="col">
 			<img class="rounded mx-auto d-block logo" src="image/steam2.png">
-			<br> <br> <label class="UserName">Usuario: Sesion</label>
+			<br> <br> <label class="UserName">Usuario: <%=Usuario%></label>
 			<hr>
 		</div>
 		<div class="row row-opciones">
@@ -37,7 +48,7 @@
 			</div>
 		</div>
 		<div class="row row-sesion">
-			<a class="btn btn-dark" href="google.com">Cerrar sesion</a>
+			<a class="btn btn-dark" href="Login.jsp">Cerrar sesion</a>
 		</div>
 	</div>
 

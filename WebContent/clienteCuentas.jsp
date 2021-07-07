@@ -29,6 +29,17 @@
 </script>
 </head>
 <body>
+	<%
+		HttpSession sessionUsuario = request.getSession();
+		int dni = 0;
+
+		if (sessionUsuario.getAttribute("SesionDNI") != null) {
+			dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
+	%>
  
 	<div class=".container">
 		<div class="row row-principal">

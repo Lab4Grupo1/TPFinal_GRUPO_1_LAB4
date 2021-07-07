@@ -22,12 +22,23 @@
  
 </head>
 <body>
+	<%
+		HttpSession sessionUsuario = request.getSession();
+		String Usuario = null;
+
+		if (sessionUsuario.getAttribute("SesionUsuario") != null) {
+			Usuario = sessionUsuario.getAttribute("SesionUsuario").toString();
+
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
+	%>	
  
 
 <div class=".container">
 		<div class="col">
 			<img class="rounded mx-auto d-block logo" src="image/steam2.png">
-			<br> <br> <label class="UserName">Usuario: Sesion</label>
+			<br> <br> <label class="UserName">Usuario: <%=Usuario%></label>
 			<hr>
 		</div>
 		<div class="row row-opciones">
@@ -42,7 +53,7 @@
 			</div>
 		</div>
 		<div class="row row-sesion">
-			<a class="btn btn-dark" href="google.com">Cerrar sesion</a>
+			<a class="btn btn-dark" href="Login.jsp">Cerrar sesion</a>
 		</div>
 	</div>
 

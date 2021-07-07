@@ -11,6 +11,17 @@
 <title>Transferencias</title>
 </head>
 <body>
+	<%
+		HttpSession sessionUsuario = request.getSession();
+		int dni = 0;
+
+		if (sessionUsuario.getAttribute("SesionDNI") != null) {
+			dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
+	%>
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">
@@ -27,54 +38,53 @@
 							href="clienteTransf_Terceros.jsp"> Terceros </a></li>
 					</ul>
 					</nav>
-				<form action="servletClienteTransf_CuentaPropia" method="get">
-					<div class="row" style="width: 500px">
-						<div class="col-md-3 mb-3" style="margin-right: 100px; padding: 10px;">
-							<label for="CuentaDesde">Desde cuenta</label> 
-							<select name="CuentaDesde">
-								<%
-									HttpSession sessionUsuario = request.getSession();
+					<form action="servletClienteTransf_CuentaPropia" method="get">
+						<div class="row" style="width: 500px">
+							<div class="col-md-3 mb-3"
+								style="margin-right: 100px; padding: 10px;">
+								<label for="CuentaDesde">Desde cuenta</label> <select
+									name="CuentaDesde">
+									<%
+										CuentasNegocio cNimpDesde = new CuentasNegocioImpl();
 
-									CuentasNegocio cNimpDesde = new CuentasNegocioImpl();
-									String dni = sessionUsuario.getAttribute("SesionDNI").toString();
-									int dniEntero = Integer.parseInt(dni);
-									ArrayList<Cuentas> ListCDesde = cNimpDesde.ListarCuentas(dniEntero);
+										ArrayList<Cuentas> ListCDesde = cNimpDesde.ListarCuentas(dni);
 
-									if (cNimpDesde != null) {
-										for (Cuentas tpcListaDesde : ListCDesde) {
-								%><option value="<%=tpcListaDesde.getNumeroCuenta() %>"><%=tpcListaDesde.getTipoCuenta().getDescripcion()%>-<%=tpcListaDesde.getNumeroCuenta()%>
-								</option>
-								<%
-									}
-									}
-								%>
-							</select>
+										if (cNimpDesde != null) {
+											for (Cuentas tpcListaDesde : ListCDesde) {
+									%><option value="<%=tpcListaDesde.getNumeroCuenta()%>">
+										<%=tpcListaDesde.getTipoCuenta().getDescripcion()%>-<%=tpcListaDesde.getNumeroCuenta()%>
+									</option>
+									<%
+										}
+										}
+									%>
+								</select>
+							</div>
+							<div class="col-md-3 mb-3"
+								style="margin-right: 60px; padding: 10px;">
+								<label for="CuentaHasta">Hacia cuenta</label> <select
+									name="CuentaHasta">
+									<%
+										CuentasNegocioImpl cNimpHasta = new CuentasNegocioImpl();
+										ArrayList<Cuentas> ListCHasta = cNimpHasta.ListarCuentas(dni);
+
+										if (cNimpHasta != null) {
+											for (Cuentas tpcListaHasta : ListCHasta) {
+									%><option value="<%=tpcListaHasta.getNumeroCuenta()%>"><%=tpcListaHasta.getTipoCuenta().getDescripcion()%>-<%=tpcListaHasta.getNumeroCuenta()%>
+									</option>
+									<%
+										}
+										}
+									%>
+								</select>
+							</div>
 						</div>
-						<div class="col-md-3 mb-3" style="margin-right: 60px; padding: 10px;">
-							<label for="CuentaHasta">Hacia cuenta</label> 
-							<select	name="CuentaHasta">
-								<%
-									CuentasNegocioImpl cNimpHasta = new CuentasNegocioImpl();
-									String dni2 = sessionUsuario.getAttribute("SesionDNI").toString();
-									int dniEntero2 = Integer.parseInt(dni2);
-									ArrayList<Cuentas> ListCHasta = cNimpHasta.ListarCuentas(dniEntero2);
-
-									if (cNimpHasta != null) {
-										for (Cuentas tpcListaHasta : ListCHasta) {
-								%><option value="<%=tpcListaHasta.getNumeroCuenta() %>"><%=tpcListaHasta.getTipoCuenta().getDescripcion()%>-<%=tpcListaHasta.getNumeroCuenta()%>
-								</option>
-								<%
-									}
-									}
-								%>
-							</select>
-						</div>
-					</div>
-					<label for="Monto">Monto</label> 
-					<input type="text" class="form-control col-md-3" name="monto" placeholder="monto" required>
-					<br>
-					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
+						<label for="Monto">Monto</label> <input type="text"
+							class="form-control col-md-3" name="monto" placeholder="monto"
+							required> <br> <input
+							class="btn btn-outline-primary" type="submit" value="Aceptar"
+							name="btnAceptar"> <input class="btn btn-outline-primary"
+							type="submit" value="Cancelar" name="btnCancelar">
 					</form>
 				</div>
 			</div>

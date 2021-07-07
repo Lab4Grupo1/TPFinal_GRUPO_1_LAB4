@@ -74,7 +74,7 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 					if(dao.UpdateSumarPrestamo(soli2.getNumeroCuenta(), soli2.getMontoSolicitado())>0){
 						
 						request.setAttribute("listo", listo);
-						RequestDispatcher rd= request.getRequestDispatcher("/bancoSolicitudes.jsp");
+						RequestDispatcher rd= request.getRequestDispatcher("confirmacionBanco.jsp");
 						rd.forward(request, response);
 					}
 					

@@ -16,4 +16,6 @@ public interface CuentasNegocio {
 	ArrayList<Cuentas> ListarCuentas(int DNI);
 	
 	public int updateMonto(Double Monto, int dni, int Ncuenta);
+
+	public ArrayList<Cuentas> ListarCuentasCBU(double cbu);
 }

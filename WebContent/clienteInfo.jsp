@@ -1,3 +1,6 @@
+<%@page import="negocio.DatosPersonalesNegocio"%>
+<%@page import="negocioImpl.CuentasNegocioImpl"%>
+<%@page import="negocio.CuentasNegocio"%>
 <%@page import="negocioImpl.DatosPersonalesNegocioImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -9,8 +12,20 @@
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<%
+		HttpSession sessionUsuario = request.getSession();
+		int dni = 0;
+
+		if (sessionUsuario.getAttribute("SesionDNI") != null) {
+			dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
+	%>
 
 	<%@ page errorPage="errorCliente.jsp"%>
+
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">
@@ -19,10 +34,10 @@
 			<div class="col">
 
 				<h4>Informacion Personal</h4>
+
+
 				<%
-					HttpSession sesion1 = request.getSession();
-					int dni = 1;
-					DatosPersonalesNegocioImpl datImpl = null;
+					DatosPersonalesNegocio datImpl = new DatosPersonalesNegocioImpl();
 				%>
 				<br>
 				<form class="row">
@@ -48,7 +63,7 @@
 						<label class="form-label" style="font-weight: bold">CUIL</label> <input
 							class="form-control" type="text"
 							aria-label="readonly input example" readonly
-							value="<%=datImpl.buscarDNI(dni).getCuil()%>">
+							value="<%=datImpl.buscarDNI(dni).getCuil().longValue()%>">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label class="form-label" style="font-weight: bold">Sexo</label> <input
@@ -90,19 +105,17 @@
 						<label class="form-label" style="font-weight: bold">Nacionalidad</label>
 						<input class="form-control" type="text"
 							aria-label="readonly input example" readonly
-							value="<%=datImpl.buscarDNI(dni).getNacionalidad()%>">
+							value="<%=datImpl.buscarDNI(dni).getNacionalidad().getNacionalidad()%>">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label class="form-label" style="font-weight: bold">Telefono</label>
 						<input class="form-control" type="text"
 							aria-label="readonly input example" readonly
-							value="<%=datImpl.buscarDNI(dni).getTelefono()%>">
+							value="<%=datImpl.buscarDNI(dni).getTelefono().getNumero()%>">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>

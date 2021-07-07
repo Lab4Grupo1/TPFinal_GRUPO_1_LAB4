@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class DatosPersonales {
 	
 	private int Dni;
-	private String Cuil;
+	private Double Cuil;
 	private String Nombre;
 	private String Apellido;
 	private String Sexo;
@@ -17,7 +17,7 @@ public class DatosPersonales {
 	private String Mail;
 	private Telefonos Telefono;	
 	
-	public DatosPersonales(int dni, String cuil, String nombre, String apellido, String sexo, Nacionalidad nacionalidad, String direccion, String localidad, String provincia, String mail,
+	public DatosPersonales(int dni, Double cuil, String nombre, String apellido, String sexo, Nacionalidad nacionalidad, String direccion, String localidad, String provincia, String mail,
 			Telefonos telefono) { 
 		Dni = dni;
 		Cuil = cuil;
@@ -40,10 +40,11 @@ public class DatosPersonales {
 	public void setDni(int dni) {
 		Dni = dni;
 	}
-	public String getCuil() {
+	public Double getCuil() {
 		return Cuil;
 	}
-	public void setCuil(String cuil) {
+
+	public void setCuil(Double cuil) {
 		Cuil = cuil;
 	}
 	public String getNombre() {
