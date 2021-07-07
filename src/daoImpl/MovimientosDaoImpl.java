@@ -13,7 +13,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 	static String host = "localhost";
 	static int port = 3306;
-	static String db = "tpint_grupo1_v2";
+	static String db = "tpint_grupo1_V2";
 	static String user = "root";
 	static String pass = "root";
 
