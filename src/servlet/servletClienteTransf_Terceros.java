@@ -44,11 +44,13 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 			ArrayList<Cuentas> ListaCDesde = cnDesc.ListarCuentas(dni);
 			
 			for (Cuentas cuentasDesde : ListaCDesde) {
-				if(cuentasDesde.getNumeroCuenta() == desdeI ) {
-					System.out.println("desde -->" + desdeI);
-					double descontar = cuentasDesde.getSaldo() - montoI;
-					int updateDescontar = cnDesc.updateMonto(descontar, dni, desdeI);
-				}
+				if(cuentasDesde.getSaldo() > montoI) {
+					if(cuentasDesde.getNumeroCuenta() == desdeI ) {
+						System.out.println("desde -->" + desdeI);
+						double descontar = cuentasDesde.getSaldo() - montoI;
+						int updateDescontar = cnDesc.updateMonto(descontar, dni, desdeI);
+					}	
+				}				
 			}
 			
 

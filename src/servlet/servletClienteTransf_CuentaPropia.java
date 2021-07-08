@@ -48,13 +48,15 @@ public class servletClienteTransf_CuentaPropia extends HttpServlet {
 				
 				ArrayList<Cuentas> ListaC = cnDesc.ListarCuentas(dni);
 				for (Cuentas cuentas : ListaC) {
-					if(cuentas.getNumeroCuenta() == desdeI ) {
-						double descontar = cuentas.getSaldo() - montoI;
-						int updateDescontar = cnDesc.updateMonto(descontar, dni, desdeI);
-					}
-					if(cuentas.getNumeroCuenta() == hastaI ) {
-						double Transf = cuentas.getSaldo() + montoI;
-						int updateTransf = cnDesc.updateMonto(Transf, dni, hastaI);
+					if(cuentas.getSaldo() > montoI) {
+						if(cuentas.getNumeroCuenta() == desdeI ) {
+							double descontar = cuentas.getSaldo() - montoI;
+							int updateDescontar = cnDesc.updateMonto(descontar, dni, desdeI);
+						}
+						if(cuentas.getNumeroCuenta() == hastaI ) {
+							double Transf = cuentas.getSaldo() + montoI;
+							int updateTransf = cnDesc.updateMonto(Transf, dni, hastaI);
+						}						
 					}
 				} 
 
