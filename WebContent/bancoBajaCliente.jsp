@@ -7,6 +7,7 @@
 <title>Baja Usuario</title>
 </head>
 <body>
+<%@ page errorPage="errorBanco.jsp" %> 
 
 <div class=".container">
 	<div class="row row-principal">

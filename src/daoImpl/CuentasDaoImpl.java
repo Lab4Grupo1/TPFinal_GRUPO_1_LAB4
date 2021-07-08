@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import dao.CuentasDao;
 import entidad.Cuentas;
 import entidad.DatosPersonales;
-import entidad.Movimientos;
 import entidad.TipoCuentas;
 
 public class CuentasDaoImpl implements CuentasDao {
@@ -125,7 +124,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			e.printStackTrace();
 		}
 
-		TipoCuentasDaoImpl TipoImp = new TipoCuentasDaoImpl();
+		TiposCuentaDaoImpl TipoImp = new TiposCuentaDaoImpl();
 		DatosPersonalesDaoImpl DniImp = new DatosPersonalesDaoImpl();
 
 		Connection cn = null;
@@ -162,7 +161,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			e.printStackTrace();
 		}
 
-		TipoCuentasDaoImpl TipoImp = new TipoCuentasDaoImpl();
+		TiposCuentaDaoImpl TipoImp = new TiposCuentaDaoImpl();
 		DatosPersonalesDaoImpl DniImp = new DatosPersonalesDaoImpl();
 
 		Connection cn = null;

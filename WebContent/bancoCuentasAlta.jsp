@@ -1,4 +1,4 @@
-<%@page import="negocioImpl.TipoCuentasNegocioImpl"%>
+<%@page import="negocioImpl.TiposCuentaNegocioImpl"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidad.TipoCuentas"%> 
 
@@ -11,6 +11,7 @@
 <title>Cuentas</title>
 </head>
 <body>
+<%@ page errorPage="errorBanco.jsp" %> 
 
 <div class=".container">
 	<div class="row row-principal">
@@ -38,12 +39,13 @@
 		                    <label for="TipoCuenta">Tipo Cuenta</label> 
 		                    <br>
 		                    <select name="TipoCuenta"> 
-						    	<%    TipoCuentasNegocioImpl tp = new TipoCuentasNegocioImpl();
-						            ArrayList<TipoCuentas> Listatp =  tp.readAll();
-						           if(tp != null)
-						           {
-						               for(TipoCuentas ltp : Listatp){
-						                  %><option value="<%=ltp.getId() %>"><%=ltp.getDescripcion() %> </option><%
+						    	<%
+ 						    		TiposCuentaNegocioImpl tp = new TiposCuentaNegocioImpl();
+ 						    	 						    					            ArrayList<TipoCuentas> Listatp =  tp.readAll();
+ 						    	 						    					           if(tp != null)
+ 						    	 						    					           {
+ 						    	 						    					               for(TipoCuentas ltp : Listatp){
+ 						    	%><option value="<%=ltp.getId() %>"><%=ltp.getDescripcion() %> </option><%
 						               		                                          }
 						           }
 						       %> 

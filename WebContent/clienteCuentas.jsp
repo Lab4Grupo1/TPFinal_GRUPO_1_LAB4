@@ -1,26 +1,44 @@
 <%@page import="entidad.Movimientos"%>
 <%@page import="entidad.TipoCuentas"%>
-<%@page import="negocioImpl.TipoCuentasNegocioImpl"%>
-<%@page import="java.util.ArrayList"%> 
+<%@page import="negocioImpl.TiposCuentaNegocioImpl"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page errorPage="errorCliente.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cuentas</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js" ></script> 
-<script type="text/javascript"  src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" defer ></script>
-<script type="text/javascript"  src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js" defer ></script>
- 
-<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" defer ></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js" defer  ></script>
-<script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js" defer    ></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" defer ></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js" defer ></script> 
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript"
+	src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"
+	defer></script>
+<script type="text/javascript"
+	src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"
+	defer></script>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"></link>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"
+	defer></script>
+<script type="text/javascript"
+	src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"
+	defer></script>
+<script type="text/javascript"
+	src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"
+	defer></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"
+	defer></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"
+	defer></script>
+
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"></link>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -40,7 +58,7 @@
 			response.sendRedirect("Login.jsp");
 		}
 	%>
- 
+
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">
@@ -61,19 +79,21 @@
 						}
 					%>
 					<div class="col-md-3 mb-3">
-					   <label for="Nacionalidad">Tipo de cuenta</label> 
-					   <select name="Nacionalidad"> 
-						   <%	TipoCuentasNegocioImpl tpc = new TipoCuentasNegocioImpl();
-					 			ArrayList<TipoCuentas> ListaN =  tpc.readAll();
-								if(tpc != null)
-								{
-									for(TipoCuentas tpcLista : ListaN){
-								       %><option value="<%=tpcLista.getId() %>"><%=tpcLista.getDescripcion() %> </option><%
-								       }		
-								}			
-							%> 
+						<label for="Nacionalidad">Tipo de cuenta</label> <select
+							name="Nacionalidad">
+							<%
+								TiposCuentaNegocioImpl tpc = new TiposCuentaNegocioImpl();
+								ArrayList<TipoCuentas> ListaN = tpc.readAll();
+								if (tpc != null) {
+									for (TipoCuentas tpcLista : ListaN) {
+							%><option value="<%=tpcLista.getId()%>"><%=tpcLista.getDescripcion()%>
+							</option>
+							<%
+								}
+								}
+							%>
 						</select>
-					</div>	    
+					</div>
 					<br>
 					<%
 						ArrayList<Movimientos> Lmov = null;
@@ -82,10 +102,11 @@
 					%>
 					<div>
 						<h5><%=tipoCuenta%>
-							número:
+							número: 
 							<%=numCuenta%></h5>
 						<br>
-						<table id="table1" class="table table-sm table-hover table-bordered">
+						<table id="table1"
+							class="table table-sm table-hover table-bordered">
 							<thead>
 								<tr>
 									<th scope="col">Mov</th>

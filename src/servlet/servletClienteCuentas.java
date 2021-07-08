@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
 import entidad.Movimientos;
 import negocio.CuentasNegocio;
 import negocio.MovimientosNegocio;
-import negocio.TipoCuentasNegocio;
+import negocio.TiposCuentaNegocio;
+import negocioImpl.CuentasNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
+import negocioImpl.TiposCuentaNegocioImpl;
 
 @WebServlet("/servletClienteCuentas")
 public class servletClienteCuentas extends HttpServlet {
@@ -38,9 +41,9 @@ public class servletClienteCuentas extends HttpServlet {
 
 			int tip = Integer.parseInt(request.getParameter("idTipoCuenta"));
 
-			MovimientosNegocio mov = null;
-			TipoCuentasNegocio tipImp = null;
-			CuentasNegocio cueImp = null;
+			MovimientosNegocio mov = new MovimientosNegocioImpl();
+			TiposCuentaNegocio tipImp = new TiposCuentaNegocioImpl();
+			CuentasNegocio cueImp = new CuentasNegocioImpl();
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 
 			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());
@@ -56,14 +59,14 @@ public class servletClienteCuentas extends HttpServlet {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			HttpSession sesionMensajes = request.getSession();			
+
+			HttpSession sesionMensajes = request.getSession();
 			sesionMensajes.setAttribute("Confirmacion", "El alta de cuenta se realizo con exito!!");
-			
+
 			// REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
 			rd.forward(request, response);
-		} 
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

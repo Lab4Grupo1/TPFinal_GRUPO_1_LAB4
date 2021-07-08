@@ -44,16 +44,16 @@ public class servletClientePrestamos extends HttpServlet {
 				s.setCantCuotasSolicitado(cuotas);
 				s.setEstadoSolicitud("Pendiente");
 
-				int res = SNimp.insert(s);
+				SNimp.insert(s);
 			}
-			
-			HttpSession sesionMensajes = request.getSession();			
+
+			HttpSession sesionMensajes = request.getSession();
 			sesionMensajes.setAttribute("Confirmacion", "El prestamo se realizo con exito!!");
-			
+
 			// REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
 			rd.forward(request, response);
-		} 
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,6 +1,6 @@
 <%@page import="entidad.TipoCuentas"%>
-<%@page import="negocioImpl.TipoCuentasNegocioImpl"%>
-<%@page import="negocio.TipoCuentasNegocio"%>
+<%@page import="negocioImpl.TiposCuentaNegocioImpl"%>
+<%@page import="negocio.TiposCuentaNegocio"%>
 <%@page import="entidad.Cuentas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="negocioImpl.CuentasNegocioImpl"%>
@@ -10,20 +10,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page errorPage="errorCliente.jsp" %> 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transferencias</title>
 </head>
 <body>
 	<%
 		HttpSession sessionUsuario = request.getSession();
-		int dni = 0;
+			int dni = 0;
 
-		if (sessionUsuario.getAttribute("SesionDNI") != null) {
-			dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+			if (sessionUsuario.getAttribute("SesionDNI") != null) {
+		dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
 
-		} else {
-			response.sendRedirect("Login.jsp");
-		}
+			} else {
+		response.sendRedirect("Login.jsp");
+			}
 	%>
 	<div class=".container">
 		<div class="row row-principal">
@@ -49,15 +50,15 @@
 									name="CuentaDesde">
 									<%
 										CuentasNegocio cNimpDesde = new CuentasNegocioImpl();
-										ArrayList<Cuentas> ListCDesde = cNimpDesde.ListarCuentas(dni);
+																															ArrayList<Cuentas> ListCDesde = cNimpDesde.ListarCuentas(dni);
 
-										if (cNimpDesde != null) {
-											for (Cuentas tpcListaDesde : ListCDesde) {
+																															if (cNimpDesde != null) {
+																																for (Cuentas tpcListaDesde : ListCDesde) {
 									%><option value="<%=tpcListaDesde.getNumeroCuenta()%>"><%=tpcListaDesde.getTipoCuenta().getDescripcion()%>-<%=tpcListaDesde.getNumeroCuenta()%>
 									</option>
 									<%
 										}
-										}
+																															}
 									%>
 								</select>
 							</div>
@@ -66,11 +67,11 @@
 								<label for="CuentaHasta">Hacia cuenta</label> <select
 									name="CuentaHasta">
 									<%
-										TipoCuentasNegocio TcN = new TipoCuentasNegocioImpl();
-										ArrayList<TipoCuentas> ListTP = TcN.readAll();
+										TiposCuentaNegocio TcN = new TiposCuentaNegocioImpl();
+																															ArrayList<TipoCuentas> ListTP = TcN.readAll();
 
-										if (TcN != null) {
-											for (TipoCuentas Lista : ListTP) {
+																															if (TcN != null) {
+																																for (TipoCuentas Lista : ListTP) {
 									%><option value="<%=Lista.getId()%>"><%=Lista.getDescripcion()%></option>
 									<%
 										}

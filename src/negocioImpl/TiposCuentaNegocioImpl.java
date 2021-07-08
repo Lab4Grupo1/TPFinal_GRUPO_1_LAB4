@@ -2,13 +2,13 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
-import daoImpl.TipoCuentasDaoImpl;
+import daoImpl.TiposCuentaDaoImpl;
 import entidad.TipoCuentas;
-import negocio.TipoCuentasNegocio;
+import negocio.TiposCuentaNegocio;
 
-public class TipoCuentasNegocioImpl implements TipoCuentasNegocio {
+public class TiposCuentaNegocioImpl implements TiposCuentaNegocio {
 
-	TipoCuentasDaoImpl tcdao = new TipoCuentasDaoImpl();
+	TiposCuentaDaoImpl tcdao = new TiposCuentaDaoImpl();
 
 	@Override
 	public ArrayList<TipoCuentas> readAll() {

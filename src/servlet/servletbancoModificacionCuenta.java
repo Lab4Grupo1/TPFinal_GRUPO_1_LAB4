@@ -11,12 +11,12 @@ import javax.servlet.http.HttpSession;
 import entidad.Cuentas;
 import entidad.DatosPersonales;
 import negocio.DatosPersonalesNegocio;
-import negocio.TipoCuentasNegocio;
+import negocio.TiposCuentaNegocio;
 
 import javax.servlet.RequestDispatcher;
 import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.DatosPersonalesNegocioImpl;
-import negocioImpl.TipoCuentasNegocioImpl;
+import negocioImpl.TiposCuentaNegocioImpl;
 
 
 @WebServlet("/servletbancoModificacionCuenta")
@@ -58,7 +58,7 @@ public class servletbancoModificacionCuenta extends HttpServlet {
 		{
 			CuentasNegocioImpl CNI=new CuentasNegocioImpl();
 			Cuentas C=new Cuentas();
-			TipoCuentasNegocio TCN=new TipoCuentasNegocioImpl();
+			TiposCuentaNegocio TCN=new TiposCuentaNegocioImpl();
 			DatosPersonalesNegocio DPN= new DatosPersonalesNegocioImpl();
 			
 			

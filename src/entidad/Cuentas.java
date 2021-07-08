@@ -1,7 +1,6 @@
 package entidad;
 
 import java.time.LocalDate;
-import java.text.DecimalFormat;
 
 public class Cuentas {
 
@@ -13,7 +12,8 @@ public class Cuentas {
 	private double Saldo;
 	private boolean Estado;
 
-	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, LocalDate fechaCreacion,double saldo, boolean estado) {
+	public Cuentas(int numeroCuenta, double cbu, TipoCuentas tipoCuenta, DatosPersonales dpDNI, LocalDate fechaCreacion,
+			double saldo, boolean estado) {
 		NumeroCuenta = numeroCuenta;
 		Cbu = cbu;
 		TipoCuenta = tipoCuenta;

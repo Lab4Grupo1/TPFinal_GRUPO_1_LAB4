@@ -11,11 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daoImpl.DatosPersonalesDaoImpl;
-import daoImpl.NacionalidadDaoImpl;
-import daoImpl.RolDaoImpl;
-import daoImpl.TelefonosDaoImpl;
-import daoImpl.UsuarioDaoImpl;
 import entidad.DatosPersonales;
 import entidad.Telefonos;
 import entidad.Usuario;
@@ -76,7 +71,7 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			TelefonosNegocioImpl tel = new TelefonosNegocioImpl();
 			num.setId(Integer.parseInt(request.getParameter("idtel")));
 			num.setNumero(request.getParameter("Telefono"));
-			int idTel = tel.update(num);
+			tel.update(num);
 
 			/* Update en Datos Personales */
 			DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
@@ -96,15 +91,15 @@ public class servletBancoModificacionCliente extends HttpServlet {
 
 			/* Inserto en usuario */
 			UsuarioNegocioImpl usuario = new UsuarioNegocioImpl();
-			int FilaU = usuario.updateDNI(dp);
+			usuario.updateDNI(dp);
 
-			if(FilaDP == 1) {
-				HttpSession sesionMensajes = request.getSession();			
+			if (FilaDP == 1) {
+				HttpSession sesionMensajes = request.getSession();
 				sesionMensajes.setAttribute("Confirmacion", "El cliente se modificó con exito!!");
-				
+
 				// REQUESTDISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
-				rd.forward(request, response);		
+				rd.forward(request, response);
 			}
 		}
 

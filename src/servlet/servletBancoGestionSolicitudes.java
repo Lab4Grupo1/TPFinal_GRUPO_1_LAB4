@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daoImpl.PrestamosDaoImpl;
-import daoImpl.SolicitudDaoImpl;
 import entidad.Prestamos;
 import entidad.Solicitud;
 import negocioImpl.PrestamosNegocioImpl;

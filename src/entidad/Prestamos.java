@@ -1,10 +1,9 @@
 package entidad;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Prestamos {
-	
+
 	private int Id;
 	private int CuotasPagas;
 	private int CuotasTotal;
@@ -12,13 +11,14 @@ public class Prestamos {
 	private double ImportePedidoTotal;
 	private LocalDate FechaUltimoPago;
 	private int NumeroCuenta;
-	
+
 	public Prestamos() {
-		
+
 	}
-	
-	public Prestamos(int id, int cuotasPagas, int cuotasTotal, double importeCuota, double importePedidoTotal, LocalDate fechaUltimoPago, int numeroCuenta) {
-		Id =id;
+
+	public Prestamos(int id, int cuotasPagas, int cuotasTotal, double importeCuota, double importePedidoTotal,
+			LocalDate fechaUltimoPago, int numeroCuenta) {
+		Id = id;
 		CuotasPagas = cuotasPagas;
 		CuotasTotal = cuotasTotal;
 		ImporteCuota = importeCuota;
@@ -26,7 +26,6 @@ public class Prestamos {
 		FechaUltimoPago = fechaUltimoPago;
 		NumeroCuenta = numeroCuenta;
 	}
-	
 
 	public int getId() {
 		return Id;
@@ -49,7 +48,7 @@ public class Prestamos {
 	}
 
 	public void setCuotasTotal(int cuotasTotal) {
-		CuotasTotal =  cuotasTotal;
+		CuotasTotal = cuotasTotal;
 	}
 
 	public double getImporteCuota() {
@@ -65,7 +64,7 @@ public class Prestamos {
 	}
 
 	public void setImportePedidoTotal(double importePedidoTotal) {
-		ImportePedidoTotal =importePedidoTotal;
+		ImportePedidoTotal = importePedidoTotal;
 	}
 
 	public LocalDate getFechaUltimoPago() {

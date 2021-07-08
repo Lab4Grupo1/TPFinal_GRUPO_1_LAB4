@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import dao.TiposCuentaDao;
 import entidad.TipoCuentas;
 
-public class TipoCuentasDaoImpl implements TiposCuentaDao {
+public class TiposCuentaDaoImpl implements TiposCuentaDao {
 
 	static String host = "localhost";
 	static int port = 3306;

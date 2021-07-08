@@ -7,11 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import java.sql.Date;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
@@ -19,10 +14,9 @@ import entidad.Cuentas;
 import entidad.TipoCuentas;
 import entidad.Usuario;
 import entidad.DatosPersonales;  
-import negocio.DatosPersonalesNegocio;
 import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.DatosPersonalesNegocioImpl;
-import negocioImpl.TipoCuentasNegocioImpl;
+import negocioImpl.TiposCuentaNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 
 
@@ -55,7 +49,7 @@ public class servletBancoCuentasAlta extends HttpServlet {
 				double SaldoD = Double.parseDouble(Saldo);
 				String TCuenta = request.getParameter("TipoCuenta");
 				
-				TipoCuentasNegocioImpl TPi = new TipoCuentasNegocioImpl();
+				TiposCuentaNegocioImpl TPi = new TiposCuentaNegocioImpl();
 				TipoCuentas tP = new TipoCuentas();				
 				tP = TPi.buscarId(Integer.parseInt(TCuenta));
 				

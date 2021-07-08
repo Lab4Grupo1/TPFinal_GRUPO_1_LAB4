@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,12 +14,12 @@
 	href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
 	rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/estilos.css" rel="stylesheet" type="text/css" /> 
+<link href="css/estilos.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-	
- 
+
+
 </head>
 <body>
 	<%
@@ -32,10 +32,10 @@
 		} else {
 			response.sendRedirect("Login.jsp");
 		}
-	%>	
- 
+	%>
 
-<div class=".container">
+
+	<div class=".container">
 		<div class="col">
 			<img class="rounded mx-auto d-block logo" src="image/steam2.png">
 			<br> <br> <label class="UserName">Usuario: <%=Usuario%></label>
@@ -44,12 +44,12 @@
 		<div class="row row-opciones">
 			<div class="btn-group-vertical" style="width: 100%;" role="group"
 				aria-label="Basic outlined example">
-					<a class="btn btn-dark" href="bancoSolicitudes.jsp">Solicitudes</a>
-							<a class="btn btn-dark" href="bancoAltaCliente.jsp">Alta</a> 
-							<a class="btn btn-dark" href="bancoModificarCliente.jsp">Modificacion</a>
-							<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> 
-							<a class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> 
-							<a class="btn btn-dark" href="bancoInformes.jsp">Informes</a> 
+				<a class="btn btn-dark" href="bancoSolicitudes.jsp">Solicitudes</a>
+				<a class="btn btn-dark" href="bancoAltaCliente.jsp">Alta</a> <a
+					class="btn btn-dark" href="bancoModificarCliente.jsp">Modificacion</a>
+				<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> <a
+					class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> <a
+					class="btn btn-dark" href="bancoInformes.jsp">Informes</a>
 			</div>
 		</div>
 		<div class="row row-sesion">

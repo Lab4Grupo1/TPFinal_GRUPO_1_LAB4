@@ -1,12 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
-import java.util.regex.Matcher;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,13 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import dao.DatosPersonalesDao;
-import daoImpl.DatosPersonalesDaoImpl;
-import daoImpl.NacionalidadDaoImpl;
-import daoImpl.RolDaoImpl;
-import daoImpl.TelefonosDaoImpl;
-import daoImpl.UsuarioDaoImpl;
 import entidad.DatosPersonales;
 import entidad.Telefonos;
 import entidad.Usuario;

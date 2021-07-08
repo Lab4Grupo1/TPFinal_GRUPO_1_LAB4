@@ -29,7 +29,7 @@
 		} else {
 			response.sendRedirect("Login.jsp");
 		}
-	%>	
+	%>
 	<div class=".container">
 		<div class="col">
 			<img class="rounded mx-auto d-block logo" src="image/steam2.png">

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import entidad.TipoCuentas;
 
-public interface TipoCuentasNegocio {
+public interface TiposCuentaNegocio {
 	public ArrayList<TipoCuentas> readAll();
 	
 	public TipoCuentas buscarId(int id);

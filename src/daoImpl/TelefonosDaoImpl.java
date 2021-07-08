@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.Query;
-
 import dao.TelefonosDao;
 import entidad.Telefonos;
 
@@ -31,36 +29,32 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			e.printStackTrace();
 		}
 
-		int cantidad = 0; 
-		int insert = 0; 
+		int cantidad = 0;
 
 		Connection cn = null;
-		try 
-		{
+		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			
 
-			String query = "Insert into tpint_grupo1_v2.telefonos(numero) values('" + tel.getNumero() + "');"; 
- 
-			insert = st.executeUpdate(query); 
+			String query = "Insert into tpint_grupo1_v2.telefonos(numero) values('" + tel.getNumero() + "');";
+
+			st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 
-		try 
-		{
+
+		try {
 			cn = DriverManager.getConnection(url, user, pass);
-			Statement st = cn.createStatement(); 
+			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT max(id) as id FROM tpint_grupo1_v2.telefonos;");
-			while (rs.next()) { 
+			while (rs.next()) {
 				cantidad = rs.getInt("id");
 			}
 			cn.close();
-			 
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return cantidad;
 	}
 
@@ -78,7 +72,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "update Telefonos set numero = '" + tel.getNumero() + "' where id = " + tel.getId() ;
+			String query = "update Telefonos set numero = '" + tel.getNumero() + "' where id = " + tel.getId();
 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
@@ -122,7 +116,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		return Telefonos;
 
 	}
-	
+
 	@Override
 	public Telefonos buscarId(int id) {
 
@@ -138,12 +132,12 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "SELECT id, numero FROM tpint_grupo1_v2.Telefonos where id= " + id; 
+			String query = "SELECT id, numero FROM tpint_grupo1_v2.Telefonos where id= " + id;
 			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next()) {
 				TelefonosRs.setId(rs.getInt("id"));
-				TelefonosRs.setNumero(rs.getString("numero")); 
+				TelefonosRs.setNumero(rs.getString("numero"));
 			}
 			cn.close();
 
@@ -152,6 +146,6 @@ public class TelefonosDaoImpl implements TelefonosDao {
 		} finally {
 
 		}
-		return TelefonosRs; 
+		return TelefonosRs;
 	}
 }

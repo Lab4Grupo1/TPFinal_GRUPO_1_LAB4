@@ -4,7 +4,7 @@ import java.util.List;
 
 import entidad.TipoMovimiento;
 
-public interface TipoMovimientoNegocio {
+public interface TiposMovimientoNegocio {
 	public List<TipoMovimiento> readAll();
 
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import dao.PrestamosDao;
 import entidad.Prestamos;
-import entidad.Solicitud;
 
 
 public class PrestamosDaoImpl implements PrestamosDao{

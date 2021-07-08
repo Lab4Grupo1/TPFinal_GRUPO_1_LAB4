@@ -19,7 +19,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 	static String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false", host, port, db);
 
-	TipoMovimientoDaoImpl TipoMovImp = new TipoMovimientoDaoImpl();
+	TiposMovimientoDaoImpl TipoMovImp = new TiposMovimientoDaoImpl();
 	CuentasDaoImpl CueImp = new CuentasDaoImpl();
 
 	@Override
