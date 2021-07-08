@@ -73,7 +73,7 @@ public class servletBancoCuentas extends HttpServlet {
 				CuentasNegocioImpl cImp = new CuentasNegocioImpl();
 				int insert = cImp.insert(c);
 
-				if (insert == 1) {
+				if (insert > 0) {
 					sesionMensajes.setAttribute("Confirmacion", "La cuenta se creó con exito!!");
 
 					// REQUESTDISPATCHER

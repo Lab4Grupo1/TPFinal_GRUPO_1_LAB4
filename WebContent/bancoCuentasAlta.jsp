@@ -60,9 +60,11 @@
 							</div>
 						</div>
 						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar"> <a
+							value="Aceptar" name="btnAceptar">
+							<a
 							class="btn btn-outline-primary"
-							href="bancoCuentaModificacion.jsp" role="button">Modificar</a> <input
+							href="bancoCuentaModificacion.jsp" role="button">Modificar</a>
+							<input
 							class="btn btn-outline-primary" type="submit" value="Cancelar"
 							name="btnCancelar">
 					</form>
