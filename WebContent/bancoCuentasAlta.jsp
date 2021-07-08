@@ -38,8 +38,9 @@
 
 						<div class="form-row">
 							<div class="col-md-3 mb-3">
-								<label for="TipoCuenta">Tipo Cuenta</label> <br> <select
-									name="TipoCuenta">
+								<label for="TipoCuenta">Tipo Cuenta</label>
+								<br>
+								<select name="TipoCuenta">
 									<%
 										TiposCuentaNegocioImpl tp = new TiposCuentaNegocioImpl();
 										ArrayList<TipoCuentas> Listatp = tp.readAll();
@@ -60,11 +61,9 @@
 							</div>
 						</div>
 						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar">
-							<a
+							value="Aceptar" name="btnAceptar"> <a
 							class="btn btn-outline-primary"
-							href="bancoCuentaModificacion.jsp" role="button">Modificar</a>
-							<input
+							href="bancoCuentaModificacion.jsp" role="button">Modificar</a> <input
 							class="btn btn-outline-primary" type="submit" value="Cancelar"
 							name="btnCancelar">
 					</form>

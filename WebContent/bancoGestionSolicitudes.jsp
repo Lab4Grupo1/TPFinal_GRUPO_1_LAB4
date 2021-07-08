@@ -10,7 +10,7 @@
 <title>Gestion Solicitudes</title>
 </head>
 <body>
-<%@ page errorPage="errorBanco.jsp" %> 
+	<%@ page errorPage="errorBanco.jsp"%>
 
 	<div class=".container">
 		<div class="row row-principal">
@@ -26,8 +26,10 @@
 
 					<%
 						int Nsoli = 0;
-						if (request.getParameter("Nsoli") != null) {
-							Nsoli = Integer.parseInt(request.getParameter("Nsoli").toString());
+									if (request.getParameter("Nsoli") != null) {
+										Nsoli = Integer.parseInt(request.getParameter("Nsoli").toString());
+										HttpSession pepito = request.getSession();
+										pepito.setAttribute("Nsoli", Nsoli);
 							SolicitudNegocio dao = new SolicitudNegocioImpl();
 							Solicitud solicitud = (Solicitud) dao.buscarSolicitud(Nsoli);
 					%>

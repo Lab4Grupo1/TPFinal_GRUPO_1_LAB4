@@ -13,6 +13,7 @@ import javax.servlet.RequestDispatcher;
 import entidad.Cuentas;
 import entidad.TipoCuentas;
 import entidad.Usuario;
+import negocio.UsuarioNegocio;
 import entidad.DatosPersonales;
 import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.DatosPersonalesNegocioImpl;
@@ -41,8 +42,9 @@ public class servletBancoCuentas extends HttpServlet {
 			int dni = Integer.parseInt(request.getParameter("DNICliente"));
 			String usuario = request.getParameter("UsuarioCliente");
 
-			UsuarioNegocioImpl uni = new UsuarioNegocioImpl();
+			UsuarioNegocio uni = new UsuarioNegocioImpl();
 			Usuario u = null;
+			
 			u = uni.obtenerUnUsuario(dni, usuario);
 
 			if (u.getdp_DNI() != null) {

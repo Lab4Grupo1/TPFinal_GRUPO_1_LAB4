@@ -75,7 +75,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				} else {
 					System.out.println("Formato de fecha incorrecto");
 				}
-				
+
 				/* Inserto en Datos Personales */
 				NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();
 				DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
@@ -125,15 +125,17 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 
 				int FilaU = usuario.insert(u);
 				if (FilaU == 1) {
-					HttpSession sesionMensajes = request.getSession();			
-					sesionMensajes.setAttribute("Confirmacion", "El usuario se creó con exito!!");
-					
+					request.setAttribute("Estado", "1");
+					// HttpSession sesionMensajes = request.getSession();
+					// sesionMensajes.setAttribute("Confirmacion", "El usuario se creó con
+					// exito!!");
+
 					// REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 					rd.forward(request, response);
 				} else {
 					// REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 					rd.forward(request, response);
 				}
 
@@ -142,7 +144,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 			}
 
 			// REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 			rd.forward(request, response);
 		}
 	}
