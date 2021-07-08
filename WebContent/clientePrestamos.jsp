@@ -11,6 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Prestamos</title>
 
+ 
+
 </head>
 <body>
 	<%
@@ -37,35 +39,15 @@
 					<form action="servletClientePrestamos" method="get">
 						<div class="form-row">
 							<div class="col-md-3 mb-3">
-								<label for="Importe">Importe</label> <input type="text"
-									class="form-control" name="Importe" placeholder="Importe"
-									required>
+								<label for="Importe">Importe</label> 
+								<input type="text" class="form-control" id="Importe" name="Importe" placeholder="Importe" required>
 							</div>
 							<div class="col-md-3 mb-3">
-								<label for="CantidadCuotas">Cantidad de cuotas</label> <input
-									type="text" class="form-control" name="CantidadCuotas"
-									placeholder="Cantidad de cuotas" required>
+								<label for="CantidadCuotas">Cantidad de cuotas</label> 
+								<input type="text" class="form-control" id="Cantidad" name="CantidadCuotas" placeholder="Cantidad de cuotas" required>
 							</div>
-						</div>
-						<div class="form-row">
-							<div class="col-md-3 mb-3">
-
-								<button
-									onclick="<%int total = 0;
-			String Cantidad = "";
-			if (request.getParameter("Importe") != null && request.getParameter("CantidadCuotas") != null) {
-				String importe = request.getParameter("Importe");
-				Cantidad = request.getParameter("CantidadCuotas");
-				total = Integer.parseInt(importe) / Integer.parseInt(Cantidad);
-			}%>"
-									class="btn btn-outline-primary">Validar</button>
-							</div>
-
-							<div class="col-md-3 mb-3">
-								<label for="CantidadCuotas">Vista previa</label> <br> <label>$</label>
-								<label for="CantidadCuotas"><%=total%></label> <label> X<%=Cantidad%></label>
-							</div>
-						</div>
+						</div> 
+						
 						<div class="col-md-3 mb-3">
 							<label for="TipoCuenta">Cuenta a depositar</label> <select
 								name="TipoCuenta">

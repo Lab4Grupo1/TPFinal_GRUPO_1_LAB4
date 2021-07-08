@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidad.Solicitud;
 import negocioImpl.SolicitudNegocioImpl;
@@ -45,10 +46,14 @@ public class servletClientePrestamos extends HttpServlet {
 
 				int res = SNimp.insert(s);
 			}
+			
+			HttpSession sesionMensajes = request.getSession();			
+			sesionMensajes.setAttribute("Confirmacion", "El prestamo se realizo con exito!!");
+			
+			// REQUESTDISPATCHER
+			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
+			rd.forward(request, response);
 		}
-		// REQUESTDISPATCHER
-		RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
