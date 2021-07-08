@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
@@ -48,6 +49,15 @@ public class servletBancoGestionPassModificacion extends HttpServlet {
 				
 				UsuarioNegocioImpl udp = new UsuarioNegocioImpl();
 				int updatePass = udp.updatePass(request.getParameter("NuevaPass"), request.getParameter("UsuarioUrl"));
+				
+				if(updatePass == 1) {
+					HttpSession sesionMensajes = request.getSession();			
+					sesionMensajes.setAttribute("Confirmacion", "La contraseña se modificó con exito!!");
+					
+					// REQUESTDISPATCHER
+					RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+					rd.forward(request, response);		
+				}
 				
 				RequestDispatcher rd = request.getRequestDispatcher("bancoModificarCliente.jsp");
 				rd.forward(request, response);

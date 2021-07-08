@@ -73,9 +73,12 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 				if(presImpl.insertPrestamo(pres) == true) {
 					if(dao.UpdateSumarPrestamo(soli2.getNumeroCuenta(), soli2.getMontoSolicitado())>0){
 						
-						request.setAttribute("listo", listo);
-						RequestDispatcher rd= request.getRequestDispatcher("confirmacionBanco.jsp");
-						rd.forward(request, response);
+						HttpSession sesionMensajes = request.getSession();			
+						sesionMensajes.setAttribute("Confirmacion", "El préstamo se fue autorizado con éxito!!");
+						
+						// REQUESTDISPATCHER
+						RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+						rd.forward(request, response);		
 					}
 					
 				}

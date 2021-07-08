@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daoImpl.UsuarioDaoImpl;
 import negocioImpl.UsuarioNegocioImpl;
@@ -37,10 +38,21 @@ public class serveltBancoBajaCliente extends HttpServlet {
 			
 			UsuarioNegocioImpl uBaja = new UsuarioNegocioImpl();
 			int baja = uBaja.delete(DNI, usuario); 
+			
+			if(baja == 1) {
+				HttpSession sesionMensajes = request.getSession();			
+				sesionMensajes.setAttribute("Confirmacion", "El cliente se eliminó con éxito!!");
+				
+				// REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+				rd.forward(request, response);
+			} else {
+				//REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("bancoBajaCliente.jsp");
+				rd.forward(request, response);
+				
+			}
 
-			//REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoBajaCliente.jsp");
-			rd.forward(request, response);
 		} 
 	}
 

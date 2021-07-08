@@ -10,18 +10,30 @@
 	<div class=".container">
 		<div class="row row-principal">
 			<div class="col-2 col-menu">
-				<jsp:include page="masterBanco.jsp"></jsp:include>
+				<jsp:include page="masterCliente.jsp"></jsp:include>
 			</div>
 			<div class="col">
 				<div class="col-md-8">
+				<%
+					HttpSession sessionUsuario = request.getSession();
+					int dni = 0;
+	
+					if (sessionUsuario.getAttribute("SesionDNI") != null) {
+						dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+	
+					} else {
+						response.sendRedirect("Login.jsp");
+					}
+					HttpSession sesionMensajes = request.getSession();			
+					String msj =  sesionMensajes.getAttribute("Confirmacion").toString();
+				%>
 					<br>
-					<div class="alert alert-danger" role="alert">
-						<h4 class="alert-heading">Operación finalizada</h4>
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading"><%=msj %></h4>
 						<a class="btn btn-primary col-md-2" name="btnContinuar"
-							href="bancoSolicitudes.jsp">Continuar</a>
+							href="clienteCuentas.jsp">Continuar</a>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -133,8 +133,17 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				u.setEstado(true);
 
 				int FilaU = usuario.insert(u);
-				if (FilaU != 1) {
-					System.out.println("No se inserto en Usuario");
+				if (FilaU == 1) {
+					HttpSession sesionMensajes = request.getSession();			
+					sesionMensajes.setAttribute("Confirmacion", "El usuario se creó con exito!!");
+					
+					// REQUESTDISPATCHER
+					RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+					rd.forward(request, response);
+				} else {
+					// REQUESTDISPATCHER
+					RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
+					rd.forward(request, response);
 				}
 
 			} catch (Exception e) {

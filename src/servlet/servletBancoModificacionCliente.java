@@ -98,11 +98,14 @@ public class servletBancoModificacionCliente extends HttpServlet {
 			UsuarioNegocioImpl usuario = new UsuarioNegocioImpl();
 			int FilaU = usuario.updateDNI(dp);
 
-			System.out.println(idTel + "-" + FilaDP + "-" + FilaU);
-
-			// REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoModificarCliente.jsp");
-			rd.forward(request, response);
+			if(FilaDP == 1) {
+				HttpSession sesionMensajes = request.getSession();			
+				sesionMensajes.setAttribute("Confirmacion", "El cliente se modificó con exito!!");
+				
+				// REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+				rd.forward(request, response);		
+			}
 		}
 
 	}

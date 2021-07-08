@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
@@ -74,16 +75,26 @@ public class servletBancoCuentasAlta extends HttpServlet {
 				CuentasNegocioImpl cImp = new CuentasNegocioImpl();
 				int insert = cImp.insert(c);
 				
-				System.out.println("->"+insert);  
+				if(insert == 1) {
+					HttpSession sesionMensajes = request.getSession();			
+					sesionMensajes.setAttribute("Confirmacion", "La cuenta se creó con exito!!");
+					
+					// REQUESTDISPATCHER
+					RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+					rd.forward(request, response);					
+					System.out.println("->"+insert);  
+				}else {
+					//REQUESTDISPATCHER
+					RequestDispatcher rd = request.getRequestDispatcher("bancoCuentasAlta.jsp");
+					rd.forward(request, response);
+				}
 				
 			}
 			else {
 				System.out.println("No existe el cliente");
 			}
 	
-			//REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoCuentasAlta.jsp");
-			rd.forward(request, response);
+			
 	    } 
     } 
 	 
