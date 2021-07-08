@@ -115,12 +115,14 @@ INSERT INTO `nacionalidad`(Nacionalidad) VALUES ('Afganistán'),('Albania'),('Ale
 ('Dominica'),('Ecuador'),('El Salvador'),('España'),('Estados Unidos'),('Guatemala'),('Francia'),('Honduras'),('Israel'),('Italia'),('Jamaica'),
 ('México'),('Nicaragua'),('Noruega'),('Panamá'),('Paraguay'),('Perú'),('Portugal'),('República Dominicana'),('Rusia'),('Suiza'),('Uruguay'),
 ('Zimbabue');
-insert into `tipomovimiento`(Descripcion) values('Alta de cuenta'),(' Alta de un préstamo'),('Pago de préstamo'),('Transferencia'),('Extraccion'),
-('Deposito');
+insert into `tipomovimiento`(Descripcion) values('Alta de cuenta'),(' Alta de un préstamo'),('Pago de préstamo'),('Transferencia'),('Extraccion'),('Deposito');
 insert into `tipocuenta`(Descripcion) values ('Caja de ahorro'),('Cuenta corriente');
 insert into `rol` (Descripcion,Estado)values ('Adminitrativo',true),('Cliente',true),('Gerente',false);
 
-insert into `telefonos`(Numero) values(19377894);
-insert into `datospersonales`(Dni, Cuil, FK_Nacionalidad, FK_idTelefono) values(1,1,12,1);
-insert into `cuentas`(CBU, Estado, FK_idTipoCuenta, FK_DniCliente) values(222,true,2,1);
-insert into `movimientos`(Detalle, Fecha, Importe, FK_IdTipoMovimiento, FK_IdCuentas) values('Acreditacion Prestamo','2021/7/8',25.26,2,1),('Uso Prestamo','2021/7/5',-55,3,1)
+insert into `telefonos`(Numero) values(44444444);
+insert into `datospersonales`(Dni, Cuil, Nombre, Apellido, Sexo, FechaNacimiento, Direccion, Localidad, Provincia, Mail, FK_Nacionalidad, FK_idTelefono)
+values(30000000,20300000006,'Admin','Admin','Femenino','1980/1/1','corrientes 455','CABA','Buenos Aires','admin@admin.com',12,1),
+(31000000,20300000016,'Cliente','Cliente','Masculino','1980/1/1','cordoba 455','CABA','Buenos Aires','cliente@cliente.com',12,1);
+
+insert into `usuario` (NombreUsuario, Contraseña, FK_idRol, FK_DniDP, Estado)
+values('300AdmAdm','1234',1,30000000,true), ('310CliCLi','1234',2,31000000,true);
