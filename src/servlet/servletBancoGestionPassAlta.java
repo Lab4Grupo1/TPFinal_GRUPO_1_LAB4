@@ -97,6 +97,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				/* Inserto en Datos Personales */
 				NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();
 				DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
+				dpDao.validarCuil(CUIL);
 				DatosPersonales dp = new DatosPersonales();
 
 				dp.setDni(DNIentero);

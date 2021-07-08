@@ -5,6 +5,7 @@ import java.util.List;
 import dao.DatosPersonalesDao;
 import daoImpl.DatosPersonalesDaoImpl;
 import entidad.DatosPersonales;
+import exceptions.cuilException;
 import negocio.DatosPersonalesNegocio;
 
 public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
@@ -36,5 +37,19 @@ public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
 		// TODO Auto-generated method stub
 		return dpdao.readAll();
 	}
+
+
+	@Override
+	public boolean validarCuil(double cuil) throws cuilException {
+
+			String cuilString = Double.toString(cuil);
+			int tam = cuilString.length();
+			if(tam != 11) {
+				cuilException exc1 = new cuilException();
+				throw exc1;
+			}
+			return true;
+		}
+	
 
 }
