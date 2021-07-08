@@ -6,6 +6,7 @@ import dao.DatosPersonalesDao;
 import daoImpl.DatosPersonalesDaoImpl;
 import entidad.DatosPersonales;
 import exceptions.cuilException;
+import exceptions.telefonoException;
 import negocio.DatosPersonalesNegocio;
 
 public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
@@ -50,6 +51,21 @@ public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
 			}
 			return true;
 		}
-	
 
-}
+
+	@Override
+	public boolean validarTelefono(String tel) throws telefonoException {
+
+	       try {
+	            Integer.parseInt(tel);
+	            return true;
+	        } catch (NumberFormatException nfe) {
+	        }
+	        throw new telefonoException();
+	    }
+		
+		
+		
+	}
+
+

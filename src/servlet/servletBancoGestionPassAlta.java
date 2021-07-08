@@ -86,6 +86,13 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				} else {
 					System.out.println("Formato de fecha incorrecto");
 				}
+				
+				/* Inserto en Datos Personales */
+				NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();
+				DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
+				dpDao.validarCuil(CUIL);
+				dpDao.validarTelefono(Telefono);
+				DatosPersonales dp = new DatosPersonales();
 
 				Telefonos num = new Telefonos();
 				TelefonosNegocioImpl tel = new TelefonosNegocioImpl();
@@ -93,12 +100,6 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				num.setNumero(Telefono);
 				int idTel = tel.insert(num);
 				num.setId(idTel);
-
-				/* Inserto en Datos Personales */
-				NacionalidadNegocioImpl nac = new NacionalidadNegocioImpl();
-				DatosPersonalesNegocioImpl dpDao = new DatosPersonalesNegocioImpl();
-				dpDao.validarCuil(CUIL);
-				DatosPersonales dp = new DatosPersonales();
 
 				dp.setDni(DNIentero);
 				dp.setCuil(CUIL);
