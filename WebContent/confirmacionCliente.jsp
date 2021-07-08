@@ -25,7 +25,10 @@
 						response.sendRedirect("Login.jsp");
 					}
 					HttpSession sesionMensajes = request.getSession();			
-					String msj =  sesionMensajes.getAttribute("Confirmacion").toString();
+					String msj =null;
+					if (sessionUsuario.getAttribute("Confirmacion") != null) {
+					msj =  sesionMensajes.getAttribute("Confirmacion").toString();
+				}
 				%>
 					<br>
 					<div class="alert alert-success" role="alert">
