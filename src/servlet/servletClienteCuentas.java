@@ -56,11 +56,14 @@ public class servletClienteCuentas extends HttpServlet {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-
-			RequestDispatcher rd = request.getRequestDispatcher("clienteCuentas.jsp");
+			
+			HttpSession sesionMensajes = request.getSession();			
+			sesionMensajes.setAttribute("Confirmacion", "El alta de cuenta se realizo con exito!!");
+			
+			// REQUESTDISPATCHER
+			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
 			rd.forward(request, response);
-		}
-
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -59,10 +59,13 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 					int updateTransf = cnDesc.updateMonto(Transf, cuentasCHasta.getDniCliente().getDni() , cuentasCHasta.getNumeroCuenta());			
 			} 
 			
-			//REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("clienteTransf_CuentaPropia.jsp");
-			rd.forward(request, response);			
-		}
+			HttpSession sesionMensajes = request.getSession();			
+			sesionMensajes.setAttribute("Confirmacion", "La transferencia se realizo con exito!!");
+			
+			// REQUESTDISPATCHER
+			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
+			rd.forward(request, response);		
+		} 
 	} 
 	
 	

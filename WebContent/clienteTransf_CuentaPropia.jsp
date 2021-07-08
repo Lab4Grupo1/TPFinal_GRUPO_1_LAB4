@@ -83,8 +83,8 @@
 							class="form-control col-md-3" name="monto" placeholder="monto"
 							required> <br> <input
 							class="btn btn-outline-primary" type="submit" value="Aceptar"
-							name="btnAceptar"> <input class="btn btn-outline-primary"
-							type="submit" value="Cancelar" name="btnCancelar">
+							name="btnAceptar"> 
+						<a	class="btn btn-outline-primary" href="clienteTransf_CuentaPropia.jsp"	name="btnCancelar"></a>
 					</form>
 				</div>
 			</div>

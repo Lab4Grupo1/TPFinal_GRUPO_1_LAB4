@@ -53,7 +53,7 @@ public class servletClientePrestamos extends HttpServlet {
 			// REQUESTDISPATCHER
 			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
 			rd.forward(request, response);
-		}
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -9,10 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Prestamos</title>
-
- 
-
+<title>Prestamos</title> 
 </head>
 <body>
 	<%
@@ -68,10 +65,9 @@
 								%>
 							</select>
 						</div>
-						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar"> <input
-							class="btn btn-outline-primary" type="submit" value="Cancelar"
-							name="btnCancelar">
+						<br> 
+						<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar"> 
+						<a	class="btn btn-outline-primary" href="clientePrestamos.jsp"	name="btnCancelar"></a>
 					</form>
 				</div>
 			</div>

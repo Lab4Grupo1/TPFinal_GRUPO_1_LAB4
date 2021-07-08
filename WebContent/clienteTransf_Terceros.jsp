@@ -93,9 +93,9 @@
 
 
 						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar"> <input
-							class="btn btn-outline-primary" type="submit" value="Cancelar"
-							name="btnCancelar">
+							value="Aceptar" name="btnAceptar"> 	
+							<a	class="btn btn-outline-primary" href="clienteTransf_Terceros.jsp"	name="btnCancelar"></a>
+
 					</form>
 				</div>
 			</div>

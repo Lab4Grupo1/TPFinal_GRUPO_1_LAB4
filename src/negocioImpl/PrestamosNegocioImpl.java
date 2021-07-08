@@ -27,6 +27,24 @@ public class PrestamosNegocioImpl implements PrestamosNegocio {
 		return pdao.BuscarPrestamo(Nprestamo);
 	}
 
+	public Prestamos BuscarPrestamos(String numero) {
+		return pdao.BuscarPrestamos(numero);
+	}
+
+	public boolean ComprobarSaldo(double saldo, String Ncuenta) {
+		return pdao.ComprobarSaldo(saldo, Ncuenta);
+	}
+
+	public boolean UpdateCuotas(String NPrestamo, int cantCuotasPagas) {
+		return pdao.UpdateCuotas(NPrestamo, cantCuotasPagas);
+	}
+
+	public boolean RestarSaldo(int Ncuenta, double saldo) {
+		return pdao.RestarSaldo(Ncuenta, saldo);
+	}
+
+	
+
 	
 	
 	

@@ -56,19 +56,20 @@ public class servletClienteTransf_CuentaPropia extends HttpServlet {
 						double Transf = cuentas.getSaldo() + montoI;
 						int updateTransf = cnDesc.updateMonto(Transf, dni, hastaI);
 					}
-				}
-				
+				} 
 
-				//REQUESTDISPATCHER
-				RequestDispatcher rd = request.getRequestDispatcher("clienteTransf_CuentaPropia.jsp");
+				HttpSession sesionMensajes = request.getSession();			
+				sesionMensajes.setAttribute("Confirmacion", "La transferencia se realizo con exito!!");
+				
+				// REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
 				rd.forward(request, response);
 			} 
 			else {
 				System.out.println("Seleccione una cuenta destino diferente");
 			}
 			
-		}
-		
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
