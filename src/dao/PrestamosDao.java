@@ -7,7 +7,7 @@ import entidad.Prestamos;
 public interface PrestamosDao {
 
 	public boolean insertPrestamo(Prestamos prestamo);
-	public ArrayList<Prestamos> readAll();
+	public ArrayList<Prestamos> readAll(int dni);
 	public ArrayList<Prestamos>BuscarPrestamo(String Nprestamo);
 	public Prestamos BuscarPrestamos(String numero);
 	public boolean ComprobarSaldo(double saldo, String Ncuenta);

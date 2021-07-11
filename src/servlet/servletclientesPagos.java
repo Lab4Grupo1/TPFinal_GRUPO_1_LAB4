@@ -67,11 +67,11 @@ public class servletclientesPagos extends HttpServlet {
 			double total = (cantidad * Importe);
 
 			if (dao.ComprobarSaldo(total, cuenta)) {
-				System.out.print("hdp1");
+				
 				if (dao.UpdateCuotas(cuenta, cantidad)) {
-					System.out.print("hdp2");
+					
 					if (dao.RestarSaldo(pre.getNumeroCuenta(), total)) {
-						System.out.print("hdp3");
+						
 						RequestDispatcher rd = request.getRequestDispatcher("clientePagos.jsp");
 						rd.forward(request, response);
 					}

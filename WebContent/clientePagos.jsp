@@ -69,7 +69,10 @@
 	  	
 	  	<%}else{%>
 	  	<%PrestamosNegocio dao = new PrestamosNegocioImpl();
-	  	 ListarPrestamos = dao.readAll(); %>
+	  	 HttpSession sessionUsuario = request.getSession();
+	  	 int dniUsuario =Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
+	  	
+	  	 ListarPrestamos = dao.readAll(dniUsuario); %>
 	    <tr>
 	    <%for(Prestamos pres : ListarPrestamos){ %>
 	      	<td><%=pres.getId() %></td>

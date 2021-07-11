@@ -16,11 +16,13 @@ public class PrestamosNegocioImpl implements PrestamosNegocio {
 		return pdao.insertPrestamo(prestamo);
 	}
 
-	@Override
-	public ArrayList<Prestamos> readAll() {
-		// TODO Auto-generated method stub
-		return pdao.readAll();
+	
+
+	public ArrayList<Prestamos> readAll(int dni) {
+		return pdao.readAll(dni);
 	}
+
+
 
 	public ArrayList<Prestamos> BuscarPrestamo(String Nprestamo) {
 		

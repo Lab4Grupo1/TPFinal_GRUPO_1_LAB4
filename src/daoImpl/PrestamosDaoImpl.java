@@ -56,7 +56,7 @@ public class PrestamosDaoImpl implements PrestamosDao{
 		
 	}
 	
-	public ArrayList<Prestamos> readAll(){
+	public ArrayList<Prestamos> readAll(int dni){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e){
@@ -69,8 +69,9 @@ public class PrestamosDaoImpl implements PrestamosDao{
 			conn =  DriverManager.getConnection(url, user, pass);
 			Statement st =   conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("SELECT id, cuotaspagas, cuotastotal, importeCuota, importePedido," + 
-					 " FechaUltimoPago, FK_NumeroCuenta, FechaUltimoPago FROM prestamos");
+			ResultSet rs = st.executeQuery("SELECT p.id, p.cuotaspagas, p.cuotastotal, p.importeCuota, p.importePedido, p.FechaUltimoPago,"
+					+ " p.FK_NumeroCuenta FROM prestamos as p inner join cuentas as c on c.NumeroCuenta = p.FK_NumeroCuenta " + 
+					"  inner join usuario as u on u.FK_DniDP = c.FK_DniCliente  where u.FK_DniDP =" + dni );
 			
 			while(rs.next()){
 				
