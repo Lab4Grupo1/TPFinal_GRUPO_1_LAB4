@@ -89,7 +89,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 		return solicitud;
 	}
 
-	@Override
+	
 	public int updateSolicitud(int numero) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -105,7 +105,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 
-			String query = ("update solicitud set EstadoSolicitud =('" + estado + "')" + " where idSolicitud ="
+			String query = ("update solicitud set EstadoSolicitud =('" +estado+ "')" + " where idSolicitud="
 					+ numero);
 			System.out.println("query " + query);
 			filas = st.executeUpdate(query);
@@ -212,7 +212,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 
-			String query = ("update solicitud set EstadoSolicitud =('" + estado + "')" + "where idSolicitud ="
+			String query = ("update solicitud set EstadoSolicitud =('" +estado+ "')" + "where idSolicitud ="
 					+ numero);
 
 			filas = st.executeUpdate(query);
@@ -246,7 +246,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 			conn = DriverManager.getConnection(url, user, pass);
 			Statement st = conn.createStatement();
 
-			String query = ("update cuentas set Saldo =('" + d + "'+ Saldo)" + "where NumeroCuenta =" + numeroCuenta);
+			String query = ("update cuentas set Saldo =('" +d+ "'+ Saldo)" + "where NumeroCuenta =" + numeroCuenta);
 
 			filas = st.executeUpdate(query);
 			if (filas > 0) {

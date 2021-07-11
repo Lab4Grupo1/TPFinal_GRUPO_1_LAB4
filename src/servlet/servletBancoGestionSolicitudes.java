@@ -33,7 +33,7 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 		// TODO Auto-generated method stub
 		SolicitudNegocio dao = new SolicitudNegocioImpl();
 		HttpSession session = request.getSession();
-		int Nsoli = 0;
+		int Nsoli = Integer.parseInt(session.getAttribute("Nsoli").toString());
 
 		if (request.getParameter("btnAceptar") != null) {
 
@@ -42,9 +42,6 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 			PrestamosNegocio presImpl = new PrestamosNegocioImpl();
 
 			if (session.getAttribute("Nsoli") != null) {
-
-				Nsoli = Integer.parseInt(session.getAttribute("Nsoli").toString());
-
 				System.out.println("error: " + Nsoli);
 
 				soli2 = (Solicitud) dao.buscarSolicitud(Nsoli);
@@ -59,8 +56,10 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 				pres.setImporteCuota(valor);
 				// pres.getFechaUltimoPago("2021/07/05");
 			}
+			System.out.println("error2: " + Nsoli);
 
 			int listo = dao.updateSolicitud(Nsoli);
+			
 			if (listo > 0) {
 				if (presImpl.insertPrestamo(pres) == true) {
 					if (dao.UpdateSumarPrestamo(soli2.getNumeroCuenta(), soli2.getMontoSolicitado()) > 0) {

@@ -22,12 +22,11 @@ public class SolicitudNegocioImpl implements SolicitudNegocio {
         return sdao.readAll();
     }
 
+	
 	@Override
-    public int updateSolicitud(int numero ) {
-        int filas = 0;
-        // TODO Auto-generated method stub
-        return sdao.updateSolicitud(filas);
-    }
+	public int updateSolicitud(int numero) {
+		return sdao.updateSolicitud(numero);
+	}
 
 	@Override
 	public Solicitud buscarSolicitud(int nsoli) {
