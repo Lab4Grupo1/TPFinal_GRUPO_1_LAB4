@@ -1,20 +1,21 @@
 package entidad;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Movimientos {
 
 	private int Id;
 	private String Detalle;
-	private Date Fecha;
-	private float Importe;
+	private LocalDate Fecha;
+	private double Importe;
 	private TipoMovimiento TipoMovimiento;
 	private Cuentas Cuenta;
 
 	public Movimientos() {
 	}
 
-	public Movimientos(int id, String detalle, Date fecha, float importe, TipoMovimiento tipoMovimiento,
+	public Movimientos(int id, String detalle, LocalDate fecha, double importe, TipoMovimiento tipoMovimiento,
 			Cuentas cuenta) {
 		Id = id;
 		Detalle = detalle;
@@ -40,19 +41,19 @@ public class Movimientos {
 		Detalle = detalle;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return Fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		Fecha = fecha;
 	}
 
-	public float getImporte() {
+	public double getImporte() {
 		return Importe;
 	}
 
-	public void setImporte(float importe) {
+	public void setImporte(double importe) {
 		Importe = importe;
 	}
 

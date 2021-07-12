@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 
+import javax.management.modelmbean.ModelMBean;
 import javax.servlet.RequestDispatcher;
 import entidad.Cuentas;
 import entidad.TipoCuentas;
+import entidad.TipoMovimiento;
 import entidad.Usuario;
+import negocio.MovimientosNegocio;
 import negocio.UsuarioNegocio;
 import entidad.DatosPersonales;
+import entidad.Movimientos;
 import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.DatosPersonalesNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.TiposCuentaNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
 
@@ -74,6 +79,22 @@ public class servletBancoCuentas extends HttpServlet {
 
 				CuentasNegocioImpl cImp = new CuentasNegocioImpl();
 				int insert = cImp.insert(c);
+				
+				/*Alta movimiento*/
+				Movimientos mov = new Movimientos();
+				MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+				
+				/*Tipo Movimiento = 1 - Alta cuenta*/
+				TipoMovimiento tpM = new TipoMovimiento();
+				tpM.setId(1);
+				
+				mov.setDetalle("DNI: " + dni + " usuario: " + u.getNombreUsuario());
+				mov.setFecha(LocalDate.now());
+				mov.setImporte(SaldoD);
+				mov.setTipoMovimiento(tpM);
+				mov.setCuenta(cImp.buscarDni(dni));
+				
+				MovNeg.insert(mov);
 
 				if (insert > 0) {
 					sesionMensajes.setAttribute("Confirmacion", "La cuenta se creó con exito!!");

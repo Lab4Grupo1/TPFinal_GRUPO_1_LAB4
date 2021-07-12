@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.MovimientosDao;
+import entidad.Cuentas;
 import entidad.Movimientos;
 
 public class MovimientosDaoImpl implements MovimientosDao {
@@ -21,6 +22,35 @@ public class MovimientosDaoImpl implements MovimientosDao {
 
 	TiposMovimientoDaoImpl TipoMovImp = new TiposMovimientoDaoImpl();
 	CuentasDaoImpl CueImp = new CuentasDaoImpl();
+	
+	@Override
+	public int insert(Movimientos Movimientos) {
+
+		int filas = 0;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+			String query = "Insert into Movimientos(Detalle,Fecha,Importe,FK_IdTipoMovimiento,FK_IdCuentas) values ("
+			+ "'" + Movimientos.getDetalle() 			 		+ "'," 
+			+ "('"  + Movimientos.getFecha()					+ "'), " 
+					+ Movimientos.getImporte() 					+ ","
+					+ Movimientos.getTipoMovimiento().getId()	+ "," 
+					+ Movimientos.getCuenta().getNumeroCuenta()	+ ")";
+			
+			System.out.println(query);
+			filas = st.executeUpdate(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return filas;
+	}
 
 	@Override
 	public ArrayList<Movimientos> readAll() {
@@ -43,7 +73,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				Movimientos x = new Movimientos();
 				x.setId(rs.getInt("id"));
 				x.setDetalle(rs.getString("Detalle"));
-				x.setFecha(rs.getDate("Fecha"));
+				x.setFecha(rs.getDate("Fecha").toLocalDate());
 				x.setImporte(rs.getFloat("Importe"));
 				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
 				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
@@ -77,7 +107,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				Movimientos x = new Movimientos();
 				x.setId(rs.getInt("id"));
 				x.setDetalle(rs.getString("Detalle"));
-				x.setFecha(rs.getDate("Fecha"));
+				x.setFecha(rs.getDate("Fecha").toLocalDate());
 				x.setImporte(rs.getFloat("Importe"));
 				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
 				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));

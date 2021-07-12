@@ -31,11 +31,10 @@ public class servletClienteCuentas extends HttpServlet {
 			throws ServletException, IOException {
 
 		// carga session
-		HttpSession sesion1 = request.getSession();
-		sesion1.setAttribute("dni", "1");
+		HttpSession sessionUsuario = request.getSession(); 
 
 		// uso session
-		int dni = Integer.parseInt(sesion1.getAttribute("dni").toString());
+		int dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
 
 		if (request.getParameter("idTipoCuenta") != null) {
 
@@ -47,7 +46,7 @@ public class servletClienteCuentas extends HttpServlet {
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 
 			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());
-			request.setAttribute("numCuenta", cueImp.buscarDni(dni).getNumeroCuenta());
+			request.setAttribute("numCuenta", request.getParameter("idTipoCuenta"));
 
 			try {
 				if (Lmov != null) {
@@ -60,11 +59,7 @@ public class servletClienteCuentas extends HttpServlet {
 				// TODO: handle exception
 			}
 
-			HttpSession sesionMensajes = request.getSession();
-			sesionMensajes.setAttribute("Confirmacion", "El alta de cuenta se realizo con exito!!");
-
-			// REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("confirmacionCliente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("clienteCuentas.jsp");
 			rd.forward(request, response);
 		}
 	}

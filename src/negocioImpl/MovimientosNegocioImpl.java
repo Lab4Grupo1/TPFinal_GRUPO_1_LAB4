@@ -21,5 +21,11 @@ public class MovimientosNegocioImpl implements MovimientosNegocio {
 		// TODO Auto-generated method stub
 		return mdao.buscarDNI(dni, tip);
 	}
+	
+
+	public int insert(Movimientos Movimientos) {
+		// TODO Auto-generated method stub
+		return mdao.insert(Movimientos);
+	}
 
 }

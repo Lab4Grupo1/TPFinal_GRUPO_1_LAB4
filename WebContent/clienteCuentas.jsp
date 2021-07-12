@@ -1,3 +1,7 @@
+<%@page import="negocio.TiposCuentaNegocio"%>
+<%@page import="entidad.Cuentas"%>
+<%@page import="negocioImpl.CuentasNegocioImpl"%>
+<%@page import="negocio.CuentasNegocio"%>
 <%@page import="entidad.Movimientos"%>
 <%@page import="entidad.TipoCuentas"%>
 <%@page import="negocioImpl.TiposCuentaNegocioImpl"%>
@@ -79,20 +83,31 @@
 						}
 					%>
 					<div class="col-md-3 mb-3">
-						<label for="Nacionalidad">Tipo de cuenta</label> <select
-							name="Nacionalidad">
+						 <div class="dropdown">
+						<a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Elegir cuenta </a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
 							<%
-								TiposCuentaNegocioImpl tpc = new TiposCuentaNegocioImpl();
-								ArrayList<TipoCuentas> ListaN = tpc.readAll();
-								if (tpc != null) {
-									for (TipoCuentas tpcLista : ListaN) {
-							%><option value="<%=tpcLista.getId()%>"><%=tpcLista.getDescripcion()%>
-							</option>
-							<%
-								}
-								}
+							
+							CuentasNegocio cNimpDesde = new CuentasNegocioImpl();
+							ArrayList<Cuentas> ListCDesde = cNimpDesde.ListarCuentas(dni);
+							
+							TiposCuentaNegocio tip = new TiposCuentaNegocioImpl();
+							ArrayList<TipoCuentas> Ltip = tip.readAll();
+							try {
+								if (ListCDesde != null) {
+									for (Cuentas list : ListCDesde) {
 							%>
-						</select>
+							<a class="dropdown-item" href="servletClienteCuentas?idTipoCuenta=<%=list.getNumeroCuenta()%>"><%=list.getTipoCuenta().getDescripcion()%> - <%=list.getNumeroCuenta()%></a>
+							<%
+							}
+							}
+							} catch (Exception e) {
+							}
+							%>
+
+						</div>
+					</div>
 					</div>
 					<br>
 					<%
@@ -101,9 +116,7 @@
 							Lmov = (ArrayList<Movimientos>) request.getAttribute("Lmov");
 					%>
 					<div>
-						<h5><%=tipoCuenta%>
-							número: 
-							<%=numCuenta%></h5>
+						<h5><%=tipoCuenta%>	número:	<%=numCuenta%></h5>
 						<br>
 						<table id="table1"
 							class="table table-sm table-hover table-bordered">
@@ -131,14 +144,7 @@
 									}
 								%>
 							</tbody>
-						</table>
-						<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-						</ul>
-						</nav>
+						</table> 
 					</div>
 
 					<%
