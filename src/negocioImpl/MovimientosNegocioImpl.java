@@ -2,13 +2,14 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
+import dao.MovimientosDao;
 import daoImpl.MovimientosDaoImpl;
 import entidad.Movimientos;
 import negocio.MovimientosNegocio;
 
 public class MovimientosNegocioImpl implements MovimientosNegocio {
 
-	MovimientosDaoImpl mdao = new MovimientosDaoImpl();
+	MovimientosDao mdao = new MovimientosDaoImpl();
 
 	@Override
 	public ArrayList<Movimientos> readAll() {

@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import dao.DatosPersonalesDao;
+import dao.RolDao;
 import dao.UsuarioDao;
 import entidad.DatosPersonales;
 import entidad.Rol;
@@ -118,42 +122,88 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
-	public Usuario obtenerUnUsuario(int id, String NombreUsuario) {
+	public ArrayList<Usuario> readAll() {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		Usuario usuario = new Usuario();
-		Rol rol = new Rol();
-		DatosPersonales dp = new DatosPersonales();
+		ArrayList<Usuario> Lusuario = new ArrayList<Usuario>();
 
-		Connection con = null;
+		Connection cn = null;
 		try {
-			con = DriverManager.getConnection(url, user, pass);
-			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.contraseña, "
-					+ "u.FK_idRol, r.Descripcion, u.FK_DniDP, u.Estado "
-					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.FK_DniDP = ? or u.NombreUsuario = ?;");
-			miSentencia.setInt(1, id); // Cargo el ID recibido
-			miSentencia.setString(2, NombreUsuario); // Cargo el usuario recibido
-			ResultSet resultado = miSentencia.executeQuery();
-			resultado.next();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
-			rol.setId(resultado.getInt(3));
-			rol.setDescripcion(resultado.getString(4));
+			ResultSet rs = st.executeQuery("Select * from usuario");
 
-			dp.setDni(resultado.getInt(5));
+			while (rs.next()) {
 
-			usuario.setNombreUsuario(resultado.getString(1));
-			usuario.setContraseña(resultado.getString(2));
-			usuario.setRol(rol);
-			usuario.setDatosPersonales(dp);
-			usuario.setEstado(resultado.getBoolean(6));
-			con.close();
-		} catch (Exception e) {
+				Usuario usuario = new Usuario();
+				RolDao rolrs = new RolDaoImpl();
+				DatosPersonalesDao dnirs = new DatosPersonalesDaoImpl();
+
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombreUsuario(rs.getString("NombreUsuario"));
+				usuario.setContraseña(rs.getString("contraseña"));
+				usuario.setRol(rolrs.buscarId(rs.getInt("FK_idRol")));
+				usuario.setDatosPersonales(dnirs.buscarDNI(rs.getInt("FK_DniDP")));
+				usuario.setEstado(rs.getBoolean("Estado"));
+
+				Lusuario.add(usuario);
+			}
+			cn.close();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+
+		}
+		return Lusuario;
+	}
+
+	@Override
+	public Usuario obtenerUnUsuario(int id, String NombreUsuario) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Connection cn = null;
+
+		Usuario usuario = new Usuario();
+
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
+
+			ResultSet rs = st.executeQuery(
+					"Select u.NombreUsuario, u.contraseña, " + "u.FK_idRol, u.FK_DniDP, u.Estado from usuario "
+							+ "where u.FK_DniDP = " + id + " or u.NombreUsuario = " + NombreUsuario);
+
+			while (rs.next()) {
+
+				RolDao rolrs = new RolDaoImpl();
+				DatosPersonalesDao dnirs = new DatosPersonalesDaoImpl();
+
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombreUsuario(rs.getString("NombreUsuario"));
+				usuario.setContraseña(rs.getString("contraseña"));
+				usuario.setRol(rolrs.buscarId(rs.getInt("FK_idRol")));
+				usuario.setDatosPersonales(dnirs.buscarDNI(rs.getInt("FK_DniDP")));
+				usuario.setEstado(rs.getBoolean("Estado"));
+
+			}
+			cn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
 		}
 		return usuario;
 	}
@@ -217,11 +267,4 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	 * DELIMITER $$ CREATE PROCEDURE `crearUsuario`(IN Unombre varchar(45), IN
-	 * Uapellido varchar(45)) BEGIN INSERT INTO usuario(nombre,apellido) VALUES
-	 * (Unombre,Uapellido); END $$ DELIMITER ;
-	 */
-
 }

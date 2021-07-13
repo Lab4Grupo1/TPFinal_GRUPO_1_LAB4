@@ -1,14 +1,22 @@
 package negocio;
 
+import java.util.ArrayList;
+
 import entidad.DatosPersonales;
 import entidad.Usuario;
 
 public interface UsuarioNegocio {
 	public int insert(Usuario usuario);
+
 	public int updateDNI(DatosPersonales DatosPersonales);
-	public int updatePass(String pass, String usuario);
-	public int delete(String id, String usuario); 
-	public Usuario obtenerUnUsuario(int id, String nombreUsuario); 
-	public Usuario logueo(String pass, String NombreUsuario);
-	
+
+	public int updatePass(String passWord, String usuario);
+
+	public int delete(String dni, String usuario);
+
+	Usuario obtenerUnUsuario(int id, String NombreUsuario);
+
+	Usuario logueo(String pass, String NombreUsuario);
+
+	ArrayList<Usuario> readAll();
 }

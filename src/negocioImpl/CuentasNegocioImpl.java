@@ -2,13 +2,14 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
+import dao.CuentasDao;
 import daoImpl.CuentasDaoImpl;
 import entidad.Cuentas;
 import negocio.CuentasNegocio;
 
 public class CuentasNegocioImpl implements CuentasNegocio {
 
-	CuentasDaoImpl cdao = new CuentasDaoImpl();
+	CuentasDao cdao = new CuentasDaoImpl();
 
 	@Override
 	public int insert(Cuentas cuenta) {
@@ -22,7 +23,6 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		return cdao.update(cuenta);
 	}
 
-
 	@Override
 	public int delete(Cuentas cuenta) {
 		// TODO Auto-generated method stub
@@ -34,9 +34,9 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		// TODO Auto-generated method stub
 		return cdao.buscarDni(dni);
 	}
-	
+
 	@Override
-	public ArrayList<Cuentas> ListarCuentas(int DNI){
+	public ArrayList<Cuentas> ListarCuentas(int DNI) {
 		// TODO Auto-generated method stub
 		return cdao.ListarCuentas(DNI);
 	}
@@ -44,7 +44,7 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 	@Override
 	public int updateMonto(Double Monto, int dni, int Ncuenta) {
 		// TODO Auto-generated method stub
-		return cdao.updateMonto(Monto, dni,Ncuenta);
+		return cdao.updateMonto(Monto, dni, Ncuenta);
 	}
 
 	@Override
@@ -52,6 +52,5 @@ public class CuentasNegocioImpl implements CuentasNegocio {
 		// TODO Auto-generated method stub
 		return cdao.ListarCuentasCBU(cbu);
 	}
-
 
 }

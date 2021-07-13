@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.MovimientosDao;
-import entidad.Cuentas;
 import entidad.Movimientos;
 
 public class MovimientosDaoImpl implements MovimientosDao {

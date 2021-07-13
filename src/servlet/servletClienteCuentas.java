@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidad.Movimientos;
-import negocio.CuentasNegocio;
 import negocio.MovimientosNegocio;
 import negocio.TiposCuentaNegocio;
-import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.TiposCuentaNegocioImpl;
 
@@ -31,7 +29,7 @@ public class servletClienteCuentas extends HttpServlet {
 			throws ServletException, IOException {
 
 		// carga session
-		HttpSession sessionUsuario = request.getSession(); 
+		HttpSession sessionUsuario = request.getSession();
 
 		// uso session
 		int dni = Integer.parseInt(sessionUsuario.getAttribute("SesionDNI").toString());
@@ -42,7 +40,6 @@ public class servletClienteCuentas extends HttpServlet {
 
 			MovimientosNegocio mov = new MovimientosNegocioImpl();
 			TiposCuentaNegocio tipImp = new TiposCuentaNegocioImpl();
-			CuentasNegocio cueImp = new CuentasNegocioImpl();
 			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
 
 			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());

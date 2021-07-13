@@ -1,14 +1,15 @@
 package negocioImpl;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
+import dao.NacionalidadDao;
 import daoImpl.NacionalidadDaoImpl;
 import entidad.Nacionalidad;
 import negocio.NacionalidadNegocio;
 
 public class NacionalidadNegocioImpl implements NacionalidadNegocio {
 
-	NacionalidadDaoImpl ndao = new NacionalidadDaoImpl();
+	NacionalidadDao ndao = new NacionalidadDaoImpl();
 
 	@Override
 	public ArrayList<Nacionalidad> readAll() {

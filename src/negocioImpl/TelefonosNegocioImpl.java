@@ -2,13 +2,14 @@ package negocioImpl;
 
 import java.util.List;
 
+import dao.TelefonosDao;
 import daoImpl.TelefonosDaoImpl;
 import entidad.Telefonos;
 import negocio.TelefonosNegocio;
 
 public class TelefonosNegocioImpl implements TelefonosNegocio {
 
-	TelefonosDaoImpl tdao = new TelefonosDaoImpl();
+	TelefonosDao tdao = new TelefonosDaoImpl();
 
 	@Override
 	public int insert(Telefonos usuario) {

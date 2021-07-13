@@ -1,14 +1,15 @@
 package negocioImpl;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
+import dao.SolicitudDao;
 import daoImpl.SolicitudDaoImpl;
 import entidad.Solicitud;
 import negocio.SolicitudNegocio;
 
 public class SolicitudNegocioImpl implements SolicitudNegocio {
 
-    SolicitudDaoImpl sdao = new SolicitudDaoImpl();
+    SolicitudDao sdao = new SolicitudDaoImpl();
     
     @Override
     public int insert(Solicitud soli) {
