@@ -74,14 +74,15 @@
 					<h4>Últimos movimientos</h4>
 					<%
 						String tipoCuenta = "";
-						String numCuenta = "";
+						String numCuenta = ""; 
 						if (request.getAttribute("tipoCuenta") != null) {
 							tipoCuenta = request.getAttribute("tipoCuenta").toString();
 						}
 						if (request.getAttribute("numCuenta") != null) {
 							numCuenta = request.getAttribute("numCuenta").toString();
-						}
+						} 
 					%>
+					 
 					<div class="col-md-3 mb-3">
 						 <div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Elegir cuenta </a>
@@ -116,7 +117,7 @@
 							Lmov = (ArrayList<Movimientos>) request.getAttribute("Lmov");
 					%>
 					<div>
-						<h5><%=tipoCuenta%>	número:	<%=numCuenta%></h5>
+						<h5><%=tipoCuenta%>	número:	<%=numCuenta%></h5> 
 						<br>
 						<table id="table1"
 							class="table table-sm table-hover table-bordered">
@@ -133,7 +134,10 @@
 								<tr>
 									<%
 										for (Movimientos list : Lmov) {
-									%>
+											if(Integer.parseInt(numCuenta) == list.getCuenta().getNumeroCuenta()){
+									%> 
+									<th scope="row"><%=numCuenta%> -</th>
+									<th scope="row"><%=list.getCuenta().getNumeroCuenta()%> -</th>
 									<th scope="row"><%=list.getId()%></th>
 									<th scope="row"><%=list.getDetalle()%></th>
 									<th scope="row"><%=list.getFecha()%></th>
@@ -141,7 +145,8 @@
 									<th scope="row"><%=list.getTipoMovimiento().getDescripcion()%></th>
 								</tr>
 								<%
-									}
+											}
+										}
 								%>
 							</tbody>
 						</table> 

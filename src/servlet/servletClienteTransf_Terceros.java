@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidad.Cuentas;
+import entidad.Movimientos;
+import entidad.TipoMovimiento;
 import negocio.CuentasNegocio;
+import negocio.MovimientosNegocio;
 import negocioImpl.CuentasNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
 
 @WebServlet("/servletClienteTransf_Terceros")
 public class servletClienteTransf_Terceros extends HttpServlet {
@@ -48,6 +53,24 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 						System.out.println("desde -->" + desdeI);
 						double descontar = cuentasDesde.getSaldo() - montoI;
 						cnDesc.updateMonto(descontar, dni, desdeI);
+						
+						/*Transferencia movimiento*/
+						Movimientos mov = new Movimientos();
+						MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+						
+						/*Tipo Movimiento = 4 - transf cuenta*/
+						TipoMovimiento tpM = new TipoMovimiento();
+						tpM.setId(4);
+						
+						mov.setDetalle("Se debita desde cuenta " + cuentasDesde.getTipoCuenta().getDescripcion() + " : " + desdeI + " $"+montoI );
+						mov.setFecha(LocalDate.now());
+						mov.setImporte(montoI);
+						mov.setTipoMovimiento(tpM);
+						mov.setCuenta(cuentasDesde);
+						
+						MovNeg.insert(mov);
+						
+						
 					}
 				}
 			}
@@ -57,6 +80,22 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 				System.out.println("desde -->" + cuentasCHasta.getNumeroCuenta());
 				double Transf = cuentasCHasta.getSaldo() + montoI;
 				cnDesc.updateMonto(Transf, cuentasCHasta.getDniCliente().getDni(), cuentasCHasta.getNumeroCuenta());
+				
+				/*Transferencia movimiento*/
+				Movimientos mov = new Movimientos();
+				MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+				
+				/*Tipo Movimiento = 4 - transf cuenta*/
+				TipoMovimiento tpM = new TipoMovimiento();
+				tpM.setId(4);
+				
+				mov.setDetalle("Se acredita en cuenta " + cuentasCHasta.getTipoCuenta().getDescripcion() + ": " + cuentasCHasta.getNumeroCuenta() + " $"+Transf );
+				mov.setFecha(LocalDate.now());
+				mov.setImporte(montoI);
+				mov.setTipoMovimiento(tpM);
+				mov.setCuenta(cuentasCHasta);
+				
+				MovNeg.insert(mov);
 			}
 
 			HttpSession sesionMensajes = request.getSession();

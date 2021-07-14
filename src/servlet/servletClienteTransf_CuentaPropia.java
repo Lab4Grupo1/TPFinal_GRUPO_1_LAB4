@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidad.Cuentas;
+import entidad.Movimientos;
+import entidad.TipoMovimiento;
 import negocio.CuentasNegocio;
+import negocio.MovimientosNegocio;
 import negocioImpl.CuentasNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
 
 @WebServlet("/servletClienteTransf_CuentaPropia")
 public class servletClienteTransf_CuentaPropia extends HttpServlet {
@@ -51,10 +56,43 @@ public class servletClienteTransf_CuentaPropia extends HttpServlet {
 						if(cuentas.getNumeroCuenta() == desdeI ) {
 							double descontar = cuentas.getSaldo() - montoI;
 							cnDesc.updateMonto(descontar, dni, desdeI);
+							
+							/*Transferencia movimiento*/
+							Movimientos mov = new Movimientos();
+							MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+							
+							/*Tipo Movimiento = 4 - Transferencia*/
+							TipoMovimiento tpM = new TipoMovimiento();
+							tpM.setId(4);
+							
+							mov.setDetalle("Se debita desde " + cuentas.getTipoCuenta().getDescripcion() + " : " + desdeI + " $"+montoI );
+							mov.setFecha(LocalDate.now());
+							mov.setImporte(montoI);
+							mov.setTipoMovimiento(tpM);
+							mov.setCuenta(cuentas);
+							
+							MovNeg.insert(mov);
+							
 						}
 						if(cuentas.getNumeroCuenta() == hastaI ) {
 							double Transf = cuentas.getSaldo() + montoI;
 							cnDesc.updateMonto(Transf, dni, hastaI);
+							
+							/*Transferencia movimiento*/
+							Movimientos mov = new Movimientos();
+							MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+							
+							/*Tipo Movimiento = 4 - Transferencia*/
+							TipoMovimiento tpM = new TipoMovimiento();
+							tpM.setId(4);
+							
+							mov.setDetalle("Se acredita en " + cuentas.getTipoCuenta().getDescripcion() + " : " + hastaI + " $ " +montoI );
+							mov.setFecha(LocalDate.now());
+							mov.setImporte(montoI);
+							mov.setTipoMovimiento(tpM);
+							mov.setCuenta(cuentas);
+							
+							MovNeg.insert(mov);
 						}						
 					}
 				} 

@@ -51,7 +51,7 @@ public class servletBancoCuentas extends HttpServlet {
 			
 			u = uni.obtenerUnUsuario(dni, usuario);
 
-			if (u.getdp_DNI() != null) {
+			if (u != null) {
 
 				double cbu = dni + 1000000;
 				LocalDate FechaCreacion = LocalDate.now();
