@@ -68,7 +68,7 @@
 						</div>
 						<br> 
 						<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar"> 
-						<a	class="btn btn-outline-primary" href="clientePrestamos.jsp"	name="btnCancelar"></a>
+						<a	class="btn btn-outline-primary" href="clientePrestamos.jsp"	name="btnCancelar">Cancelar</a>
 					</form>
 				</div>
 			</div>

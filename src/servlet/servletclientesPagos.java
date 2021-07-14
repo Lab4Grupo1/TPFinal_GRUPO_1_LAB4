@@ -12,8 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Cuentas;
+import entidad.Movimientos;
 import entidad.Prestamos;
+import entidad.TipoMovimiento;
+import negocio.CuentasNegocio;
+import negocio.MovimientosNegocio;
 import negocio.PrestamosNegocio;
+import negocioImpl.CuentasNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.PrestamosNegocioImpl;
 
 /**
@@ -71,6 +78,25 @@ public class servletclientesPagos extends HttpServlet {
 				if (dao.UpdateCuotas(cuenta, cantidad)) {
 					
 					if (dao.RestarSaldo(pre.getNumeroCuenta(), total)) {
+						
+						Cuentas cn = new Cuentas();
+						cn.setNumeroCuenta(Integer.parseInt(cuenta));
+						
+						/*Pago movimiento*/
+						Movimientos mov = new Movimientos();
+						MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+						
+						/*Tipo Movimiento = 3 - pago*/
+						TipoMovimiento tpM = new TipoMovimiento();
+						tpM.setId(3);
+						
+						mov.setDetalle("Pago: " + pre.getId() + " Cuenta:" + cuenta + " Cantidad:" + cantidad);
+						mov.setFecha(LocalDate.now());
+						mov.setImporte(total);
+						mov.setTipoMovimiento(tpM);
+						mov.setCuenta(cn);
+						
+						MovNeg.insert(mov);
 						
 						RequestDispatcher rd = request.getRequestDispatcher("clientePagos.jsp");
 						rd.forward(request, response);

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Cuentas;
+import entidad.Movimientos;
 import entidad.Prestamos;
 import entidad.Solicitud;
+import entidad.TipoMovimiento;
+import negocio.MovimientosNegocio;
 import negocio.PrestamosNegocio;
 import negocio.SolicitudNegocio;
+import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.PrestamosNegocioImpl;
 import negocioImpl.SolicitudNegocioImpl;
 
@@ -63,6 +69,27 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 			if (listo > 0) {
 				if (presImpl.insertPrestamo(pres) == true) {
 					if (dao.UpdateSumarPrestamo(soli2.getNumeroCuenta(), soli2.getMontoSolicitado()) > 0) {
+						
+						Cuentas cn = new Cuentas(); 
+						cn.setNumeroCuenta(soli2.getNumeroCuenta());
+						
+						/*Deposito movimiento*/
+						Movimientos mov = new Movimientos();
+						MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+						
+						/*Tipo Movimiento = 6 - transf cuenta*/
+						TipoMovimiento tpM = new TipoMovimiento();
+						tpM.setId(6);
+						
+						mov.setDetalle("Prestamo aceptado, se deposita:" +  soli2.getMontoSolicitado() );
+						mov.setFecha(LocalDate.now());
+						mov.setImporte(soli2.getMontoSolicitado());
+						mov.setTipoMovimiento(tpM);
+						mov.setCuenta(cn);
+						
+						MovNeg.insert(mov);
+						
+						
 						session.setAttribute("Confirmacion", "El préstamo se fue autorizado con éxito!!");
 
 						// REQUESTDISPATCHER

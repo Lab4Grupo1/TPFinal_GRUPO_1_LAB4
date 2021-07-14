@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidad.Movimientos;
 import entidad.Solicitud;
+import entidad.TipoMovimiento;
+import negocio.MovimientosNegocio;
+import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.SolicitudNegocioImpl;
 
 @WebServlet("/servletClientePrestamos")
@@ -44,7 +48,9 @@ public class servletClientePrestamos extends HttpServlet {
 				s.setCantCuotasSolicitado(cuotas);
 				s.setEstadoSolicitud("Pendiente");
 
-				SNimp.insert(s);
+				SNimp.insert(s); 
+				
+				
 			}
 
 			HttpSession sesionMensajes = request.getSession();
