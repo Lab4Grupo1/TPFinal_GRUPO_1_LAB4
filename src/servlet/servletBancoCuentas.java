@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import entidad.Cuentas;
 import entidad.TipoCuentas;
 import entidad.TipoMovimiento;
 import entidad.Usuario;
+import negocio.CuentasNegocio;
 import negocio.MovimientosNegocio;
 import negocio.UsuarioNegocio;
 import entidad.DatosPersonales;
@@ -47,64 +49,77 @@ public class servletBancoCuentas extends HttpServlet {
 			String usuario = request.getParameter("UsuarioCliente");
 
 			UsuarioNegocio uni = new UsuarioNegocioImpl();
-			Usuario u = null;
+			Usuario u = null;			
 			
 			u = uni.obtenerUnUsuario(dni, usuario);
+			
+			CuentasNegocio Culist = new CuentasNegocioImpl();
+			ArrayList<Cuentas> listCuentas = Culist.ListarCuentas(dni);
+			
+			System.out.println("cantidad-->> "+listCuentas.size());
 
 			if (u != null) {
+				if(listCuentas.size() <= 3) {
 
-				double cbu = dni + 1000000;
-				LocalDate FechaCreacion = LocalDate.now();
-				String Saldo = request.getParameter("Saldo");
-				double SaldoD = Double.parseDouble(Saldo);
-				String TCuenta = request.getParameter("TipoCuenta");
-
-				TiposCuentaNegocioImpl TPi = new TiposCuentaNegocioImpl();
-				TipoCuentas tP = new TipoCuentas();
-				tP = TPi.buscarId(Integer.parseInt(TCuenta));
-
-				DatosPersonalesNegocioImpl dpNeg = new DatosPersonalesNegocioImpl();
-				DatosPersonales dp = new DatosPersonales();
-
-				dp = dpNeg.buscarDNI(dni);
-
-				Cuentas c = new Cuentas();
-				c.setCbu(cbu);
-				c.setFechaCreacion(FechaCreacion);
-				c.setSaldo(SaldoD);
-				c.setEstado(true);
-				c.setTipoCuenta(tP);
-				c.setDniCliente(dp);
-
-				CuentasNegocioImpl cImp = new CuentasNegocioImpl();
-				int insert = cImp.insert(c);
-				
-				/*Alta movimiento*/
-				Movimientos mov = new Movimientos();
-				MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
-				
-				/*Tipo Movimiento = 1 - Alta cuenta*/
-				TipoMovimiento tpM = new TipoMovimiento();
-				tpM.setId(1);
-				
-				mov.setDetalle("DNI: " + dni + " usuario: " + u.getNombreUsuario());
-				mov.setFecha(LocalDate.now());
-				mov.setImporte(SaldoD);
-				mov.setTipoMovimiento(tpM);
-				mov.setCuenta(cImp.buscarDni(dni));
-				
-				MovNeg.insert(mov);
-
-				if (insert > 0) {
-					sesionMensajes.setAttribute("Confirmacion", "La cuenta se creó con exito!!");
-
+					double cbu = dni + 1000000;
+					LocalDate FechaCreacion = LocalDate.now();
+					String Saldo = request.getParameter("Saldo");
+					double SaldoD = Double.parseDouble(Saldo);
+					String TCuenta = request.getParameter("TipoCuenta");
+	
+					TiposCuentaNegocioImpl TPi = new TiposCuentaNegocioImpl();
+					TipoCuentas tP = new TipoCuentas();
+					tP = TPi.buscarId(Integer.parseInt(TCuenta));
+	
+					DatosPersonalesNegocioImpl dpNeg = new DatosPersonalesNegocioImpl();
+					DatosPersonales dp = new DatosPersonales();
+	
+					dp = dpNeg.buscarDNI(dni);
+	
+					Cuentas c = new Cuentas();
+					c.setCbu(cbu);
+					c.setFechaCreacion(FechaCreacion);
+					c.setSaldo(SaldoD);
+					c.setEstado(true);
+					c.setTipoCuenta(tP);
+					c.setDniCliente(dp);
+	
+					CuentasNegocioImpl cImp = new CuentasNegocioImpl();
+					int insert = cImp.insert(c);
+					
+					/*Alta movimiento*/
+					Movimientos mov = new Movimientos();
+					MovimientosNegocio MovNeg = new MovimientosNegocioImpl();
+					
+					/*Tipo Movimiento = 1 - Alta cuenta*/
+					TipoMovimiento tpM = new TipoMovimiento();
+					tpM.setId(1);
+					
+					mov.setDetalle("DNI: " + dni + " usuario: " + u.getNombreUsuario());
+					mov.setFecha(LocalDate.now());
+					mov.setImporte(SaldoD);
+					mov.setTipoMovimiento(tpM);
+					mov.setCuenta(cImp.buscarDni(dni));
+					
+					MovNeg.insert(mov);
+	
+					if (insert > 0) {
+						sesionMensajes.setAttribute("Confirmacion", "La cuenta se creó con exito!!");
+	
+						// REQUESTDISPATCHER
+						RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+						rd.forward(request, response);
+					} else {
+						// REQUESTDISPATCHER
+						RequestDispatcher rd = request.getRequestDispatcher("bancoCuentasAlta.jsp");
+						rd.forward(request, response);
+					}
+				}else {
 					// REQUESTDISPATCHER
+					sesionMensajes.setAttribute("Confirmacion", "Rechazado, el usuario tiene 3 cuentas!!");
 					RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
 					rd.forward(request, response);
-				} else {
-					// REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("bancoCuentasAlta.jsp");
-					rd.forward(request, response);
+					
 				}
 
 			} else {
