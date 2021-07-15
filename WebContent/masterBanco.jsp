@@ -42,14 +42,15 @@
 			<hr>
 		</div>
 		<div class="row row-opciones">
-			<div class="btn-group-vertical" style="width: 100%;" role="group"
-				aria-label="Basic outlined example">
+			<div class="btn-group-vertical" style="width: 100%;" role="group" aria-label="Basic outlined example">
 				<a class="btn btn-dark" href="bancoSolicitudes.jsp">Solicitudes</a>
-				<a class="btn btn-dark" href="bancoAltaCliente.jsp">Alta</a> <a
-					class="btn btn-dark" href="bancoModificarCliente.jsp">Modificacion</a>
-				<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> <a
-					class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> <a
-					class="btn btn-dark" href="bancoInformes.jsp">Informes</a>
+				<a class="btn btn-dark" href="bancoAltaCliente.jsp">Alta</a> 
+				<a class="btn btn-dark" href="bancoModificarCliente.jsp">Modificacion</a>
+				<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> 
+				<a class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> 
+				<a class="btn btn-dark" href="bancoInformes.jsp">Informes</a> 
+				<a class="btn btn-dark" href="bancoListaClientes.jsp">Clientes</a>
+				
 			</div>
 		</div>
 		<div class="row row-sesion">

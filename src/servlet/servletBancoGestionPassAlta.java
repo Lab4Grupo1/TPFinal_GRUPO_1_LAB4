@@ -42,7 +42,7 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				String Apellido = (String) sesionAltaCliente.getAttribute("Apellido");
 				String DNI = (String) sesionAltaCliente.getAttribute("DNI");
 				int DNIentero = Integer.parseInt(DNI);
-				Double CUIL = (Double) sesionAltaCliente.getAttribute("CUIL");
+				double CUIL = Double.parseDouble(sesionAltaCliente.getAttribute("CUIL").toString());
 				String Direccion = (String) sesionAltaCliente.getAttribute("Direccion");
 				String Localidad = (String) sesionAltaCliente.getAttribute("Localidad");
 				String Provincia = (String) sesionAltaCliente.getAttribute("Provincia");
@@ -129,24 +129,25 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 					// HttpSession sesionMensajes = request.getSession();
 					// sesionMensajes.setAttribute("Confirmacion", "El usuario se creó con
 					// exito!!");
-
+					sesionAltaCliente.invalidate();
 					// REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
 					rd.forward(request, response);
 				} else {
 					// REQUESTDISPATCHER
-					RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
+					sesionAltaCliente.invalidate();
+					RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
 					rd.forward(request, response);
 				}
 
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-
+ 
 			// REQUESTDISPATCHER
-			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
 			rd.forward(request, response);
-		}
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

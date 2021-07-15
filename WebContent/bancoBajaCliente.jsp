@@ -30,7 +30,7 @@
 				    </div>
 				  </div>     
 					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
+					<a class="btn btn-outline-primary" href="bancoBajaCliente.jsp" name="btnCancelar">Cancelar</a>
 				</form>
 			</div> 	 
 		</div>		

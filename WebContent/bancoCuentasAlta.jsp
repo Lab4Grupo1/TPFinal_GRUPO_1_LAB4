@@ -60,12 +60,11 @@
 									placeholder="Saldo" required>
 							</div>
 						</div>
-						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar"> <a
-							class="btn btn-outline-primary"
-							href="bancoCuentaModificacion.jsp" role="button">Modificar</a> <input
-							class="btn btn-outline-primary" type="submit" value="Cancelar"
-							name="btnCancelar">
+						<br> 
+						
+						<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar"> 
+						<a	class="btn btn-outline-primary"	href="bancoCuentaModificacion.jsp" role="button">Modificar</a> 
+						<a class="btn btn-outline-primary" href="bancoCuentasAlta.jsp" name="btnCancelar">Cancelar</a>
 					</form>
 				</div>
 			</div>

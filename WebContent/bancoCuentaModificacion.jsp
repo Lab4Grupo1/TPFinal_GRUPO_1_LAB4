@@ -86,12 +86,10 @@
 
 						</div>
 
-						<br> <input class="btn btn-outline-primary" type="submit"
-							value="Aceptar" name="btnAceptar"> <input
-							class="btn btn-outline-primary" type="submit" value="Dar de baja"
-							name="tbnDardebaja"> <input
-							class="btn btn-outline-primary" type="submit" value="Cancelar"
-							name="btnCancelar">
+						<br> 
+						<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar"> 
+						<input class="btn btn-outline-primary" type="submit" value="Dar de baja"name="tbnDardebaja"> 
+						<a class="btn btn-outline-primary" href="bancoCuentaModificacion.jsp" name="btnCancelar">Cancelar</a>
 					</form>
 				</div>
 			</div>

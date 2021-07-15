@@ -35,11 +35,9 @@
 							</div>
 						</div>
 
-						<br> <input class="btn btn-primary col-md-1" type="submit"
-							value="Aceptar" name="btnAceptar"> <input
-							class="btn btn-primary col-md-1" type="submit" value="Cancelar"
-							name="btnCancelar">
-
+						<br>
+						 <input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar"> 
+							<a class="btn btn-outline-primary" href="bancoAltaCliente.jsp" name="btnCancelar">Cancelar</a> 
 
 					</form>
 				</div>

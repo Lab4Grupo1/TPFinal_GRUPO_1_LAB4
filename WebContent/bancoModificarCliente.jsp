@@ -113,7 +113,7 @@
 					%> 
 					
 					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
+					<a class="btn btn-outline-primary" href="bancoModificarCliente.jsp" name="btnCancelar">Cancelar</a>
 				
 					<a class="btn btn-outline-primary" href="bancoGestionPassModificacion.jsp" role="button">Constraseña</a> 
 				</form>

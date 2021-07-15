@@ -47,7 +47,7 @@
 				<input type="hidden" class="form-control" name=UsuarioUrl value="<%=UsuarioUrl %>">
 			   <br>
 			<input class="btn btn-primary col-md-1" type="submit" value="Aceptar" name="btnAceptar">
-			<input class="btn btn-primary col-md-1" type="submit" value="Cancelar" name="btnCancelar">
+			<a class="btn btn-outline-primary" href="bancoModificarCliente.jsp" name="btnCancelar">Cancelar</a>
 			</form>
 		</div>     
 		

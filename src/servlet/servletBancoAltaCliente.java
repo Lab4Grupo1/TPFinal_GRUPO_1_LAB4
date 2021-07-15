@@ -40,6 +40,12 @@ public class servletBancoAltaCliente extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("bancoGestionPassAlta.jsp");
 			rd.forward(request, response);
 		}
+		
+		if (request.getParameter("btnCancelar") != null) {
+			// REQUESTDISPATCHER
+			RequestDispatcher rd = request.getRequestDispatcher("bancoAltaCliente.jsp");
+			rd.forward(request, response);
+		}
 		 
 	}
 

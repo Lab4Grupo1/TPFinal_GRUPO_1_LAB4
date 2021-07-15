@@ -47,7 +47,7 @@
 				    </div>
 				    <div class="col-md-3 mb-3">
 				      <label for="Apellido">CUIL</label>
-				      <input type="text" class="form-control" name="CUIL" placeholder="CUIL" required>
+				      <input type="text" class="form-control" name="CUIL" placeholder="CUIL - Entre 7 y 11 carateres" required>
 				    </div>
 				  </div>
 				  
@@ -118,7 +118,7 @@
 				  </div> 
 				  
 					<input class="btn btn-outline-primary" type="submit" value="Aceptar" name="btnAceptar">
-					<input class="btn btn-outline-primary" type="submit" value="Cancelar" name="btnCancelar">
+					<a class="btn btn-outline-primary" href="bancoAltaCliente.jsp" name="btnCancelar">Cancelar</a>
 				</form>
 			</div>  
 		</div>		

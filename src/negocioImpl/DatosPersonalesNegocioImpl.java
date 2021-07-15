@@ -44,8 +44,8 @@ public class DatosPersonalesNegocioImpl implements DatosPersonalesNegocio{
 	public boolean validarCuil(double cuil) throws cuilException {
 
 			String cuilString = Double.toString(cuil);
-			int tam = cuilString.length();
-			if(tam != 11) {
+			int tam = cuilString.length(); 
+			if(tam >= 11 && tam <= 7) {
 				cuilException exc1 = new cuilException();
 				throw exc1;
 			}
