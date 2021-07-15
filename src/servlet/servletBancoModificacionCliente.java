@@ -32,18 +32,32 @@ public class servletBancoModificacionCliente extends HttpServlet {
 		if (request.getParameter("btnBuscar") != null) {
 			int dni = Integer.parseInt(request.getParameter("DNICliente"));
 			String NombreCliente = request.getParameter("NombreCliente");
+			
+			
 
 			DatosPersonalesNegocioImpl dpB = new DatosPersonalesNegocioImpl();
-			DatosPersonales dpBusqueda = dpB.buscarDNI(dni);
-
 			UsuarioNegocioImpl uB = new UsuarioNegocioImpl();
-			Usuario uBusqueda = uB.obtenerUnUsuario(dni, NombreCliente);
-
 			TelefonosNegocioImpl tB = new TelefonosNegocioImpl();
-			Telefonos tBusqueda = tB.buscarId(dpBusqueda.getTelefono().getId());
-
-			if (dpBusqueda.getDni() == dni
-					&& uBusqueda.getNombreUsuario().toLowerCase().equals(NombreCliente.toLowerCase())) {
+			
+			DatosPersonales dpBusqueda = null;
+			Usuario uBusqueda = null;
+			Telefonos tBusqueda = null;
+			
+			try {				
+				 dpBusqueda = dpB.buscarDNI(dni);
+				 uBusqueda = uB.obtenerUnUsuario(dni, NombreCliente);
+				 tBusqueda = tB.buscarId(dpBusqueda.getTelefono().getId());
+				
+			} catch (Exception e) {
+				System.out.println("Datos incorrectos");
+				HttpSession sesionMensajes = request.getSession();
+				sesionMensajes.setAttribute("Confirmacion", "Datos incorrectos");
+				// REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
+				rd.forward(request, response);
+			} 
+			 
+			if(dpBusqueda.getDni() == dni && uBusqueda.getNombreUsuario().toLowerCase().equals(NombreCliente.toLowerCase())){
 				request.setAttribute("DatosPersonales", dpBusqueda);
 				request.setAttribute("Usuario", uBusqueda);
 				request.setAttribute("Telefono", tBusqueda);
@@ -51,9 +65,14 @@ public class servletBancoModificacionCliente extends HttpServlet {
 				// REQUESTDISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("bancoModificarCliente.jsp");
 				rd.forward(request, response);
-			} else {
-				System.out.println("No hay cliente");
-			}
+				
+			}else{
+				System.out.println("No hay cliente"); 
+
+				// REQUESTDISPATCHER
+				RequestDispatcher rd = request.getRequestDispatcher("bancoModificarCliente.jsp");
+				rd.forward(request, response);
+			} 
 		}
 
 		if (request.getParameter("btnAceptar") != null) {

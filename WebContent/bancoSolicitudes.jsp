@@ -123,7 +123,7 @@
 								<td>
 									<button type="button" class="btn btn-outline-primary"
 										onclick="location.href='bancoGestionSolicitudes.jsp?Nsoli=<%=soli.getNumeroSolicitud()%>'"
-										name="btnGestionar" style="margin-left: 10px;" Visible=false></button>
+										name="btnGestionar" style="margin-left: 10px;" Visible=false>Gestionar</button>
 								</td>
 							</tr>
 							<%

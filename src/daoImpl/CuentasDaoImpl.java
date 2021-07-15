@@ -53,15 +53,16 @@ public class CuentasDaoImpl implements CuentasDao {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) { 
 			e.printStackTrace();
 		}
-		Connection cn = null;
+		Connection cn = null; 
+ 
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Update cuentas set saldo= ('" + cuenta.getSaldo() + "'), tipocuenta=('"
-					+ cuenta.getTipoCuenta() + "') where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
+			String query = "Update tpint_grupo1_v2.cuentas set saldo= ('" + cuenta.getSaldo() + "'), FK_idTipoCuenta=('" + cuenta.getTipoCuenta().getId() + "') where NumeroCuenta = ('" + cuenta.getNumeroCuenta() + "');";
+			System.out.println(query);
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -110,13 +110,16 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 		}
 
 		if (request.getParameter("btnRechazar") != null) {
-			Solicitud soli2 = (Solicitud) session.getAttribute("Solicitud");
-			int listo2 = dao.UpdateRechazoSolicitud(soli2.getNumeroSolicitud());
+			   
+			HttpSession pepito = request.getSession(); 
+
+			int listo2 = dao.UpdateRechazoSolicitud(Integer.parseInt(pepito.getAttribute("Nsoli").toString())); 
+			
 			if (listo2 > 0) {
 				request.setAttribute("listo", listo2);
 				RequestDispatcher rd = request.getRequestDispatcher("/bancoSolicitudes.jsp");
 				rd.forward(request, response);
-			}
+			} 
 		}
 
 	}

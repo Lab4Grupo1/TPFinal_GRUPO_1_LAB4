@@ -87,7 +87,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "update tpint_grupo1_v2.usuario set ContraseÃ±a='" + passNueva + "'  where NombreUsuario='"
+			String query = "update tpint_grupo1_v2.usuario set Contraseña='" + passNueva + "'  where NombreUsuario='"
 					+ usuario + "'";
 
 			filas = st.executeUpdate(query);
@@ -182,8 +182,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			Statement st = cn.createStatement();
 
 			ResultSet rs = st.executeQuery(
-					"Select u.NombreUsuario, u.contraseña, " + "u.FK_idRol, u.FK_DniDP, u.Estado from usuario "
-							+ "where u.FK_DniDP = " + id + " or u.NombreUsuario = " + NombreUsuario);
+					"Select id, NombreUsuario, contraseña, FK_idRol, FK_DniDP, Estado from usuario "
+							+ " where FK_DniDP = " + id + " or NombreUsuario = '" + NombreUsuario + "'" );
 
 			while (rs.next()) {
 

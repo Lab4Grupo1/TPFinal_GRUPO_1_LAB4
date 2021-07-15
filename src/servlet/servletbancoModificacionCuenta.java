@@ -27,59 +27,49 @@ public class servletbancoModificacionCuenta extends HttpServlet {
         super();
            }
 
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if (request.getParameter("btnBuscar") != null)
-		{
-			int dni=Integer.parseInt(request.getParameter("DNI"));
-			System.out.println("lleg??"+ dni);
+		if (request.getParameter("btnBuscar") != null){
+			int dni=Integer.parseInt(request.getParameter("DNI")); 
 			DatosPersonalesNegocioImpl DPNI=new DatosPersonalesNegocioImpl();
 			DatosPersonales DPBuscar=DPNI.buscarDNI(dni);
 			CuentasNegocioImpl CNI=new CuentasNegocioImpl();
 			Cuentas CBuscar=CNI.buscarDni(dni);
-			if (DPBuscar.getDni()==dni)
-			{
+			
+			if (DPBuscar.getDni()==dni){
 				request.setAttribute("Cuentas", CBuscar);
 				// REQUESTDISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("bancoCuentaModificacion.jsp");
 				rd.forward(request, response);
-			}
-			else
-			{
+			}else{
 				System.out.println("NO HAY CUENTAS ASOCIADAS");
-			}
-			
+			}			
 		}
-		if(request.getParameter("btnAceptar")!=null)
-		{
+		
+		if(request.getParameter("btnAceptar")!=null){
 			CuentasNegocioImpl CNI=new CuentasNegocioImpl();
 			Cuentas C=new Cuentas();
 			TiposCuentaNegocio TCN=new TiposCuentaNegocioImpl();
-			DatosPersonalesNegocio DPN= new DatosPersonalesNegocioImpl();
+			DatosPersonalesNegocio DPN= new DatosPersonalesNegocioImpl(); 
 			
-			
-			C.setDniCliente(DPN.buscarDNI(Integer.parseInt(request.getParameter("DNI"))));
+			C.setDniCliente(DPN.buscarDNI(Integer.parseInt(request.getParameter("LabelDNI"))));
 			C.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
 			C.setTipoCuenta(TCN.buscarId(Integer.parseInt(request.getParameter("TipoCuenta"))));
-			C.setNumeroCuenta(Integer.parseInt(request.getParameter("NroCuenta")));
-			int filaCNI= CNI.update(C);
+			C.setNumeroCuenta(Integer.parseInt(request.getParameter("TipoCuentaActiva")));  
+			int filaCNI= CNI.update(C); 
 			
-			if (filaCNI==1)
-			{
+			if (filaCNI==1){
 				HttpSession sesionMensajes = request.getSession();			
 				sesionMensajes.setAttribute("Confirmacion", "LA CUENTA SE MODIFICO CON EXITO");
 				
 				// REQUESTDISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("confirmacionBanco.jsp");
 				rd.forward(request, response);
-			}
-			
-		}
-		
+			}			
+		}	 
 	}
-
 }
