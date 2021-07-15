@@ -54,12 +54,10 @@ public class servletBancoCuentas extends HttpServlet {
 			u = uni.obtenerUnUsuario(dni, usuario);
 			
 			CuentasNegocio Culist = new CuentasNegocioImpl();
-			ArrayList<Cuentas> listCuentas = Culist.ListarCuentas(dni);
-			
-			System.out.println("cantidad-->> "+listCuentas.size());
+			ArrayList<Cuentas> listCuentas = Culist.ListarCuentas(u.getdp_DNI().getDni()); 
 
 			if (u != null) {
-				if(listCuentas.size() <= 3) {
+				if(listCuentas.size() < 3) {
 
 					double cbu = dni + 1000000;
 					LocalDate FechaCreacion = LocalDate.now();

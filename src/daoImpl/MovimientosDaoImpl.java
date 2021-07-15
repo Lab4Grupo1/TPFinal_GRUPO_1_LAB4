@@ -42,8 +42,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 					+ Movimientos.getImporte() 					+ ","
 					+ Movimientos.getTipoMovimiento().getId()	+ "," 
 					+ Movimientos.getCuenta().getNumeroCuenta()	+ ")";
-			
-			System.out.println(query);
+			 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
