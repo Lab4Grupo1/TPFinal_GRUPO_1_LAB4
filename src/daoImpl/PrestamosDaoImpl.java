@@ -55,7 +55,8 @@ public class PrestamosDaoImpl implements PrestamosDao{
 		 return false;
 		
 	}
-	
+
+	@Override
 	public ArrayList<Prestamos> readAll(int dni){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -87,6 +88,91 @@ public class PrestamosDaoImpl implements PrestamosDao{
 				lista.add(presRs);
 			
 				
+			}
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		return lista;
+	}
+	
+	
+	@Override
+	public ArrayList<Prestamos> FiltroMonto(String desde, String hasta){
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		ArrayList<Prestamos> lista  = new ArrayList<Prestamos>();
+		Connection conn = null;
+		try {
+			conn =  DriverManager.getConnection(url, user, pass);
+			Statement st =   conn.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT p.id, p.cuotaspagas, p.cuotastotal, p.importeCuota, p.importePedido, p.FechaUltimoPago,"
+					+ " p.FK_NumeroCuenta FROM prestamos as p inner join cuentas as c on c.NumeroCuenta = p.FK_NumeroCuenta " + 
+					"  inner join usuario as u on u.FK_DniDP = c.FK_DniCliente  where p.importePedido >= '" + desde + "' and  p.importePedido <= '" + hasta +"'");
+			
+			while(rs.next()){
+				
+				Prestamos presRs= new Prestamos();
+				presRs.setId(rs.getInt("id"));
+				presRs.setCuotasPagas(rs.getInt("cuotaspagas"));
+				presRs.setCuotasTotal(rs.getInt("cuotastotal"));
+				presRs.setImporteCuota(rs.getDouble("importeCuota"));
+				presRs.setImportePedidoTotal(rs.getFloat("importePedido"));
+				//presRs.setFechaUltimoPago(rs.getDate("FechaUltimoPago").toLocalDate());
+				presRs.setNumeroCuenta(rs.getInt("FK_NumeroCuenta"));
+				
+				lista.add(presRs);
+			
+				
+			}
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		return lista;
+	}
+	
+	@Override
+	public ArrayList<Prestamos> readAll(){
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		ArrayList<Prestamos> lista  = new ArrayList<Prestamos>();
+		Connection conn = null;
+		try {
+			conn =  DriverManager.getConnection(url, user, pass);
+			Statement st =   conn.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT p.id, p.cuotaspagas, p.cuotastotal, p.importeCuota, p.importePedido, p.FechaUltimoPago,"
+					+ " p.FK_NumeroCuenta FROM prestamos as p inner join cuentas as c on c.NumeroCuenta = p.FK_NumeroCuenta " + 
+					"  inner join usuario as u on u.FK_DniDP = c.FK_DniCliente ");
+			
+			while(rs.next()){
+				
+				Prestamos presRs= new Prestamos();
+				presRs.setId(rs.getInt("id"));
+				presRs.setCuotasPagas(rs.getInt("cuotaspagas"));
+				presRs.setCuotasTotal(rs.getInt("cuotastotal"));
+				presRs.setImporteCuota(rs.getDouble("importeCuota"));
+				presRs.setImportePedidoTotal(rs.getFloat("importePedido"));
+				//presRs.setFechaUltimoPago(rs.getDate("FechaUltimoPago").toLocalDate());
+				presRs.setNumeroCuenta(rs.getInt("FK_NumeroCuenta"));
+				
+				lista.add(presRs); 
 			}
 			conn.close();
 			

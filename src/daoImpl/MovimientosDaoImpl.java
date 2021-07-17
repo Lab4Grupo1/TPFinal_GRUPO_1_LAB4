@@ -135,9 +135,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
-			String query = "SELECT * FROM movimientos where fecha >= ('" + desde + "') and fecha <=  ('" + hasta + "')" ;
-			
-			System.out.println(query);
+			String query = "SELECT * FROM movimientos where fecha >= ('" + desde + "') and fecha <=  ('" + hasta + "')" ;			
 			Statement st = cn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {

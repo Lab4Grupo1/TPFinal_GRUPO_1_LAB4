@@ -49,8 +49,8 @@
 				<a class="btn btn-dark" href="bancoBajaCliente.jsp">Baja</a> 
 				<a class="btn btn-dark" href="bancoCuentasAlta.jsp">Cuentas</a> 
 				<a class="btn btn-dark" href="bancoInformes.jsp">Informes</a> 
-				<a class="btn btn-dark" href="bancoListaClientes.jsp">Clientes</a>
-				
+				<a class="btn btn-dark" href="bancoListaClientes.jsp">Clientes</a> 
+
 			</div>
 		</div>
 		<div class="row row-sesion">
