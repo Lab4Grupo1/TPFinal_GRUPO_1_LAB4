@@ -11,5 +11,8 @@ public interface MovimientosNegocio {
 	
 
 	public int insert(Movimientos Movimientos);
+	
+
+	ArrayList<Movimientos> FiltroFechas(String desde, String hasta);
 
 }

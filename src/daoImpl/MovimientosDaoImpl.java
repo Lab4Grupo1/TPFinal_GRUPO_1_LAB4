@@ -120,4 +120,40 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		}
 		return lmov;
 	}
+	
+	@Override
+	public ArrayList<Movimientos> FiltroFechas(String desde, String hasta) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Movimientos> lmov = new ArrayList<Movimientos>();
+
+		Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(url, user, pass);
+			String query = "SELECT * FROM movimientos where fecha >= ('" + desde + "') and fecha <=  ('" + hasta + "')" ;
+			
+			System.out.println(query);
+			Statement st = cn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				Movimientos x = new Movimientos();
+				x.setId(rs.getInt("id"));
+				x.setDetalle(rs.getString("Detalle"));
+				x.setFecha(rs.getDate("Fecha").toLocalDate());
+				x.setImporte(rs.getFloat("Importe"));
+				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
+				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
+				lmov.add(x);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lmov;
+	}
 }

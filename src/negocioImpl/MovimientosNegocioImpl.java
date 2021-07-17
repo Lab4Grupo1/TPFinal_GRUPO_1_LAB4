@@ -23,10 +23,17 @@ public class MovimientosNegocioImpl implements MovimientosNegocio {
 		return mdao.buscarDNI(dni, tip);
 	}
 	
-
+	@Override
 	public int insert(Movimientos Movimientos) {
 		// TODO Auto-generated method stub
 		return mdao.insert(Movimientos);
 	}
+	
+	@Override
+	public ArrayList<Movimientos> FiltroFechas(String desde, String hasta) {
+		// TODO Auto-generated method stub
+		return mdao.FiltroFechas(desde, hasta);
+	}
+
 
 }
