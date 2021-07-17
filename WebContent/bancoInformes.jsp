@@ -40,7 +40,7 @@
 			<jsp:include page="masterBanco.jsp"></jsp:include>	
 		</div>		
 		<div class="col">	 
-		  <h4>Reportes</h4>	
+		  <h4>Reporte movimientos clientes</h4>	
 		  <br>	 
 		  <h5>Desde - Hasta</h5>	
 		  	<form class="formBusqueda" action="servletBancoReporte" method="get">	  
@@ -53,9 +53,10 @@
 				  </div> 
 				  <div class="col-md mb-5"> 
 				  	<input class="btn btn-outline-primary" type="submit" value="Buscar" name="btnBuscar">
+				  	<a class="btn btn-outline-primary" href="bancoInformes.jsp" >Limpiar</a>				  	 
 				  </div> 
 				</div>
-			</form> 
+			</form>  
 						
 <div class="container table-responsive-md">
 

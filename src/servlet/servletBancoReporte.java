@@ -45,6 +45,24 @@ public class servletBancoReporte extends HttpServlet {
 			
 			
 		}
+		
+		
+		if(request.getParameter("btnActualizar")!=null) {
+
+			String desde = (String) request.getParameter("Desde");
+			String hasta = (String) request.getParameter("Hasta");
+			
+			HttpSession sesionFiltroMov = request.getSession();		
+
+			sesionFiltroMov.setAttribute("desde", desde);
+			sesionFiltroMov.setAttribute("hasta", hasta); 
+
+			// REQUESTDISPATCHER
+			RequestDispatcher rd = request.getRequestDispatcher("bancoInformes.jsp");
+			rd.forward(request, response);
+			
+			
+		}  
  
 	} 
 	 
