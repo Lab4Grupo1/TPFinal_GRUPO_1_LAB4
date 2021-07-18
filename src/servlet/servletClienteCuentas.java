@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidad.Movimientos;
+import negocio.CuentasNegocio;
 import negocio.MovimientosNegocio;
 import negocio.TiposCuentaNegocio;
+import negocioImpl.CuentasNegocioImpl;
 import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.TiposCuentaNegocioImpl;
 
@@ -39,11 +41,13 @@ public class servletClienteCuentas extends HttpServlet {
 			int tip = Integer.parseInt(request.getParameter("idTipoCuenta"));
 
 			MovimientosNegocio mov = new MovimientosNegocioImpl();
-			TiposCuentaNegocio tipImp = new TiposCuentaNegocioImpl();
-			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);
+			ArrayList<Movimientos> Lmov = mov.buscarDNI(dni, tip);			
+			CuentasNegocio tipImp = new CuentasNegocioImpl();
+			 
+			String tipoC =  tipImp.buscarDni(dni).getTipoCuenta().getDescripcion(); 
 
-			request.setAttribute("tipoCuenta", tipImp.buscarId(tip).getDescripcion());
-			request.setAttribute("numCuenta", request.getParameter("idTipoCuenta"));
+			request.setAttribute("tipoCuenta", tipoC);			
+			request.setAttribute("numCuenta", request.getParameter("idTipoCuenta")); 
 
 			try {
 				if (Lmov != null) {

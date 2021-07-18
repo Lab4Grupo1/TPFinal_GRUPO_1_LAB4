@@ -56,7 +56,7 @@
 
 									if (cNimp != null) {
 										for (Cuentas tpcLista : ListC) {
-								%><option value="<%=tpcLista.getTipoCuenta().getId()%>"><%=tpcLista.getTipoCuenta().getDescripcion()%>
+								%><option value="<%=tpcLista.getNumeroCuenta()%>"><%=tpcLista.getTipoCuenta().getDescripcion()%>
 									-
 									<%=tpcLista.getNumeroCuenta()%>
 								</option>

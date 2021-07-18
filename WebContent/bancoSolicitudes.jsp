@@ -62,7 +62,7 @@
 
 					<div class="row">
 						<div class="col">
-							<label for="cliente">Busqueda cliente</label>
+							<label for="cliente">Busqueda cuenta</label>
 							<div class="busquedaForm">
 								<form class="formBusqueda" style="display: flex;"
 									action="servletBancoSolicitud" method="get">
@@ -96,7 +96,7 @@
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">N° Solicitud</th>
-								<th scope="col">Cliente</th>
+								<th scope="col">Cuenta</th>
 								<th scope="col">Cant Cuotas Solic.</th>
 								<th scope="col">Monto</th>
 								<th scope="col">Estado Solicitud</th>

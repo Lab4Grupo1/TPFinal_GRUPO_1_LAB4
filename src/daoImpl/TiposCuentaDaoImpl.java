@@ -72,9 +72,7 @@ public class TiposCuentaDaoImpl implements TiposCuentaDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-
 			ResultSet rs = st.executeQuery(" SELECT * FROM TipoCuenta where id=" + id);
-
 			while (rs.next()) {
 				TcuentaRs.setId(id);
 				TcuentaRs.setDescripcion(rs.getString("descripcion"));

@@ -59,7 +59,7 @@ public class servletBancoCuentas extends HttpServlet {
 			if (u != null) {
 				if(listCuentas.size() < 3) {
 
-					double cbu = dni + 1000000;
+					double cbu = dni + 100000 + listCuentas.size();
 					LocalDate FechaCreacion = LocalDate.now();
 					String Saldo = request.getParameter("Saldo");
 					double SaldoD = Double.parseDouble(Saldo);

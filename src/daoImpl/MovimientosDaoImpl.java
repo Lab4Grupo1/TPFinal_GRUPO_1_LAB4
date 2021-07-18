@@ -100,7 +100,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			String query = "SELECT * FROM movimientos";
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery(query);
+			ResultSet rs = st.executeQuery(query); 
 			while (rs.next()) {
 				Movimientos x = new Movimientos();
 				x.setId(rs.getInt("id"));
@@ -108,11 +108,8 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				x.setFecha(rs.getDate("Fecha").toLocalDate());
 				x.setImporte(rs.getFloat("Importe"));
 				x.setTipoMovimiento(TipoMovImp.buscarID(rs.getInt("FK_IdTipoMovimiento")));
-				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
-				if (x.getCuenta().getTipoCuenta().getId() == tipoCuenta
-						&& x.getCuenta().getDniCliente().getDni() == dni) {
-					lmov.add(x);
-				}
+				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas"))); 
+				lmov.add(x); 
 			}
 
 		} catch (Exception e) {

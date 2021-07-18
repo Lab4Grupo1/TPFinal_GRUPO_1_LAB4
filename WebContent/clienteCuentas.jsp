@@ -117,7 +117,7 @@
 							Lmov = (ArrayList<Movimientos>) request.getAttribute("Lmov");
 					%>
 					<div>
-						<h5><%=tipoCuenta%>	número:	<%=numCuenta%></h5> 
+						<h5><%=tipoCuenta%>	n°:	<%=numCuenta%></h5> 
 						<br>
 						<table id="table1"
 							class="table table-sm table-hover table-bordered">
@@ -134,7 +134,7 @@
 								<tr>
 									<%
 										for (Movimientos list : Lmov) {
-										//	if(Integer.parseInt(numCuenta) == list.getCuenta().getNumeroCuenta()){
+											if(Integer.parseInt(numCuenta) == list.getCuenta().getNumeroCuenta()){
 									%> 
 									<th scope="row"><%=numCuenta%> -</th>
 									<th scope="row"><%=list.getCuenta().getNumeroCuenta()%> -</th>
@@ -145,7 +145,7 @@
 									<th scope="row"><%=list.getTipoMovimiento().getDescripcion()%></th>
 								</tr>
 								<%
-										//	}
+											}
 										}
 								%>
 							</tbody>

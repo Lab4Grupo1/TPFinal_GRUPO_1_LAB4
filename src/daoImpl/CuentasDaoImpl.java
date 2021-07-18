@@ -62,7 +62,6 @@ public class CuentasDaoImpl implements CuentasDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Update tpint_grupo1_v2.cuentas set saldo= ('" + cuenta.getSaldo() + "'), FK_idTipoCuenta=('" + cuenta.getTipoCuenta().getId() + "') where NumeroCuenta = ('" + cuenta.getNumeroCuenta() + "');";
-			System.out.println(query);
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,8 +84,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 			String query = "Update cuentas set saldo= " + Monto + " where FK_DniCliente = " + dni
-					+ " and  NumeroCuenta= " + Ncuenta + ";";
-			System.out.println(query);
+					+ " and  NumeroCuenta= " + Ncuenta + ";"; 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
