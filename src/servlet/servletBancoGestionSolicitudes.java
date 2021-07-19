@@ -53,7 +53,7 @@ public class servletBancoGestionSolicitudes extends HttpServlet {
 				soli2 = (Solicitud) dao.buscarSolicitud(Nsoli);
 				presImpl = new PrestamosNegocioImpl();
 				
-				LocalDate Inicial = LocalDate.of(2099 ,12 , 31);
+				LocalDate Inicial = LocalDate.now();
 
 				pres.setNumeroCuenta(soli2.getNumeroCuenta());
 				pres.setCuotasPagas(0);

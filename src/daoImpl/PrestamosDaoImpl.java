@@ -313,7 +313,7 @@ public class PrestamosDaoImpl implements PrestamosDao{
 			conn =  DriverManager.getConnection(url, user, pass);
 			Statement st =   conn.createStatement();
 			
-			String query = ("update prestamos set cuotaspagas = (cuotaspagas+ '"+cantCuotasPagas+"')"
+			String query = ("update prestamos set cuotaspagas = (cuotaspagas+ '"+cantCuotasPagas+"'), FechaUltimoPago = now() "					
 					+ "where id ="+nPrestamo);
 			filas = st.executeUpdate(query);
 			
@@ -345,7 +345,7 @@ public class PrestamosDaoImpl implements PrestamosDao{
 			Statement st =   conn.createStatement();
 			
 			String query = ("update cuentas set Saldo = (Saldo - '"+saldo+"')"
-					+ "where NumeroCuenta ="+Ncuenta);
+					+ " where NumeroCuenta ="+Ncuenta);
 			filas = st.executeUpdate(query);
 			
 			if(filas > 0) {
