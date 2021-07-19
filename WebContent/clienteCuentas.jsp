@@ -70,6 +70,8 @@
 			</div>
 			<div class="col">
 				<div class="container table-responsive-md">
+				
+				
 					<br>
 					<h4>Últimos movimientos</h4>
 					<%
