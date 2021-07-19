@@ -135,9 +135,7 @@
 									<%
 										for (Movimientos list : Lmov) {
 											if(Integer.parseInt(numCuenta) == list.getCuenta().getNumeroCuenta()){
-									%> 
-									<th scope="row"><%=numCuenta%> -</th>
-									<th scope="row"><%=list.getCuenta().getNumeroCuenta()%> -</th>
+									%>  
 									<th scope="row"><%=list.getId()%></th>
 									<th scope="row"><%=list.getDetalle()%></th>
 									<th scope="row"><%=list.getFecha()%></th>

@@ -50,7 +50,6 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 			for (Cuentas cuentasDesde : ListaCDesde) {
 				if (cuentasDesde.getSaldo() >= montoI) {
 					if (cuentasDesde.getNumeroCuenta() == desdeI) {
-						System.out.println("desde -->" + desdeI);
 						double descontar = cuentasDesde.getSaldo() - montoI;
 						cnDesc.updateMonto(descontar, dni, desdeI);
 						
@@ -62,7 +61,7 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 						TipoMovimiento tpM = new TipoMovimiento();
 						tpM.setId(4);
 						
-						mov.setDetalle("Se debita desde cuenta " + cuentasDesde.getTipoCuenta().getDescripcion() + " : " + desdeI + " $"+montoI );
+						mov.setDetalle("Debita cuenta " + cuentasDesde.getTipoCuenta().getDescripcion() + " : " + desdeI + " $"+montoI  + " -3°");
 						mov.setFecha(LocalDate.now());
 						mov.setImporte(montoI);
 						mov.setTipoMovimiento(tpM);
@@ -77,7 +76,6 @@ public class servletClienteTransf_Terceros extends HttpServlet {
 
 			ArrayList<Cuentas> ListaCHasta = cnDesc.ListarCuentasCBU(cbuI);
 			for (Cuentas cuentasCHasta : ListaCHasta) {
-				System.out.println("desde -->" + cuentasCHasta.getNumeroCuenta());
 				double Transf = cuentasCHasta.getSaldo() + montoI;
 				cnDesc.updateMonto(Transf, cuentasCHasta.getDniCliente().getDni(), cuentasCHasta.getNumeroCuenta());
 				

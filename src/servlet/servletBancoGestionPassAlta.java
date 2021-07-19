@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import entidad.DatosPersonales;
+import entidad.Movimientos;
 import entidad.Telefonos;
+import entidad.TipoMovimiento;
 import entidad.Usuario;
+import negocio.MovimientosNegocio;
 import negocioImpl.DatosPersonalesNegocioImpl;
+import negocioImpl.MovimientosNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.RolNegocioImpl;
 import negocioImpl.TelefonosNegocioImpl;
@@ -123,7 +127,9 @@ public class servletBancoGestionPassAlta extends HttpServlet {
 				u.setDatosPersonales(dp);
 				u.setEstado(true);
 
-				int FilaU = usuario.insert(u);
+				int FilaU = usuario.insert(u); 
+				
+				
 				if (FilaU == 1) {
 					request.setAttribute("Estado", "1");
 					// HttpSession sesionMensajes = request.getSession();

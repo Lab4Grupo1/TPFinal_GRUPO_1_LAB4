@@ -83,8 +83,7 @@ public class CuentasDaoImpl implements CuentasDao {
 		try {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
-			String query = "Update cuentas set saldo= " + Monto + " where FK_DniCliente = " + dni
-					+ " and  NumeroCuenta= " + Ncuenta + ";"; 
+			String query = "Update cuentas set saldo= " + Monto + " where FK_DniCliente = " + dni + " and  NumeroCuenta= " + Ncuenta + ";"; 
 			filas = st.executeUpdate(query);
 		} catch (Exception e) {
 			e.printStackTrace();
