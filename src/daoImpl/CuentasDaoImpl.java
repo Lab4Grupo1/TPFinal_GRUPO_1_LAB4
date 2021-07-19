@@ -3,6 +3,7 @@ package daoImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public class CuentasDaoImpl implements CuentasDao {
 					+ cuenta.isEstado() + "," + cuenta.getTipoCuenta().getId() + ", " + cuenta.getDniCliente().getDni()
 					+ " )";
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,6 +65,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			Statement st = cn.createStatement();
 			String query = "Update tpint_grupo1_v2.cuentas set saldo= ('" + cuenta.getSaldo() + "'), FK_idTipoCuenta=('" + cuenta.getTipoCuenta().getId() + "') where NumeroCuenta = ('" + cuenta.getNumeroCuenta() + "');";
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +88,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			Statement st = cn.createStatement();
 			String query = "Update cuentas set saldo= " + Monto + " where FK_DniCliente = " + dni + " and  NumeroCuenta= " + Ncuenta + ";"; 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,6 +111,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			Statement st = cn.createStatement();
 			String query = "Update cuentas estado= false where nrocuenta= ('" + cuenta.getNumeroCuenta() + "')";
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,6 +148,7 @@ public class CuentasDaoImpl implements CuentasDao {
 				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
 				x.setDniCliente(DniImp.buscarDNI(rs.getInt("FK_DniCliente")));
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,6 +186,7 @@ public class CuentasDaoImpl implements CuentasDao {
 				x.setTipoCuenta(TipoImp.buscarId(rs.getInt("FK_idTipoCuenta")));
 				x.setDniCliente(DniImp.buscarDNI(dni));
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -224,6 +231,7 @@ public class CuentasDaoImpl implements CuentasDao {
 
 				lc.add(x);
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,6 +275,7 @@ public class CuentasDaoImpl implements CuentasDao {
 
 				lc.add(x);
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -313,6 +322,7 @@ public class CuentasDaoImpl implements CuentasDao {
 
 				lc.add(x);
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

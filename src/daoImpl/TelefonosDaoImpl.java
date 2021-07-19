@@ -39,6 +39,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			String query = "Insert into tpint_grupo1_v2.telefonos(numero) values('" + tel.getNumero() + "');";
 
 			st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,6 +76,7 @@ public class TelefonosDaoImpl implements TelefonosDao {
 			String query = "update Telefonos set numero = '" + tel.getNumero() + "' where id = " + tel.getId();
 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

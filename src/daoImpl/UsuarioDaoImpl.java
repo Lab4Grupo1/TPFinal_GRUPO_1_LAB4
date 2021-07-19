@@ -45,6 +45,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 					+ ")";
 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,6 +69,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 					+ DatosPersonales.getDni() + "'";
 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,6 +93,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 					+ usuario + "'";
 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,6 +118,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			String query = "update usuario set estado = 0 where FK_DniDP='" + id + "' and NombreUsuario='" + usuario
 					+ "'";
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -181,9 +185,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			cn = DriverManager.getConnection(url, user, pass);
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery(
-					"Select id, NombreUsuario, contraseña, FK_idRol, FK_DniDP, Estado from usuario "
-							+ " where FK_DniDP = " + id + " or NombreUsuario = '" + NombreUsuario + "'" );
+			ResultSet rs = st
+					.executeQuery("Select id, NombreUsuario, contraseña, FK_idRol, FK_DniDP, Estado from usuario "
+							+ " where FK_DniDP = " + id + " or NombreUsuario = '" + NombreUsuario + "'");
 
 			while (rs.next()) {
 
@@ -220,10 +224,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		Rol rol = new Rol();
 		DatosPersonales dp = new DatosPersonales();
 
-		Connection con = null;
+		Connection cn = null;
 		try {
-			con = DriverManager.getConnection(url, user, pass);
-			PreparedStatement miSentencia = con.prepareStatement("Select u.NombreUsuario, u.contraseña, "
+			cn = DriverManager.getConnection(url, user, pass);
+			PreparedStatement miSentencia = cn.prepareStatement("Select u.NombreUsuario, u.contraseña, "
 					+ "u.FK_idRol, r.Descripcion, u.FK_DniDP, u.Estado "
 					+ "from usuario u inner join rol r on r.id=u.FK_idRol where u.contraseña = ? and u.NombreUsuario = ?;");
 			miSentencia.setString(1, passLogin); // Cargo el ID recibido
@@ -241,7 +245,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			usuario.setRol(rol);
 			usuario.setDatosPersonales(dp);
 			usuario.setEstado(resultado.getBoolean(6));
-			con.close();
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -257,12 +261,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			e.printStackTrace();
 		}
 
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			CallableStatement proc = conn.prepareCall(" CALL crearUsuario(?,?) ");
+			cn = DriverManager.getConnection(url, user, pass);
+			CallableStatement proc = cn.prepareCall(" CALL crearUsuario(?,?) ");
 			proc.setString("NombreUsuario", usuario.getNombreUsuario());// Tipo String
 			proc.execute();
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

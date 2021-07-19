@@ -47,6 +47,7 @@ public class DatosPersonalesDaoImpl implements DatosPersonalesDao {
 					+ "'," + persona.getNacionalidad().getId() + "," + persona.getTelefono().getId() + ")";
 
 			filas = st.executeUpdate(query);
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,6 +78,7 @@ public class DatosPersonalesDaoImpl implements DatosPersonalesDao {
 					+ "FK_idTelefono='" + persona.getTelefono().getId() + "' where DNI=" + persona.getDni();
 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

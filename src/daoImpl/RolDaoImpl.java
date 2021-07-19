@@ -67,12 +67,12 @@ public class RolDaoImpl implements RolDao{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		Connection conn = null;
+		Connection cn = null;
 
 		Rol RolRs = new Rol();
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			ResultSet rs = st.executeQuery(" SELECT * FROM Rol where id=" + id);
 
@@ -81,7 +81,7 @@ public class RolDaoImpl implements RolDao{
 				RolRs.setDescripcion(rs.getString("Descripcion"));
 
 			}
-			conn.close();
+			cn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

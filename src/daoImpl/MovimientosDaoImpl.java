@@ -44,6 +44,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 					+ Movimientos.getCuenta().getNumeroCuenta()	+ ")";
 			 
 			filas = st.executeUpdate(query);
+			cn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,6 +78,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
 				lmov.add(x);
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,6 +113,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas"))); 
 				lmov.add(x); 
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +148,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 				x.setCuenta(CueImp.buscarCuenta(rs.getInt("FK_IdCuentas")));
 				lmov.add(x);
 			}
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

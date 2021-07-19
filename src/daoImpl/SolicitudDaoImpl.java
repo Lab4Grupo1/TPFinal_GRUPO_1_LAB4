@@ -41,6 +41,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 					+ soli.getCantCuotasSolicitado() + "," + "'" + soli.getEstadoSolicitud() + "')";
 
 			filas = st.executeUpdate(query);
+			cn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,10 +59,10 @@ public class SolicitudDaoImpl implements SolicitudDao {
 		}
 
 		ArrayList<Solicitud> solicitud = new ArrayList<Solicitud>();
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			ResultSet rs = st.executeQuery(
 					"SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
@@ -79,7 +80,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 				solicitud.add(solicitudRs);
 
 			}
-			conn.close();
+			cn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,17 +101,17 @@ public class SolicitudDaoImpl implements SolicitudDao {
 
 		int filas = 0;
 		String estado = "Autorizado";
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			String query = ("update solicitud set EstadoSolicitud =('" +estado+ "')" + " where idSolicitud="
 					+ numero);
 			System.out.println("query " + query);
 			filas = st.executeUpdate(query);
 			if (filas > 0) {
-				conn.close();
+				cn.close();
 				return filas;
 			}
 
@@ -134,10 +135,10 @@ public class SolicitudDaoImpl implements SolicitudDao {
 		}
 
 		ArrayList<Solicitud> solicitud = new ArrayList<Solicitud>();
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			ResultSet rs = st.executeQuery("SELECT * FROM solicitud where FK_NCuenta =" + cliente2);
 
@@ -150,7 +151,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
 				solicitud.add(solicitudRs);
 			}
-			conn.close();
+			cn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -170,10 +171,10 @@ public class SolicitudDaoImpl implements SolicitudDao {
 			e.printStackTrace();
 		}
 
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			ResultSet rs = st.executeQuery(
 					"SELECT idSolicitud, FK_NCuenta, Montosolicitado, CantCuotasSolicitadas, EstadoSolicitud"
@@ -187,7 +188,7 @@ public class SolicitudDaoImpl implements SolicitudDao {
 				solicitudRs.setEstadoSolicitud(rs.getString("EstadoSolicitud"));
 
 			}
-			conn.close();
+			cn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -207,17 +208,17 @@ public class SolicitudDaoImpl implements SolicitudDao {
 
 		int filas = 0;
 		String estado = "Rechazado";
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			String query = ("update solicitud set EstadoSolicitud =('" +estado+ "')" + "where idSolicitud ="
 					+ numero);
 
 			filas = st.executeUpdate(query);
 			if (filas > 0) {
-				conn.close();
+				cn.close();
 				return filas;
 			}
 
@@ -241,16 +242,16 @@ public class SolicitudDaoImpl implements SolicitudDao {
 
 		int filas = 0;
 
-		Connection conn = null;
+		Connection cn = null;
 		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			Statement st = conn.createStatement();
+			cn = DriverManager.getConnection(url, user, pass);
+			Statement st = cn.createStatement();
 
 			String query = ("update cuentas set Saldo =('" +d+ "'+ Saldo)" + "where NumeroCuenta =" + numeroCuenta);
 
 			filas = st.executeUpdate(query);
 			if (filas > 0) {
-				conn.close();
+				cn.close();
 				return filas;
 			}
 
