@@ -80,8 +80,8 @@
 								<th scope="col">Apellido</th>
 								<th scope="col">Nombre</th>
 								<th scope="col">Usuario</th>
-								<th scope="col">Cuentas</th>
-								<th scope="col">Prestamos</th>
+								<!--<th scope="col">Cuentas</th>
+								<th scope="col">Prestamos</th>  -->
 							</tr>
 						</thead>
 						<tbody>
