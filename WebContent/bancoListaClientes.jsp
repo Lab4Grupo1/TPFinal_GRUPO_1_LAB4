@@ -94,14 +94,14 @@
 								<td><%=usuario.getdp_DNI().getApellido()%></td>
 								<td><%=usuario.getdp_DNI().getNombre()%></td>
 								<td><%=usuario.getNombreUsuario()%></td>
-								<td>
+								<!--<td>
 									<button type="button" class="btn btn-outline-primary"
 										name="btnGestionar" style="margin-left: 10px;">Cuentas</button>
 								</td>
 								<td>
 									<button type="button" class="btn btn-outline-primary"
 										name="btnGestionar" style="margin-left: 10px;">Prestamos</button>
-								</td>
+								</td>  -->
 							</tr>
 							<%
 								}
